@@ -31,17 +31,17 @@ def load_settings(base_dir: Path) -> Settings:
     cache_dir = base_dir / "birdclef_cache"
     
     # Allow override via environment variable: BIRDCLEF_MAX_RECORDS
-    max_records_env = os.getenv("BIRDCLEF_MAX_RECORDS")
-    max_records = None if max_records_env is None else int(max_records_env)
-    
+    #max_records_env = os.getenv("BIRDCLEF_MAX_RECORDS")
+    #max_records = None if max_records_env is None else int(max_records_env)
+    max_records = 3000  # Limite para desenvolvimento rápido; defina como None para usar todos os registros
     return Settings(
         base_dir=base_dir,
         dataset_zip=base_dir / "birdclef-2026.zip",
         cache_dir=cache_dir,
         audio_dir=cache_dir / "train_audio",
-        embedding_cache_dir=cache_dir / "embeddings_mel_v0",
+        embedding_cache_dir=cache_dir / "embeddings_panns_v1",
         es_url="http://localhost:9200",
-        es_index="birdclef-mel-v0",
+        es_index="birdclef-panns-v1",
         sample_rate=32_000,
         window_sec=6.0,
         window_hop_sec=3.0,
@@ -53,6 +53,6 @@ def load_settings(base_dir: Path) -> Settings:
         random_seed=42,
         run_eval=True,
         enable_denoise=False,
-        embedding_backend="mel-stats",
-        embedding_name="log-mel-statistics-v0",
+        embedding_backend="panns-cnn14",
+        embedding_name="panns-cnn14-v1",
     )

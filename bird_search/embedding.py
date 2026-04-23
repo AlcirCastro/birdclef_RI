@@ -5,6 +5,7 @@ from pathlib import Path
 
 import librosa
 import numpy as np
+from panns_inference import AudioTagging
 
 from bird_search.settings import Settings
 
@@ -13,6 +14,13 @@ class Embedder:
     def __init__(self, settings: Settings):
         self.settings = settings
         self.settings.embedding_cache_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Initialize PANNs model (Cnn14)
+        # Use a models directory in cache
+        self.models_dir = self.settings.cache_dir / "panns_models"
+        self.models_dir.mkdir(parents=True, exist_ok=True)
+        checkpoint_path = str(self.models_dir / "Cnn14.pth")
+        self.model = AudioTagging(checkpoint_path=checkpoint_path, device='cpu')
 
     def _cache_key(self, path: Path) -> str:
         stat = path.stat()
@@ -22,31 +30,6 @@ class Embedder:
     def _cache_path(self, path: Path) -> Path:
         return self.settings.embedding_cache_dir / f"{self._cache_key(path)}.npy"
 
-    def _mel_features(self, y: np.ndarray, sr: int) -> np.ndarray:
-        """v0 baseline: global log-mel mean/std over full audio."""
-        n_fft = 2048
-        while n_fft > len(y) and n_fft > 64:
-            n_fft //= 2
-
-        mel = librosa.feature.melspectrogram(
-            y=y,
-            sr=sr,
-            n_mels=32,
-            n_fft=n_fft,
-            hop_length=max(256, n_fft // 4),
-            fmin=50,
-            fmax=sr // 2,
-            power=2.0,
-        )
-        log_mel = librosa.power_to_db(mel, ref=np.max)
-        parts = [
-            log_mel.mean(axis=1),
-            log_mel.std(axis=1),
-        ]
-        vec = np.concatenate(parts).astype(np.float32)
-        norm = np.linalg.norm(vec)
-        return (vec / max(norm, 1e-8)).astype(np.float32)
-
     def _normalize(self, v: np.ndarray) -> np.ndarray:
         norm = np.linalg.norm(v)
         return (v / max(norm, 1e-8)).astype(np.float32)
@@ -55,7 +38,26 @@ class Embedder:
         if y.size == 0:
             return None
 
-        return self._normalize(self._mel_features(y, sr))
+        try:
+            if sr != 32000:
+                y = librosa.resample(y, orig_sr=sr, target_sr=32000)
+            
+            # CNN14 precisa de no mínimo ~1s (32000 samples)
+            # CNN14 precisa de no mínimo ~5s para as camadas de pooling não colapsarem
+                min_samples = 32000 * 5  # 160000 samples
+                if y.shape[0] < min_samples:
+                    pad_length = min_samples - y.shape[0]
+                    y = np.pad(y, (0, pad_length), mode='constant')
+            
+            audio_input = y[np.newaxis, :]  # → (1, N)
+            
+            clipwise_output, embedding = self.model.inference(audio_input)
+            embedding = embedding[0]  # (1, 2048) → (2048,)
+            
+            return self._normalize(embedding)
+        except Exception as e:
+            print(f"Error generating embedding: {e}")
+            return None
 
     def embed_path(self, path: Path, use_cache: bool = True) -> np.ndarray | None:
         cache_path = self._cache_path(path)

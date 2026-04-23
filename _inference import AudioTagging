@@ -1,0 +1,4 @@
+Help on function __init__ in module panns_inference.inference:
+
+____iinniitt____(self, model=None, checkpoint_path=None, device='cuda')
+    Audio tagging inference wrapper.

@@ -13,8 +13,10 @@ class SearchIndex:
         self.es = Elasticsearch(settings.es_url)
 
     def ensure_connected(self) -> None:
-        if not self.es.ping():
-            raise RuntimeError(f"Cannot reach Elasticsearch at {self.settings.es_url}")
+        try:
+            self.es.info()
+        except Exception as e:
+            raise RuntimeError(f"Cannot reach Elasticsearch at {self.settings.es_url}: {e}")
 
     def create_index(self, dims: int, reset: bool = True) -> None:
         index = self.settings.es_index
