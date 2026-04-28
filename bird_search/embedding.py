@@ -70,11 +70,26 @@ class Embedder:
             )
         except Exception:
             return None
+        
+        # Aplicação do filtro de redução de ruído simples
+        # STFT
+        S = librosa.stft(y)
+        mag, phase = np.abs(S), np.angle(S)
 
-        if y.size == 0:
+        # Estimar ruído (primeiros frames)
+        noise = np.mean(mag[:, :10], axis=1, keepdims=True)
+
+        # Spectral subtraction
+        mag_clean = np.maximum(mag - noise, 0)
+
+        # Reconstrução
+        S_clean = mag_clean * np.exp(1j * phase)
+        y_clean = librosa.istft(S_clean)
+
+        if y_clean.size == 0:
             return None
 
-        vec = self._embed_audio(y, self.settings.sample_rate)
+        vec = self._embed_audio(y_clean, self.settings.sample_rate)
         if vec is None:
             return None
 
