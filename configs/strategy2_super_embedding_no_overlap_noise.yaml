@@ -1,0 +1,72 @@
+name: strategy2_super_embedding_no_overlap_noise
+seed: 42
+similarity: cosine
+
+notes: >
+  Strategy 2 without overlapping windows, plus spectral-gating denoising at
+  preprocessing time. This keeps the super-embedding setup while testing if a
+  noise filter improves the pooled representation before indexing.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: null
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: spectral_gating
+  params:
+    prop_decrease: 1.0
+    n_std_thresh: 1.5
+    stationary: true
+
+segmentation:
+  type: fixed
+  params:
+    window_sec: 5.0
+    drop_last_short: false
+    pad_last: true
+
+embedding:
+  type: perch_v2
+  params:
+    batch_size: 16
+
+aggregation:
+  type: mean
+  params: {}
+
+representation:
+  type: audio
+  params: {}
+
+indexing:
+  type: flat
+  params: {}
+
+fusion:
+  type: early
+  params:
+    aggregator: mean
+
+ranking:
+  type: max
+  params: {}
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  measure_latency: true
+  measure_memory: true
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: true
+  save_rankings: true

@@ -1,0 +1,117 @@
+{
+  "experiment": "strategy1_segments_birdnet_v3",
+  "notes": "Strategy 1 using BirdNET+ V3.0. This keeps the segment-based late-fusion pipeline the same as strategy1_segments while swapping only the embedding backbone.\n",
+  "n_train": 27309,
+  "n_test": 6835,
+  "n_documents": 363917,
+  "embedding_dim": 1280,
+  "index_build_time_s": 53.277038489992265,
+  "memory_peak_rss_bytes": 8248045568,
+  "memory_current_rss_bytes": 6970724352,
+  "config": {
+    "name": "strategy1_segments_birdnet_v3",
+    "seed": 42,
+    "data": {
+      "dataset_zip": "/home/cnt-computadores/Pedro/birdclef-2026.zip",
+      "audio_dir": "/home/cnt-computadores/Pedro/birdclef_cache/train_audio",
+      "max_records": null,
+      "min_rating": 3.0,
+      "train_ratio": 0.8,
+      "sample_rate": 32000
+    },
+    "preprocessing": {
+      "type": "none",
+      "params": {}
+    },
+    "segmentation": {
+      "type": "overlapping",
+      "params": {
+        "window_sec": 5.0,
+        "hop_sec": 2.5,
+        "pad_last": true
+      }
+    },
+    "embedding": {
+      "type": "birdnet_v3",
+      "params": {
+        "model_path": "https://zenodo.org/records/18247420/files/BirdNET%2B_V3.0-preview3_Global_11K_FP32.pt?download=1",
+        "batch_size": 16
+      }
+    },
+    "aggregation": {
+      "type": "mean",
+      "params": {}
+    },
+    "representation": {
+      "type": "segment",
+      "params": {}
+    },
+    "indexing": {
+      "type": "hnsw",
+      "params": {
+        "M": 32,
+        "ef_construction": 200,
+        "ef_search": 64
+      }
+    },
+    "fusion": {
+      "type": "late",
+      "params": {}
+    },
+    "ranking": {
+      "type": "taxonomy_boost",
+      "params": {
+        "genus_boost": 0.2,
+        "common_name_boost": 0.1
+      }
+    },
+    "similarity": "cosine",
+    "evaluation": {
+      "top_k": 10,
+      "p_at": [
+        1,
+        5
+      ],
+      "recall_at": [
+        1,
+        5,
+        10
+      ],
+      "noise": {
+        "enabled": false,
+        "noise_types": [
+          "white"
+        ],
+        "snr_db": [
+          20.0,
+          10.0,
+          0.0,
+          -5.0
+        ],
+        "noise_dir": null
+      }
+    },
+    "notes": "Strategy 1 using BirdNET+ V3.0. This keeps the segment-based late-fusion pipeline the same as strategy1_segments while swapping only the embedding backbone.\n"
+  },
+  "clean": {
+    "n_queries": 6835,
+    "MAP": 0.8893574157290324,
+    "MRR": 0.8893574157290324,
+    "nDCG": 0.9064310406096838,
+    "avg_latency_ms": 18.460768436922418,
+    "P@1": 0.8478419897585955,
+    "P@5": 0.19595708363813705,
+    "R@1": 0.0004502220378797579,
+    "R@5": 0.000566669879080061,
+    "R@10": 0.0005869342547669308,
+    "latency": {
+      "n": 6835,
+      "mean_ms": 18.460768436922418,
+      "p50_ms": 18.016086949501187,
+      "p95_ms": 23.280979372793805,
+      "p99_ms": 30.46068552997891
+    }
+  },
+  "noise": [],
+  "elapsed_s": 186.29285961197456
+}

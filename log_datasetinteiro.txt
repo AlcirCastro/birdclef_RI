@@ -1,0 +1,988 @@
+nohup: ignorando entrada
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778361345.526959  306597 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1778361345.573316  306597 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778361346.756679  306597 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-05-09 17:15:47,686 | INFO    | runner | Experiment strategy1_segments_torch starting
+2026-05-09 17:16:03,656 | INFO    | runner | Loaded 14389 records
+2026-05-09 17:16:03,662 | INFO    | runner | Split: train=11500 test=2889
+/home/cnt-computadores/Pedro/src/embeddings/perch_torch.py:204: RuntimeWarning: Perch v2 ONNX export failed; falling back to TensorFlow runtime for this backend. Cause: Failed to export Perch v2 to ONNX.
+Command: /home/cnt-computadores/Pedro/venv/bin/python -m tf2onnx.convert --saved-model /home/cnt-computadores/.cache/kagglehub/models/google/bird-vocalization-classifier/tensorFlow2/bird-vocalization-classifier/8 --output birdclef_cache/torch_models/google__bird-vocalization-classifier__tensorFlow2__bird-vocalization-classifier/model.onnx --opset 17
+stdout:
+
+stderr:
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778361366.048010  306985 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778361366.971845  306985 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-05-09 17:16:08,162 - WARNING - '--tag' not specified for saved_model. Using --tag serve
+2026-05-09 17:16:09,864 - INFO - Fingerprint not found. Saved model loading will continue.
+2026-05-09 17:16:09,864 - INFO - path_and_singleprint metric could not be logged. Saved model loading will continue.
+2026-05-09 17:16:09,865 - INFO - Signatures found in model: [serving_default].
+2026-05-09 17:16:09,865 - WARNING - '--signature_def' not specified, using first signature: serving_default
+2026-05-09 17:16:09,865 - INFO - Output names: ['embedding', 'family', 'frontend', 'genus', 'label', 'order']
+2026-05-09 17:16:16,890 - INFO - Using tensorflow=2.21.0, onnx=1.21.0, tf2onnx=1.17.0/None
+2026-05-09 17:16:16,891 - INFO - Using opset <onnx, 17>
+2026-05-09 17:16:18,370 - INFO - Computed 0 values for constant folding
+2026-05-09 17:16:18,370 - INFO - Computed 0 values for constant folding
+2026-05-09 17:16:18,485 - INFO - Computed 3 values for constant folding
+2026-05-09 17:16:18,742 - INFO - folding node using tf type=PadV2, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/pjit__pad_/PadV2
+2026-05-09 17:16:18,743 - INFO - folding node using tf type=Reshape, name=jax2tf_infer_fn_/TaxonomyModel/frontend/frontend._magnitude_scale/Reshape_15
+2026-05-09 17:16:18,744 - INFO - folding node using tf type=Transpose, name=jax2tf_infer_fn_/TaxonomyModel/frontend/transpose_7
+2026-05-09 17:16:18,979 - INFO - Computed 0 values for constant folding
+2026-05-09 17:16:19,765 - INFO - folding node type=Sub, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/Sub_3
+2026-05-09 17:16:19,767 - INFO - folding node type=Sub, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/Sub_5
+2026-05-09 17:16:19,767 - INFO - folding node type=Mul, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/truediv_4
+2026-05-09 17:16:19,768 - INFO - folding node type=Mul, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/truediv_5
+2026-05-09 17:16:20,730 - ERROR - Failed to convert node 'jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft' (fct=<bound method RFFTOp.version_13 of <class 'tf2onnx.onnx_opset.signal.RFFTOp'>>)
+'OP=RFFT\nName=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft\nInputs:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit__pad_/PadV2_9:0=Pad, [-1, 501, 1024], 1\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft/fft_length:0=Const, [1], 6\nOutpus:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft:0=[-1, 501, 513], 14'
+Traceback (most recent call last):
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 360, in version_13
+    return cls.any_version(True, 13, ctx, node, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 119, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: Current implementation of RFFT or FFT only allows ComplexAbs as consumer not {'EnsureShape'}
+2026-05-09 17:16:20,731 - ERROR - Failed to convert node 'jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs' (fct=<bound method ComplexAbsOp.version_13 of <class 'tf2onnx.onnx_opset.signal.ComplexAbsOp'>>)
+'OP=ComplexAbs\nName=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs\nInputs:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_swapaxes_/transpose:0=Transpose, [-1, 500, 513], 14\nOutpus:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs:0=[-1, 500, 513], 1'
+Traceback (most recent call last):
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 982, in version_13
+    cls.any_version(13, ctx, node, **kwargs)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 940, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: ComplexAbs expected the first dimension to be 2 but shape is [-1, 500, 513]
+2026-05-09 17:16:20,796 - ERROR - Tensorflow op [PreventGradient_5: PreventGradient] is not supported
+2026-05-09 17:16:20,797 - ERROR - Tensorflow op [PreventGradient_1: PreventGradient] is not supported
+2026-05-09 17:16:20,797 - ERROR - Tensorflow op [PreventGradient_3: PreventGradient] is not supported
+2026-05-09 17:16:20,797 - ERROR - Tensorflow op [PreventGradient_4: PreventGradient] is not supported
+2026-05-09 17:16:20,797 - ERROR - Tensorflow op [PreventGradient: PreventGradient] is not supported
+2026-05-09 17:16:20,797 - ERROR - Tensorflow op [PreventGradient_2: PreventGradient] is not supported
+2026-05-09 17:16:20,797 - ERROR - Unsupported ops: Counter({'PreventGradient': 6})
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 752, in <module>
+    main()
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 299, in main
+    model_proto, _ = _convert_common(
+                     ^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 194, in _convert_common
+    g = process_tf_graph(tf_graph, const_node_values=const_node_values,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 464, in process_tf_graph
+    g = process_graphs(main_g, subgraphs, custom_op_handlers, inputs_as_nchw, outputs_as_nchw, continue_on_error,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 513, in process_graphs
+    fg = process_parsed_graph(g, custom_op_handlers, inputs_as_nchw, outputs_as_nchw, continue_on_error,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 627, in process_parsed_graph
+    raise exceptions[0]
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 360, in version_13
+    return cls.any_version(True, 13, ctx, node, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 119, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: Current implementation of RFFT or FFT only allows ComplexAbs as consumer not {'EnsureShape'}
+
+  warnings.warn(
+I0000 00:00:1778361382.343826  306597 gpu_device.cc:2043] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 140829 MB memory:  -> device: 0, name: NVIDIA H200 NVL, pci bus id: 0000:21:00.0, compute capability: 9.0a
+I0000 00:00:1778361382.345656  306597 gpu_device.cc:2043] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 140829 MB memory:  -> device: 1, name: NVIDIA H200 NVL, pci bus id: 0000:a1:00.0, compute capability: 9.0a
+2026-05-09 17:16:26,060 | INFO    | absl | Fingerprint not found. Saved model loading will continue.
+2026-05-09 17:16:26,061 | INFO    | absl | path_and_singleprint metric could not be logged. Saved model loading will continue.
+I0000 00:00:1778361386.744066  308819 service.cc:153] XLA service 0x7e62e8075610 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1778361386.744148  308819 service.cc:161]   StreamExecutor [0]: NVIDIA H200 NVL, Compute Capability 9.0a (Driver: 13.0.0; Runtime: 12.8.0; Toolkit: 12.5.0; DNN: 9.10.2)
+I0000 00:00:1778361386.744170  308819 service.cc:161]   StreamExecutor [1]: NVIDIA H200 NVL, Compute Capability 9.0a (Driver: 13.0.0; Runtime: 12.8.0; Toolkit: 12.5.0; DNN: 9.10.2)
+I0000 00:00:1778361386.962806  308819 dump_mlir_util.cc:269] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+W0000 00:00:1778361387.533842  308819 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361387.562868  308819 cuda_dnn.cc:461] Loaded cuDNN version 91002
+I0000 00:00:1778361387.617928  308819 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778361388.045963  309074 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+E0000 00:00:1778361390.661687  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361395.696546  309091 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778361395.738975  309068 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 80 bytes spill stores, 80 bytes spill loads
+
+I0000 00:00:1778361395.877253  309089 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 608 bytes spill stores, 608 bytes spill loads
+
+I0000 00:00:1778361396.227727  309065 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1376 bytes spill stores, 1376 bytes spill loads
+
+E0000 00:00:1778361403.479066  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361406.309197  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361412.825375  308819 device_compiler.h:208] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+W0000 00:00:1778361418.057647  308817 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361420.015330  310672 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_51', 8 bytes spill stores, 8 bytes spill loads
+
+E0000 00:00:1778361421.070774  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361427.160480  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361443.410196  308813 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361443.479806  308813 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361446.360588  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361447.651109  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361448.866330  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361457.372463  311891 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 184 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778361457.418110  311928 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778361457.437259  311884 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778361457.462092  311912 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 96 bytes spill stores, 96 bytes spill loads
+
+I0000 00:00:1778361457.528760  311908 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 684 bytes spill stores, 684 bytes spill loads
+
+I0000 00:00:1778361458.014030  311927 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2404 bytes spill stores, 2456 bytes spill loads
+
+I0000 00:00:1778361458.877067  311884 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+E0000 00:00:1778361460.273191  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361473.724470  308819 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361473.794905  308819 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778361477.503359  313423 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+I0000 00:00:1778361479.008147  313394 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778361479.064477  313390 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778361479.269105  313421 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 628 bytes spill stores, 628 bytes spill loads
+
+I0000 00:00:1778361479.548203  313403 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2108 bytes spill stores, 2108 bytes spill loads
+
+E0000 00:00:1778361482.365964  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361487.998451  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361489.371499  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361502.445700  308817 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361502.515559  308817 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361506.877940  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361507.925951  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361509.328448  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361515.911769  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361520.075859  314813 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778361520.264272  314837 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 176 bytes spill stores, 176 bytes spill loads
+
+I0000 00:00:1778361520.264753  314842 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 76 bytes spill stores, 92 bytes spill loads
+
+I0000 00:00:1778361520.289608  314851 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778361520.316815  314845 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 136 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778361520.483144  314820 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 716 bytes spill stores, 716 bytes spill loads
+
+I0000 00:00:1778361520.818812  314843 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2460 bytes spill stores, 3148 bytes spill loads
+
+W0000 00:00:1778361532.764051  308812 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361532.831986  308812 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361538.077679  308812 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361541.086365  308812 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361542.730697  316351 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778361542.738406  316377 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778361542.765781  316385 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 108 bytes spill stores, 140 bytes spill loads
+
+I0000 00:00:1778361542.779663  316379 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778361542.891088  316358 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 684 bytes spill stores, 684 bytes spill loads
+
+I0000 00:00:1778361543.279096  316345 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2444 bytes spill stores, 3116 bytes spill loads
+
+E0000 00:00:1778361544.056093  308812 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361552.232592  308812 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361562.898307  308819 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361562.965654  308819 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778361564.348180  317890 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 96 bytes spill loads
+
+I0000 00:00:1778361564.372811  317871 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 80 bytes spill loads
+
+I0000 00:00:1778361564.574954  317877 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 628 bytes spill stores, 628 bytes spill loads
+
+I0000 00:00:1778361564.853484  317895 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1384 bytes spill stores, 1400 bytes spill loads
+
+E0000 00:00:1778361566.399554  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361568.329624  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361569.822551  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361577.776723  308819 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361582.325646  317892 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 68 bytes spill stores, 52 bytes spill loads
+
+W0000 00:00:1778361592.676750  308814 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361592.745218  308814 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361594.038070  308814 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361598.043177  319346 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+I0000 00:00:1778361601.243293  319378 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 68 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778361601.283353  319368 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 64 bytes spill loads
+
+I0000 00:00:1778361601.427765  319370 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 648 bytes spill stores, 648 bytes spill loads
+
+I0000 00:00:1778361601.775579  319381 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2088 bytes spill stores, 2104 bytes spill loads
+
+E0000 00:00:1778361605.254289  308814 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361606.346104  308814 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361611.109044  308814 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361622.213721  308817 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361622.285912  308817 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361624.192773  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361629.295503  320866 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 68 bytes spill stores, 52 bytes spill loads
+
+I0000 00:00:1778361633.701072  320869 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778361633.704336  320832 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778361633.907587  320872 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 632 bytes spill stores, 632 bytes spill loads
+
+I0000 00:00:1778361634.249695  320847 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2112 bytes spill stores, 2116 bytes spill loads
+
+E0000 00:00:1778361635.358243  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361639.380515  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361651.419133  308813 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361651.490909  308813 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361653.633939  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361656.046487  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361657.707905  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361661.023853  322305 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 128 bytes spill stores, 80 bytes spill loads
+
+I0000 00:00:1778361666.383154  322317 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 104 bytes spill stores, 112 bytes spill loads
+
+I0000 00:00:1778361666.487450  322324 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 96 bytes spill stores, 104 bytes spill loads
+
+I0000 00:00:1778361666.588453  322334 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 644 bytes spill stores, 644 bytes spill loads
+
+I0000 00:00:1778361666.893562  322308 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1384 bytes spill stores, 1400 bytes spill loads
+
+E0000 00:00:1778361670.602147  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361681.165629  308815 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361681.233653  308815 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361682.492231  308815 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361683.531492  308815 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361687.202799  308815 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361695.250836  308815 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361696.914971  323846 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778361700.118012  323843 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778361700.232172  323857 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778361700.316260  323817 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 156 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778361700.324189  323819 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 124 bytes spill loads
+
+I0000 00:00:1778361700.346053  323842 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 132 bytes spill stores, 132 bytes spill loads
+
+I0000 00:00:1778361700.417749  323833 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 668 bytes spill stores, 668 bytes spill loads
+
+I0000 00:00:1778361700.826714  323821 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2316 bytes spill stores, 2880 bytes spill loads
+
+W0000 00:00:1778361711.246283  308818 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361711.315419  308818 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361717.409128  308818 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361722.925481  308818 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361725.337676  325309 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778361725.339811  325313 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778361725.502241  325299 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 588 bytes spill stores, 588 bytes spill loads
+
+I0000 00:00:1778361725.845574  325314 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1372 bytes spill stores, 1372 bytes spill loads
+
+E0000 00:00:1778361729.255147  308818 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361739.725770  308813 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361739.799000  308813 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778361743.505692  326759 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778361743.506541  326722 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778361743.549985  326751 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 168 bytes spill loads
+
+I0000 00:00:1778361743.607012  326734 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 108 bytes spill stores, 148 bytes spill loads
+
+I0000 00:00:1778361743.702513  326754 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 700 bytes spill stores, 700 bytes spill loads
+
+I0000 00:00:1778361744.093169  326746 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2448 bytes spill stores, 3124 bytes spill loads
+
+E0000 00:00:1778361747.118588  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361751.771172  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361752.778163  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361754.209949  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778361770.226426  308818 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361770.295528  308818 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778361771.668616  328258 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778361771.696086  328278 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778361771.733343  328280 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 100 bytes spill stores, 132 bytes spill loads
+
+I0000 00:00:1778361771.743733  328256 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 148 bytes spill loads
+
+I0000 00:00:1778361771.900421  328285 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 668 bytes spill stores, 668 bytes spill loads
+
+I0000 00:00:1778361772.252990  328267 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2432 bytes spill stores, 3092 bytes spill loads
+
+E0000 00:00:1778361774.199698  308818 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361776.762893  328294 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778361778.345235  328286 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot', 4 bytes spill stores, 4 bytes spill loads
+
+E0000 00:00:1778361786.232021  308818 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361787.399870  308818 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361788.727797  308818 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+2026-05-09 17:23:20,530 | INFO    | runner | [train] embedded 50/11500
+W0000 00:00:1778361801.694043  308813 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361801.768959  308813 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361806.445609  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361812.071502  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361816.854088  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361817.821908  308813 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361819.391281  329778 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 124 bytes spill loads
+
+I0000 00:00:1778361819.428057  329793 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 184 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778361819.448795  329770 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 156 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778361819.499124  329757 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778361819.604716  329776 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 700 bytes spill stores, 700 bytes spill loads
+
+I0000 00:00:1778361820.019202  329779 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2340 bytes spill stores, 2932 bytes spill loads
+
+2026-05-09 17:23:52,019 | INFO    | runner | [train] embedded 100/11500
+W0000 00:00:1778361833.181658  308817 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778361833.253752  308817 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778361834.397179  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778361836.197053  331327 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778361836.208513  331313 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778361836.226294  331328 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778361836.233084  331312 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778361836.370286  331317 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 716 bytes spill stores, 716 bytes spill loads
+
+I0000 00:00:1778361836.849190  331334 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2404 bytes spill stores, 2488 bytes spill loads
+
+E0000 00:00:1778361840.136774  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361844.524601  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778361851.273303  308817 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+2026-05-09 17:24:23,414 | INFO    | runner | [train] embedded 150/11500
+2026-05-09 17:24:25,080 | INFO    | runner | [train] embedded 200/11500
+2026-05-09 17:24:26,446 | INFO    | runner | [train] embedded 250/11500
+2026-05-09 17:24:27,732 | INFO    | runner | [train] embedded 300/11500
+2026-05-09 17:24:29,199 | INFO    | runner | [train] embedded 350/11500
+2026-05-09 17:24:30,205 | INFO    | runner | [train] embedded 400/11500
+2026-05-09 17:24:31,842 | INFO    | runner | [train] embedded 450/11500
+2026-05-09 17:24:34,251 | INFO    | runner | [train] embedded 500/11500
+2026-05-09 17:24:35,874 | INFO    | runner | [train] embedded 550/11500
+2026-05-09 17:24:37,449 | INFO    | runner | [train] embedded 600/11500
+2026-05-09 17:24:38,912 | INFO    | runner | [train] embedded 650/11500
+2026-05-09 17:24:40,830 | INFO    | runner | [train] embedded 700/11500
+2026-05-09 17:24:43,357 | INFO    | runner | [train] embedded 750/11500
+2026-05-09 17:24:46,167 | INFO    | runner | [train] embedded 800/11500
+2026-05-09 17:24:47,658 | INFO    | runner | [train] embedded 850/11500
+2026-05-09 17:24:49,649 | INFO    | runner | [train] embedded 900/11500
+2026-05-09 17:24:52,904 | INFO    | runner | [train] embedded 950/11500
+2026-05-09 17:24:55,151 | INFO    | runner | [train] embedded 1000/11500
+2026-05-09 17:24:56,819 | INFO    | runner | [train] embedded 1050/11500
+2026-05-09 17:24:58,263 | INFO    | runner | [train] embedded 1100/11500
+2026-05-09 17:25:00,040 | INFO    | runner | [train] embedded 1150/11500
+2026-05-09 17:25:01,664 | INFO    | runner | [train] embedded 1200/11500
+2026-05-09 17:25:04,451 | INFO    | runner | [train] embedded 1250/11500
+2026-05-09 17:25:05,620 | INFO    | runner | [train] embedded 1300/11500
+2026-05-09 17:25:06,667 | INFO    | runner | [train] embedded 1350/11500
+2026-05-09 17:25:08,491 | INFO    | runner | [train] embedded 1400/11500
+2026-05-09 17:25:10,187 | INFO    | runner | [train] embedded 1450/11500
+2026-05-09 17:25:11,438 | INFO    | runner | [train] embedded 1500/11500
+2026-05-09 17:25:13,935 | INFO    | runner | [train] embedded 1550/11500
+2026-05-09 17:25:15,622 | INFO    | runner | [train] embedded 1600/11500
+2026-05-09 17:25:17,150 | INFO    | runner | [train] embedded 1650/11500
+2026-05-09 17:25:18,433 | INFO    | runner | [train] embedded 1700/11500
+2026-05-09 17:25:20,147 | INFO    | runner | [train] embedded 1750/11500
+2026-05-09 17:25:21,234 | INFO    | runner | [train] embedded 1800/11500
+2026-05-09 17:25:22,564 | INFO    | runner | [train] embedded 1850/11500
+2026-05-09 17:25:25,051 | INFO    | runner | [train] embedded 1900/11500
+2026-05-09 17:25:26,496 | INFO    | runner | [train] embedded 1950/11500
+2026-05-09 17:25:27,701 | INFO    | runner | [train] embedded 2000/11500
+2026-05-09 17:25:28,984 | INFO    | runner | [train] embedded 2050/11500
+2026-05-09 17:25:30,206 | INFO    | runner | [train] embedded 2100/11500
+2026-05-09 17:25:31,871 | INFO    | runner | [train] embedded 2150/11500
+2026-05-09 17:25:33,023 | INFO    | runner | [train] embedded 2200/11500
+2026-05-09 17:25:34,262 | INFO    | runner | [train] embedded 2250/11500
+2026-05-09 17:25:36,433 | INFO    | runner | [train] embedded 2300/11500
+2026-05-09 17:25:38,794 | INFO    | runner | [train] embedded 2350/11500
+2026-05-09 17:25:40,809 | INFO    | runner | [train] embedded 2400/11500
+2026-05-09 17:25:42,924 | INFO    | runner | [train] embedded 2450/11500
+2026-05-09 17:25:44,758 | INFO    | runner | [train] embedded 2500/11500
+2026-05-09 17:25:46,677 | INFO    | runner | [train] embedded 2550/11500
+2026-05-09 17:25:49,698 | INFO    | runner | [train] embedded 2600/11500
+2026-05-09 17:25:52,083 | INFO    | runner | [train] embedded 2650/11500
+2026-05-09 17:25:56,017 | INFO    | runner | [train] embedded 2700/11500
+2026-05-09 17:25:57,327 | INFO    | runner | [train] embedded 2750/11500
+2026-05-09 17:25:59,420 | INFO    | runner | [train] embedded 2800/11500
+2026-05-09 17:26:01,274 | INFO    | runner | [train] embedded 2850/11500
+2026-05-09 17:26:03,130 | INFO    | runner | [train] embedded 2900/11500
+2026-05-09 17:26:04,577 | INFO    | runner | [train] embedded 2950/11500
+2026-05-09 17:26:06,210 | INFO    | runner | [train] embedded 3000/11500
+2026-05-09 17:26:08,069 | INFO    | runner | [train] embedded 3050/11500
+2026-05-09 17:26:09,951 | INFO    | runner | [train] embedded 3100/11500
+2026-05-09 17:26:11,849 | INFO    | runner | [train] embedded 3150/11500
+2026-05-09 17:26:13,276 | INFO    | runner | [train] embedded 3200/11500
+2026-05-09 17:26:14,655 | INFO    | runner | [train] embedded 3250/11500
+2026-05-09 17:26:16,617 | INFO    | runner | [train] embedded 3300/11500
+2026-05-09 17:26:18,656 | INFO    | runner | [train] embedded 3350/11500
+2026-05-09 17:26:20,530 | INFO    | runner | [train] embedded 3400/11500
+2026-05-09 17:26:22,225 | INFO    | runner | [train] embedded 3450/11500
+2026-05-09 17:26:23,943 | INFO    | runner | [train] embedded 3500/11500
+2026-05-09 17:26:25,286 | INFO    | runner | [train] embedded 3550/11500
+2026-05-09 17:26:26,766 | INFO    | runner | [train] embedded 3600/11500
+2026-05-09 17:26:28,912 | INFO    | runner | [train] embedded 3650/11500
+2026-05-09 17:26:30,472 | INFO    | runner | [train] embedded 3700/11500
+2026-05-09 17:26:32,807 | INFO    | runner | [train] embedded 3750/11500
+2026-05-09 17:26:34,402 | INFO    | runner | [train] embedded 3800/11500
+2026-05-09 17:26:36,851 | INFO    | runner | [train] embedded 3850/11500
+2026-05-09 17:26:38,591 | INFO    | runner | [train] embedded 3900/11500
+2026-05-09 17:26:40,792 | INFO    | runner | [train] embedded 3950/11500
+2026-05-09 17:26:42,590 | INFO    | runner | [train] embedded 4000/11500
+2026-05-09 17:26:44,025 | INFO    | runner | [train] embedded 4050/11500
+2026-05-09 17:26:45,761 | INFO    | runner | [train] embedded 4100/11500
+2026-05-09 17:26:47,131 | INFO    | runner | [train] embedded 4150/11500
+2026-05-09 17:26:48,581 | INFO    | runner | [train] embedded 4200/11500
+2026-05-09 17:26:49,774 | INFO    | runner | [train] embedded 4250/11500
+2026-05-09 17:26:52,163 | INFO    | runner | [train] embedded 4300/11500
+2026-05-09 17:26:53,777 | INFO    | runner | [train] embedded 4350/11500
+2026-05-09 17:26:55,195 | INFO    | runner | [train] embedded 4400/11500
+2026-05-09 17:26:57,448 | INFO    | runner | [train] embedded 4450/11500
+2026-05-09 17:26:59,757 | INFO    | runner | [train] embedded 4500/11500
+2026-05-09 17:27:01,310 | INFO    | runner | [train] embedded 4550/11500
+2026-05-09 17:27:02,519 | INFO    | runner | [train] embedded 4600/11500
+2026-05-09 17:27:03,946 | INFO    | runner | [train] embedded 4650/11500
+2026-05-09 17:27:06,228 | INFO    | runner | [train] embedded 4700/11500
+2026-05-09 17:27:07,699 | INFO    | runner | [train] embedded 4750/11500
+2026-05-09 17:27:09,797 | INFO    | runner | [train] embedded 4800/11500
+2026-05-09 17:27:11,680 | INFO    | runner | [train] embedded 4850/11500
+2026-05-09 17:27:12,852 | INFO    | runner | [train] embedded 4900/11500
+2026-05-09 17:27:14,260 | INFO    | runner | [train] embedded 4950/11500
+2026-05-09 17:27:16,008 | INFO    | runner | [train] embedded 5000/11500
+2026-05-09 17:27:17,697 | INFO    | runner | [train] embedded 5050/11500
+2026-05-09 17:27:18,916 | INFO    | runner | [train] embedded 5100/11500
+2026-05-09 17:27:20,556 | INFO    | runner | [train] embedded 5150/11500
+2026-05-09 17:27:21,490 | INFO    | runner | [train] embedded 5200/11500
+2026-05-09 17:27:23,681 | INFO    | runner | [train] embedded 5250/11500
+2026-05-09 17:27:25,442 | INFO    | runner | [train] embedded 5300/11500
+2026-05-09 17:27:26,612 | INFO    | runner | [train] embedded 5350/11500
+2026-05-09 17:27:28,501 | INFO    | runner | [train] embedded 5400/11500
+2026-05-09 17:27:29,758 | INFO    | runner | [train] embedded 5450/11500
+2026-05-09 17:27:31,493 | INFO    | runner | [train] embedded 5500/11500
+2026-05-09 17:27:33,184 | INFO    | runner | [train] embedded 5550/11500
+2026-05-09 17:27:34,476 | INFO    | runner | [train] embedded 5600/11500
+2026-05-09 17:27:35,671 | INFO    | runner | [train] embedded 5650/11500
+2026-05-09 17:27:37,327 | INFO    | runner | [train] embedded 5700/11500
+2026-05-09 17:27:39,052 | INFO    | runner | [train] embedded 5750/11500
+2026-05-09 17:27:40,258 | INFO    | runner | [train] embedded 5800/11500
+2026-05-09 17:27:42,246 | INFO    | runner | [train] embedded 5850/11500
+2026-05-09 17:27:44,637 | INFO    | runner | [train] embedded 5900/11500
+2026-05-09 17:27:46,291 | INFO    | runner | [train] embedded 5950/11500
+2026-05-09 17:27:47,866 | INFO    | runner | [train] embedded 6000/11500
+2026-05-09 17:27:49,101 | INFO    | runner | [train] embedded 6050/11500
+2026-05-09 17:27:51,812 | INFO    | runner | [train] embedded 6100/11500
+2026-05-09 17:27:53,715 | INFO    | runner | [train] embedded 6150/11500
+2026-05-09 17:27:55,463 | INFO    | runner | [train] embedded 6200/11500
+2026-05-09 17:27:57,004 | INFO    | runner | [train] embedded 6250/11500
+2026-05-09 17:27:59,034 | INFO    | runner | [train] embedded 6300/11500
+2026-05-09 17:28:01,610 | INFO    | runner | [train] embedded 6350/11500
+2026-05-09 17:28:03,217 | INFO    | runner | [train] embedded 6400/11500
+2026-05-09 17:28:04,554 | INFO    | runner | [train] embedded 6450/11500
+2026-05-09 17:28:06,542 | INFO    | runner | [train] embedded 6500/11500
+2026-05-09 17:28:08,296 | INFO    | runner | [train] embedded 6550/11500
+2026-05-09 17:28:09,836 | INFO    | runner | [train] embedded 6600/11500
+2026-05-09 17:28:11,796 | INFO    | runner | [train] embedded 6650/11500
+2026-05-09 17:28:14,005 | INFO    | runner | [train] embedded 6700/11500
+2026-05-09 17:28:15,645 | INFO    | runner | [train] embedded 6750/11500
+2026-05-09 17:28:17,381 | INFO    | runner | [train] embedded 6800/11500
+2026-05-09 17:28:19,257 | INFO    | runner | [train] embedded 6850/11500
+2026-05-09 17:28:20,701 | INFO    | runner | [train] embedded 6900/11500
+2026-05-09 17:28:21,986 | INFO    | runner | [train] embedded 6950/11500
+2026-05-09 17:28:23,757 | INFO    | runner | [train] embedded 7000/11500
+2026-05-09 17:28:25,557 | INFO    | runner | [train] embedded 7050/11500
+2026-05-09 17:28:27,202 | INFO    | runner | [train] embedded 7100/11500
+2026-05-09 17:28:29,136 | INFO    | runner | [train] embedded 7150/11500
+2026-05-09 17:28:30,953 | INFO    | runner | [train] embedded 7200/11500
+2026-05-09 17:28:32,486 | INFO    | runner | [train] embedded 7250/11500
+2026-05-09 17:28:33,894 | INFO    | runner | [train] embedded 7300/11500
+2026-05-09 17:28:35,816 | INFO    | runner | [train] embedded 7350/11500
+2026-05-09 17:28:39,585 | INFO    | runner | [train] embedded 7400/11500
+2026-05-09 17:28:40,862 | INFO    | runner | [train] embedded 7450/11500
+2026-05-09 17:28:42,646 | INFO    | runner | [train] embedded 7500/11500
+2026-05-09 17:28:44,649 | INFO    | runner | [train] embedded 7550/11500
+2026-05-09 17:28:45,843 | INFO    | runner | [train] embedded 7600/11500
+2026-05-09 17:28:47,784 | INFO    | runner | [train] embedded 7650/11500
+2026-05-09 17:28:49,828 | INFO    | runner | [train] embedded 7700/11500
+2026-05-09 17:28:51,140 | INFO    | runner | [train] embedded 7750/11500
+2026-05-09 17:28:52,935 | INFO    | runner | [train] embedded 7800/11500
+2026-05-09 17:28:54,191 | INFO    | runner | [train] embedded 7850/11500
+2026-05-09 17:28:55,717 | INFO    | runner | [train] embedded 7900/11500
+2026-05-09 17:28:57,407 | INFO    | runner | [train] embedded 7950/11500
+2026-05-09 17:28:58,753 | INFO    | runner | [train] embedded 8000/11500
+2026-05-09 17:28:59,952 | INFO    | runner | [train] embedded 8050/11500
+2026-05-09 17:29:01,331 | INFO    | runner | [train] embedded 8100/11500
+2026-05-09 17:29:03,219 | INFO    | runner | [train] embedded 8150/11500
+2026-05-09 17:29:04,707 | INFO    | runner | [train] embedded 8200/11500
+2026-05-09 17:29:05,884 | INFO    | runner | [train] embedded 8250/11500
+2026-05-09 17:29:07,735 | INFO    | runner | [train] embedded 8300/11500
+2026-05-09 17:29:09,181 | INFO    | runner | [train] embedded 8350/11500
+2026-05-09 17:29:10,941 | INFO    | runner | [train] embedded 8400/11500
+2026-05-09 17:29:12,728 | INFO    | runner | [train] embedded 8450/11500
+2026-05-09 17:29:14,403 | INFO    | runner | [train] embedded 8500/11500
+2026-05-09 17:29:15,685 | INFO    | runner | [train] embedded 8550/11500
+2026-05-09 17:29:16,977 | INFO    | runner | [train] embedded 8600/11500
+2026-05-09 17:29:18,525 | INFO    | runner | [train] embedded 8650/11500
+2026-05-09 17:29:20,713 | INFO    | runner | [train] embedded 8700/11500
+2026-05-09 17:29:21,876 | INFO    | runner | [train] embedded 8750/11500
+2026-05-09 17:29:23,431 | INFO    | runner | [train] embedded 8800/11500
+2026-05-09 17:29:24,635 | INFO    | runner | [train] embedded 8850/11500
+2026-05-09 17:29:26,270 | INFO    | runner | [train] embedded 8900/11500
+2026-05-09 17:29:28,272 | INFO    | runner | [train] embedded 8950/11500
+2026-05-09 17:29:30,366 | INFO    | runner | [train] embedded 9000/11500
+2026-05-09 17:29:31,632 | INFO    | runner | [train] embedded 9050/11500
+2026-05-09 17:29:33,024 | INFO    | runner | [train] embedded 9100/11500
+2026-05-09 17:29:34,915 | INFO    | runner | [train] embedded 9150/11500
+2026-05-09 17:29:36,414 | INFO    | runner | [train] embedded 9200/11500
+2026-05-09 17:29:37,668 | INFO    | runner | [train] embedded 9250/11500
+2026-05-09 17:29:38,730 | INFO    | runner | [train] embedded 9300/11500
+2026-05-09 17:29:40,311 | INFO    | runner | [train] embedded 9350/11500
+2026-05-09 17:29:42,035 | INFO    | runner | [train] embedded 9400/11500
+2026-05-09 17:29:43,504 | INFO    | runner | [train] embedded 9450/11500
+2026-05-09 17:29:45,259 | INFO    | runner | [train] embedded 9500/11500
+2026-05-09 17:29:46,024 | INFO    | runner | [train] embedded 9550/11500
+2026-05-09 17:29:47,127 | INFO    | runner | [train] embedded 9600/11500
+2026-05-09 17:29:48,802 | INFO    | runner | [train] embedded 9650/11500
+2026-05-09 17:29:50,277 | INFO    | runner | [train] embedded 9700/11500
+2026-05-09 17:29:52,165 | INFO    | runner | [train] embedded 9750/11500
+2026-05-09 17:29:54,708 | INFO    | runner | [train] embedded 9800/11500
+2026-05-09 17:29:56,618 | INFO    | runner | [train] embedded 9850/11500
+2026-05-09 17:29:58,066 | INFO    | runner | [train] embedded 9900/11500
+2026-05-09 17:29:59,855 | INFO    | runner | [train] embedded 9950/11500
+2026-05-09 17:30:01,610 | INFO    | runner | [train] embedded 10000/11500
+2026-05-09 17:30:03,579 | INFO    | runner | [train] embedded 10050/11500
+2026-05-09 17:30:05,166 | INFO    | runner | [train] embedded 10100/11500
+2026-05-09 17:30:06,892 | INFO    | runner | [train] embedded 10150/11500
+2026-05-09 17:30:09,282 | INFO    | runner | [train] embedded 10200/11500
+2026-05-09 17:30:11,715 | INFO    | runner | [train] embedded 10250/11500
+2026-05-09 17:30:13,246 | INFO    | runner | [train] embedded 10300/11500
+2026-05-09 17:30:14,554 | INFO    | runner | [train] embedded 10350/11500
+2026-05-09 17:30:16,294 | INFO    | runner | [train] embedded 10400/11500
+2026-05-09 17:30:18,864 | INFO    | runner | [train] embedded 10450/11500
+2026-05-09 17:30:20,280 | INFO    | runner | [train] embedded 10500/11500
+2026-05-09 17:30:21,872 | INFO    | runner | [train] embedded 10550/11500
+2026-05-09 17:30:23,792 | INFO    | runner | [train] embedded 10600/11500
+2026-05-09 17:30:25,069 | INFO    | runner | [train] embedded 10650/11500
+2026-05-09 17:30:26,498 | INFO    | runner | [train] embedded 10700/11500
+2026-05-09 17:30:28,514 | INFO    | runner | [train] embedded 10750/11500
+2026-05-09 17:30:30,829 | INFO    | runner | [train] embedded 10800/11500
+2026-05-09 17:30:32,822 | INFO    | runner | [train] embedded 10850/11500
+2026-05-09 17:30:34,949 | INFO    | runner | [train] embedded 10900/11500
+2026-05-09 17:30:36,738 | INFO    | runner | [train] embedded 10950/11500
+2026-05-09 17:30:38,037 | INFO    | runner | [train] embedded 11000/11500
+2026-05-09 17:30:39,302 | INFO    | runner | [train] embedded 11050/11500
+2026-05-09 17:30:40,705 | INFO    | runner | [train] embedded 11100/11500
+2026-05-09 17:30:42,042 | INFO    | runner | [train] embedded 11150/11500
+2026-05-09 17:30:43,570 | INFO    | runner | [train] embedded 11200/11500
+2026-05-09 17:30:45,874 | INFO    | runner | [train] embedded 11250/11500
+2026-05-09 17:30:46,853 | INFO    | runner | [train] embedded 11300/11500
+2026-05-09 17:30:47,870 | INFO    | runner | [train] embedded 11350/11500
+2026-05-09 17:30:49,830 | INFO    | runner | [train] embedded 11400/11500
+2026-05-09 17:30:51,216 | INFO    | runner | [train] embedded 11450/11500
+2026-05-09 17:30:52,902 | INFO    | runner | [train] embedded 11500/11500
+2026-05-09 17:31:03,779 | INFO    | faiss.loader | Loading faiss with AVX512 support.
+2026-05-09 17:31:03,800 | INFO    | faiss.loader | Successfully loaded faiss with AVX512 support.
+2026-05-09 17:31:12,886 | INFO    | runner | Index built: 149119 docs, dim=1280, 20.0s
+2026-05-09 17:31:14,190 | INFO    | runner | [test:clean] embedded 50/2889
+2026-05-09 17:31:15,744 | INFO    | runner | [test:clean] embedded 100/2889
+2026-05-09 17:31:17,401 | INFO    | runner | [test:clean] embedded 150/2889
+2026-05-09 17:31:18,815 | INFO    | runner | [test:clean] embedded 200/2889
+2026-05-09 17:31:21,212 | INFO    | runner | [test:clean] embedded 250/2889
+2026-05-09 17:31:22,594 | INFO    | runner | [test:clean] embedded 300/2889
+2026-05-09 17:31:23,667 | INFO    | runner | [test:clean] embedded 350/2889
+2026-05-09 17:31:26,618 | INFO    | runner | [test:clean] embedded 400/2889
+2026-05-09 17:31:28,506 | INFO    | runner | [test:clean] embedded 450/2889
+2026-05-09 17:31:29,854 | INFO    | runner | [test:clean] embedded 500/2889
+2026-05-09 17:31:30,992 | INFO    | runner | [test:clean] embedded 550/2889
+2026-05-09 17:31:33,989 | INFO    | runner | [test:clean] embedded 600/2889
+2026-05-09 17:31:36,388 | INFO    | runner | [test:clean] embedded 650/2889
+2026-05-09 17:31:38,174 | INFO    | runner | [test:clean] embedded 700/2889
+2026-05-09 17:31:40,131 | INFO    | runner | [test:clean] embedded 750/2889
+2026-05-09 17:31:42,642 | INFO    | runner | [test:clean] embedded 800/2889
+2026-05-09 17:31:44,028 | INFO    | runner | [test:clean] embedded 850/2889
+2026-05-09 17:31:45,691 | INFO    | runner | [test:clean] embedded 900/2889
+2026-05-09 17:31:48,018 | INFO    | runner | [test:clean] embedded 950/2889
+2026-05-09 17:31:50,503 | INFO    | runner | [test:clean] embedded 1000/2889
+2026-05-09 17:31:51,746 | INFO    | runner | [test:clean] embedded 1050/2889
+2026-05-09 17:31:53,386 | INFO    | runner | [test:clean] embedded 1100/2889
+2026-05-09 17:31:55,208 | INFO    | runner | [test:clean] embedded 1150/2889
+2026-05-09 17:31:56,635 | INFO    | runner | [test:clean] embedded 1200/2889
+2026-05-09 17:31:58,341 | INFO    | runner | [test:clean] embedded 1250/2889
+2026-05-09 17:31:59,998 | INFO    | runner | [test:clean] embedded 1300/2889
+2026-05-09 17:32:01,443 | INFO    | runner | [test:clean] embedded 1350/2889
+2026-05-09 17:32:02,775 | INFO    | runner | [test:clean] embedded 1400/2889
+2026-05-09 17:32:04,136 | INFO    | runner | [test:clean] embedded 1450/2889
+2026-05-09 17:32:05,883 | INFO    | runner | [test:clean] embedded 1500/2889
+2026-05-09 17:32:07,341 | INFO    | runner | [test:clean] embedded 1550/2889
+2026-05-09 17:32:09,672 | INFO    | runner | [test:clean] embedded 1600/2889
+2026-05-09 17:32:11,203 | INFO    | runner | [test:clean] embedded 1650/2889
+2026-05-09 17:32:12,915 | INFO    | runner | [test:clean] embedded 1700/2889
+2026-05-09 17:32:14,579 | INFO    | runner | [test:clean] embedded 1750/2889
+2026-05-09 17:32:16,698 | INFO    | runner | [test:clean] embedded 1800/2889
+2026-05-09 17:32:18,948 | INFO    | runner | [test:clean] embedded 1850/2889
+2026-05-09 17:32:22,387 | INFO    | runner | [test:clean] embedded 1900/2889
+2026-05-09 17:32:23,692 | INFO    | runner | [test:clean] embedded 1950/2889
+2026-05-09 17:32:25,558 | INFO    | runner | [test:clean] embedded 2000/2889
+2026-05-09 17:32:27,177 | INFO    | runner | [test:clean] embedded 2050/2889
+2026-05-09 17:32:28,972 | INFO    | runner | [test:clean] embedded 2100/2889
+2026-05-09 17:32:30,784 | INFO    | runner | [test:clean] embedded 2150/2889
+2026-05-09 17:32:32,063 | INFO    | runner | [test:clean] embedded 2200/2889
+2026-05-09 17:32:33,530 | INFO    | runner | [test:clean] embedded 2250/2889
+2026-05-09 17:32:35,012 | INFO    | runner | [test:clean] embedded 2300/2889
+2026-05-09 17:32:36,974 | INFO    | runner | [test:clean] embedded 2350/2889
+2026-05-09 17:32:38,654 | INFO    | runner | [test:clean] embedded 2400/2889
+2026-05-09 17:32:40,526 | INFO    | runner | [test:clean] embedded 2450/2889
+2026-05-09 17:32:42,149 | INFO    | runner | [test:clean] embedded 2500/2889
+2026-05-09 17:32:43,830 | INFO    | runner | [test:clean] embedded 2550/2889
+2026-05-09 17:32:46,497 | INFO    | runner | [test:clean] embedded 2600/2889
+2026-05-09 17:32:47,929 | INFO    | runner | [test:clean] embedded 2650/2889
+2026-05-09 17:32:49,564 | INFO    | runner | [test:clean] embedded 2700/2889
+2026-05-09 17:32:51,134 | INFO    | runner | [test:clean] embedded 2750/2889
+2026-05-09 17:32:52,485 | INFO    | runner | [test:clean] embedded 2800/2889
+2026-05-09 17:32:53,760 | INFO    | runner | [test:clean] embedded 2850/2889
+2026-05-09 17:32:54,984 | INFO    | runner | [test:clean] embedded 2889/2889
+2026-05-09 17:33:21,471 | INFO    | runner | [clean] MAP=0.8050 MRR=0.8050 P@1=0.7574 nDCG=0.8280 n=2889
+/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+2026-05-09 17:33:39,132 | INFO    | runner | Experiment strategy1_segments_torch done in 1053.8s — MAP=0.8050 MRR=0.8050
+2026-05-09 17:33:39,146 | INFO    | runner | Experiment strategy2_super_embedding_torch starting
+2026-05-09 17:33:39,730 | INFO    | runner | Loaded 14389 records
+2026-05-09 17:33:39,734 | INFO    | runner | Split: train=11500 test=2889
+2026-05-09 17:33:39,735 | INFO    | runner | [train] embedded 50/11500
+2026-05-09 17:33:39,736 | INFO    | runner | [train] embedded 100/11500
+2026-05-09 17:33:39,737 | INFO    | runner | [train] embedded 150/11500
+2026-05-09 17:33:39,738 | INFO    | runner | [train] embedded 200/11500
+2026-05-09 17:33:39,739 | INFO    | runner | [train] embedded 250/11500
+2026-05-09 17:33:39,740 | INFO    | runner | [train] embedded 300/11500
+2026-05-09 17:33:39,741 | INFO    | runner | [train] embedded 350/11500
+2026-05-09 17:33:39,742 | INFO    | runner | [train] embedded 400/11500
+2026-05-09 17:33:39,743 | INFO    | runner | [train] embedded 450/11500
+2026-05-09 17:33:39,743 | INFO    | runner | [train] embedded 500/11500
+2026-05-09 17:33:39,744 | INFO    | runner | [train] embedded 550/11500
+2026-05-09 17:33:39,745 | INFO    | runner | [train] embedded 600/11500
+2026-05-09 17:33:39,746 | INFO    | runner | [train] embedded 650/11500
+2026-05-09 17:33:39,748 | INFO    | runner | [train] embedded 700/11500
+2026-05-09 17:33:39,749 | INFO    | runner | [train] embedded 750/11500
+2026-05-09 17:33:39,750 | INFO    | runner | [train] embedded 800/11500
+2026-05-09 17:33:39,750 | INFO    | runner | [train] embedded 850/11500
+2026-05-09 17:33:39,751 | INFO    | runner | [train] embedded 900/11500
+2026-05-09 17:33:39,752 | INFO    | runner | [train] embedded 950/11500
+2026-05-09 17:33:39,753 | INFO    | runner | [train] embedded 1000/11500
+2026-05-09 17:33:39,754 | INFO    | runner | [train] embedded 1050/11500
+2026-05-09 17:33:39,755 | INFO    | runner | [train] embedded 1100/11500
+2026-05-09 17:33:39,755 | INFO    | runner | [train] embedded 1150/11500
+2026-05-09 17:33:39,756 | INFO    | runner | [train] embedded 1200/11500
+2026-05-09 17:33:39,757 | INFO    | runner | [train] embedded 1250/11500
+2026-05-09 17:33:39,758 | INFO    | runner | [train] embedded 1300/11500
+2026-05-09 17:33:39,759 | INFO    | runner | [train] embedded 1350/11500
+2026-05-09 17:33:39,760 | INFO    | runner | [train] embedded 1400/11500
+2026-05-09 17:33:39,760 | INFO    | runner | [train] embedded 1450/11500
+2026-05-09 17:33:39,761 | INFO    | runner | [train] embedded 1500/11500
+2026-05-09 17:33:39,762 | INFO    | runner | [train] embedded 1550/11500
+2026-05-09 17:33:39,763 | INFO    | runner | [train] embedded 1600/11500
+2026-05-09 17:33:39,764 | INFO    | runner | [train] embedded 1650/11500
+2026-05-09 17:33:39,765 | INFO    | runner | [train] embedded 1700/11500
+2026-05-09 17:33:39,765 | INFO    | runner | [train] embedded 1750/11500
+2026-05-09 17:33:39,766 | INFO    | runner | [train] embedded 1800/11500
+2026-05-09 17:33:39,767 | INFO    | runner | [train] embedded 1850/11500
+2026-05-09 17:33:39,768 | INFO    | runner | [train] embedded 1900/11500
+2026-05-09 17:33:39,769 | INFO    | runner | [train] embedded 1950/11500
+2026-05-09 17:33:39,769 | INFO    | runner | [train] embedded 2000/11500
+2026-05-09 17:33:39,770 | INFO    | runner | [train] embedded 2050/11500
+2026-05-09 17:33:39,771 | INFO    | runner | [train] embedded 2100/11500
+2026-05-09 17:33:39,772 | INFO    | runner | [train] embedded 2150/11500
+2026-05-09 17:33:39,773 | INFO    | runner | [train] embedded 2200/11500
+2026-05-09 17:33:39,774 | INFO    | runner | [train] embedded 2250/11500
+2026-05-09 17:33:39,774 | INFO    | runner | [train] embedded 2300/11500
+2026-05-09 17:33:39,775 | INFO    | runner | [train] embedded 2350/11500
+2026-05-09 17:33:39,776 | INFO    | runner | [train] embedded 2400/11500
+2026-05-09 17:33:39,777 | INFO    | runner | [train] embedded 2450/11500
+2026-05-09 17:33:39,778 | INFO    | runner | [train] embedded 2500/11500
+2026-05-09 17:33:39,779 | INFO    | runner | [train] embedded 2550/11500
+2026-05-09 17:33:39,779 | INFO    | runner | [train] embedded 2600/11500
+2026-05-09 17:33:39,780 | INFO    | runner | [train] embedded 2650/11500
+2026-05-09 17:33:39,781 | INFO    | runner | [train] embedded 2700/11500
+2026-05-09 17:33:39,782 | INFO    | runner | [train] embedded 2750/11500
+2026-05-09 17:33:39,783 | INFO    | runner | [train] embedded 2800/11500
+2026-05-09 17:33:39,783 | INFO    | runner | [train] embedded 2850/11500
+2026-05-09 17:33:39,785 | INFO    | runner | [train] embedded 2900/11500
+2026-05-09 17:33:39,786 | INFO    | runner | [train] embedded 2950/11500
+2026-05-09 17:33:39,787 | INFO    | runner | [train] embedded 3000/11500
+2026-05-09 17:33:39,787 | INFO    | runner | [train] embedded 3050/11500
+2026-05-09 17:33:39,788 | INFO    | runner | [train] embedded 3100/11500
+2026-05-09 17:33:39,789 | INFO    | runner | [train] embedded 3150/11500
+2026-05-09 17:33:39,790 | INFO    | runner | [train] embedded 3200/11500
+2026-05-09 17:33:39,791 | INFO    | runner | [train] embedded 3250/11500
+2026-05-09 17:33:39,791 | INFO    | runner | [train] embedded 3300/11500
+2026-05-09 17:33:39,792 | INFO    | runner | [train] embedded 3350/11500
+2026-05-09 17:33:39,793 | INFO    | runner | [train] embedded 3400/11500
+2026-05-09 17:33:39,794 | INFO    | runner | [train] embedded 3450/11500
+2026-05-09 17:33:39,795 | INFO    | runner | [train] embedded 3500/11500
+2026-05-09 17:33:39,796 | INFO    | runner | [train] embedded 3550/11500
+2026-05-09 17:33:39,796 | INFO    | runner | [train] embedded 3600/11500
+2026-05-09 17:33:39,797 | INFO    | runner | [train] embedded 3650/11500
+2026-05-09 17:33:39,798 | INFO    | runner | [train] embedded 3700/11500
+2026-05-09 17:33:39,799 | INFO    | runner | [train] embedded 3750/11500
+2026-05-09 17:33:39,800 | INFO    | runner | [train] embedded 3800/11500
+2026-05-09 17:33:39,800 | INFO    | runner | [train] embedded 3850/11500
+2026-05-09 17:33:39,801 | INFO    | runner | [train] embedded 3900/11500
+2026-05-09 17:33:39,802 | INFO    | runner | [train] embedded 3950/11500
+2026-05-09 17:33:39,803 | INFO    | runner | [train] embedded 4000/11500
+2026-05-09 17:33:39,804 | INFO    | runner | [train] embedded 4050/11500
+2026-05-09 17:33:39,805 | INFO    | runner | [train] embedded 4100/11500
+2026-05-09 17:33:39,805 | INFO    | runner | [train] embedded 4150/11500
+2026-05-09 17:33:39,806 | INFO    | runner | [train] embedded 4200/11500
+2026-05-09 17:33:39,807 | INFO    | runner | [train] embedded 4250/11500
+2026-05-09 17:33:39,808 | INFO    | runner | [train] embedded 4300/11500
+2026-05-09 17:33:39,809 | INFO    | runner | [train] embedded 4350/11500
+2026-05-09 17:33:39,810 | INFO    | runner | [train] embedded 4400/11500
+2026-05-09 17:33:39,810 | INFO    | runner | [train] embedded 4450/11500
+2026-05-09 17:33:39,811 | INFO    | runner | [train] embedded 4500/11500
+2026-05-09 17:33:39,812 | INFO    | runner | [train] embedded 4550/11500
+2026-05-09 17:33:39,813 | INFO    | runner | [train] embedded 4600/11500
+2026-05-09 17:33:39,814 | INFO    | runner | [train] embedded 4650/11500
+2026-05-09 17:33:39,815 | INFO    | runner | [train] embedded 4700/11500
+2026-05-09 17:33:39,815 | INFO    | runner | [train] embedded 4750/11500
+2026-05-09 17:33:39,816 | INFO    | runner | [train] embedded 4800/11500
+2026-05-09 17:33:39,817 | INFO    | runner | [train] embedded 4850/11500
+2026-05-09 17:33:39,818 | INFO    | runner | [train] embedded 4900/11500
+2026-05-09 17:33:39,819 | INFO    | runner | [train] embedded 4950/11500
+2026-05-09 17:33:39,820 | INFO    | runner | [train] embedded 5000/11500
+2026-05-09 17:33:39,821 | INFO    | runner | [train] embedded 5050/11500
+2026-05-09 17:33:39,822 | INFO    | runner | [train] embedded 5100/11500
+2026-05-09 17:33:39,823 | INFO    | runner | [train] embedded 5150/11500
+2026-05-09 17:33:39,823 | INFO    | runner | [train] embedded 5200/11500
+2026-05-09 17:33:39,824 | INFO    | runner | [train] embedded 5250/11500
+2026-05-09 17:33:39,825 | INFO    | runner | [train] embedded 5300/11500
+2026-05-09 17:33:39,826 | INFO    | runner | [train] embedded 5350/11500
+2026-05-09 17:33:39,827 | INFO    | runner | [train] embedded 5400/11500
+2026-05-09 17:33:39,827 | INFO    | runner | [train] embedded 5450/11500
+2026-05-09 17:33:39,828 | INFO    | runner | [train] embedded 5500/11500
+2026-05-09 17:33:39,829 | INFO    | runner | [train] embedded 5550/11500
+2026-05-09 17:33:39,830 | INFO    | runner | [train] embedded 5600/11500
+2026-05-09 17:33:39,831 | INFO    | runner | [train] embedded 5650/11500
+2026-05-09 17:33:39,832 | INFO    | runner | [train] embedded 5700/11500
+2026-05-09 17:33:39,832 | INFO    | runner | [train] embedded 5750/11500
+2026-05-09 17:33:39,833 | INFO    | runner | [train] embedded 5800/11500
+2026-05-09 17:33:39,834 | INFO    | runner | [train] embedded 5850/11500
+2026-05-09 17:33:39,835 | INFO    | runner | [train] embedded 5900/11500
+2026-05-09 17:33:39,836 | INFO    | runner | [train] embedded 5950/11500
+2026-05-09 17:33:39,836 | INFO    | runner | [train] embedded 6000/11500
+2026-05-09 17:33:39,837 | INFO    | runner | [train] embedded 6050/11500
+2026-05-09 17:33:39,838 | INFO    | runner | [train] embedded 6100/11500
+2026-05-09 17:33:39,839 | INFO    | runner | [train] embedded 6150/11500
+2026-05-09 17:33:39,840 | INFO    | runner | [train] embedded 6200/11500
+2026-05-09 17:33:39,841 | INFO    | runner | [train] embedded 6250/11500
+2026-05-09 17:33:39,841 | INFO    | runner | [train] embedded 6300/11500
+2026-05-09 17:33:39,842 | INFO    | runner | [train] embedded 6350/11500
+2026-05-09 17:33:39,843 | INFO    | runner | [train] embedded 6400/11500
+2026-05-09 17:33:39,844 | INFO    | runner | [train] embedded 6450/11500
+2026-05-09 17:33:39,845 | INFO    | runner | [train] embedded 6500/11500
+2026-05-09 17:33:39,845 | INFO    | runner | [train] embedded 6550/11500
+2026-05-09 17:33:39,846 | INFO    | runner | [train] embedded 6600/11500
+2026-05-09 17:33:39,847 | INFO    | runner | [train] embedded 6650/11500
+2026-05-09 17:33:39,848 | INFO    | runner | [train] embedded 6700/11500
+2026-05-09 17:33:39,849 | INFO    | runner | [train] embedded 6750/11500
+2026-05-09 17:33:39,850 | INFO    | runner | [train] embedded 6800/11500
+2026-05-09 17:33:39,850 | INFO    | runner | [train] embedded 6850/11500
+2026-05-09 17:33:39,851 | INFO    | runner | [train] embedded 6900/11500
+2026-05-09 17:33:39,852 | INFO    | runner | [train] embedded 6950/11500
+2026-05-09 17:33:39,853 | INFO    | runner | [train] embedded 7000/11500
+2026-05-09 17:33:39,854 | INFO    | runner | [train] embedded 7050/11500
+2026-05-09 17:33:39,855 | INFO    | runner | [train] embedded 7100/11500
+2026-05-09 17:33:39,856 | INFO    | runner | [train] embedded 7150/11500
+2026-05-09 17:33:39,857 | INFO    | runner | [train] embedded 7200/11500
+2026-05-09 17:33:39,857 | INFO    | runner | [train] embedded 7250/11500
+2026-05-09 17:33:39,858 | INFO    | runner | [train] embedded 7300/11500
+2026-05-09 17:33:39,859 | INFO    | runner | [train] embedded 7350/11500
+2026-05-09 17:33:39,860 | INFO    | runner | [train] embedded 7400/11500
+2026-05-09 17:33:39,861 | INFO    | runner | [train] embedded 7450/11500
+2026-05-09 17:33:39,862 | INFO    | runner | [train] embedded 7500/11500
+2026-05-09 17:33:39,862 | INFO    | runner | [train] embedded 7550/11500
+2026-05-09 17:33:39,863 | INFO    | runner | [train] embedded 7600/11500
+2026-05-09 17:33:39,864 | INFO    | runner | [train] embedded 7650/11500
+2026-05-09 17:33:39,865 | INFO    | runner | [train] embedded 7700/11500
+2026-05-09 17:33:39,866 | INFO    | runner | [train] embedded 7750/11500
+2026-05-09 17:33:39,866 | INFO    | runner | [train] embedded 7800/11500
+2026-05-09 17:33:39,867 | INFO    | runner | [train] embedded 7850/11500
+2026-05-09 17:33:39,868 | INFO    | runner | [train] embedded 7900/11500
+2026-05-09 17:33:39,869 | INFO    | runner | [train] embedded 7950/11500
+2026-05-09 17:33:39,870 | INFO    | runner | [train] embedded 8000/11500
+2026-05-09 17:33:39,871 | INFO    | runner | [train] embedded 8050/11500
+2026-05-09 17:33:39,871 | INFO    | runner | [train] embedded 8100/11500
+2026-05-09 17:33:39,872 | INFO    | runner | [train] embedded 8150/11500
+2026-05-09 17:33:39,873 | INFO    | runner | [train] embedded 8200/11500
+2026-05-09 17:33:39,874 | INFO    | runner | [train] embedded 8250/11500
+2026-05-09 17:33:39,875 | INFO    | runner | [train] embedded 8300/11500
+2026-05-09 17:33:39,876 | INFO    | runner | [train] embedded 8350/11500
+2026-05-09 17:33:39,876 | INFO    | runner | [train] embedded 8400/11500
+2026-05-09 17:33:39,877 | INFO    | runner | [train] embedded 8450/11500
+2026-05-09 17:33:39,878 | INFO    | runner | [train] embedded 8500/11500
+2026-05-09 17:33:39,879 | INFO    | runner | [train] embedded 8550/11500
+2026-05-09 17:33:39,880 | INFO    | runner | [train] embedded 8600/11500
+2026-05-09 17:33:39,880 | INFO    | runner | [train] embedded 8650/11500
+2026-05-09 17:33:39,881 | INFO    | runner | [train] embedded 8700/11500
+2026-05-09 17:33:39,882 | INFO    | runner | [train] embedded 8750/11500
+2026-05-09 17:33:39,883 | INFO    | runner | [train] embedded 8800/11500
+2026-05-09 17:33:39,884 | INFO    | runner | [train] embedded 8850/11500
+2026-05-09 17:33:39,884 | INFO    | runner | [train] embedded 8900/11500
+2026-05-09 17:33:39,885 | INFO    | runner | [train] embedded 8950/11500
+2026-05-09 17:33:39,886 | INFO    | runner | [train] embedded 9000/11500
+2026-05-09 17:33:39,887 | INFO    | runner | [train] embedded 9050/11500
+2026-05-09 17:33:39,888 | INFO    | runner | [train] embedded 9100/11500
+2026-05-09 17:33:39,889 | INFO    | runner | [train] embedded 9150/11500
+2026-05-09 17:33:39,890 | INFO    | runner | [train] embedded 9200/11500
+2026-05-09 17:33:39,891 | INFO    | runner | [train] embedded 9250/11500
+2026-05-09 17:33:39,892 | INFO    | runner | [train] embedded 9300/11500
+2026-05-09 17:33:39,892 | INFO    | runner | [train] embedded 9350/11500
+2026-05-09 17:33:39,893 | INFO    | runner | [train] embedded 9400/11500
+2026-05-09 17:33:39,894 | INFO    | runner | [train] embedded 9450/11500
+2026-05-09 17:33:39,895 | INFO    | runner | [train] embedded 9500/11500
+2026-05-09 17:33:39,896 | INFO    | runner | [train] embedded 9550/11500
+2026-05-09 17:33:39,896 | INFO    | runner | [train] embedded 9600/11500
+2026-05-09 17:33:39,897 | INFO    | runner | [train] embedded 9650/11500
+2026-05-09 17:33:39,898 | INFO    | runner | [train] embedded 9700/11500
+2026-05-09 17:33:39,899 | INFO    | runner | [train] embedded 9750/11500
+2026-05-09 17:33:39,900 | INFO    | runner | [train] embedded 9800/11500
+2026-05-09 17:33:39,900 | INFO    | runner | [train] embedded 9850/11500
+2026-05-09 17:33:39,901 | INFO    | runner | [train] embedded 9900/11500
+2026-05-09 17:33:39,902 | INFO    | runner | [train] embedded 9950/11500
+2026-05-09 17:33:39,903 | INFO    | runner | [train] embedded 10000/11500
+2026-05-09 17:33:39,904 | INFO    | runner | [train] embedded 10050/11500
+2026-05-09 17:33:39,904 | INFO    | runner | [train] embedded 10100/11500
+2026-05-09 17:33:39,905 | INFO    | runner | [train] embedded 10150/11500
+2026-05-09 17:33:39,906 | INFO    | runner | [train] embedded 10200/11500
+2026-05-09 17:33:39,907 | INFO    | runner | [train] embedded 10250/11500
+2026-05-09 17:33:39,908 | INFO    | runner | [train] embedded 10300/11500
+2026-05-09 17:33:39,908 | INFO    | runner | [train] embedded 10350/11500
+2026-05-09 17:33:39,909 | INFO    | runner | [train] embedded 10400/11500
+2026-05-09 17:33:39,910 | INFO    | runner | [train] embedded 10450/11500
+2026-05-09 17:33:39,911 | INFO    | runner | [train] embedded 10500/11500
+2026-05-09 17:33:39,912 | INFO    | runner | [train] embedded 10550/11500
+2026-05-09 17:33:39,913 | INFO    | runner | [train] embedded 10600/11500
+2026-05-09 17:33:39,913 | INFO    | runner | [train] embedded 10650/11500
+2026-05-09 17:33:39,914 | INFO    | runner | [train] embedded 10700/11500
+2026-05-09 17:33:39,915 | INFO    | runner | [train] embedded 10750/11500
+2026-05-09 17:33:39,916 | INFO    | runner | [train] embedded 10800/11500
+2026-05-09 17:33:39,917 | INFO    | runner | [train] embedded 10850/11500
+2026-05-09 17:33:39,917 | INFO    | runner | [train] embedded 10900/11500
+2026-05-09 17:33:39,918 | INFO    | runner | [train] embedded 10950/11500
+2026-05-09 17:33:39,919 | INFO    | runner | [train] embedded 11000/11500
+2026-05-09 17:33:39,920 | INFO    | runner | [train] embedded 11050/11500
+2026-05-09 17:33:39,921 | INFO    | runner | [train] embedded 11100/11500
+2026-05-09 17:33:39,921 | INFO    | runner | [train] embedded 11150/11500
+2026-05-09 17:33:39,923 | INFO    | runner | [train] embedded 11200/11500
+2026-05-09 17:33:39,924 | INFO    | runner | [train] embedded 11250/11500
+2026-05-09 17:33:39,924 | INFO    | runner | [train] embedded 11300/11500
+2026-05-09 17:33:41,328 | INFO    | runner | [train] embedded 11350/11500
+2026-05-09 17:33:41,329 | INFO    | runner | [train] embedded 11400/11500
+2026-05-09 17:33:41,331 | INFO    | runner | [train] embedded 11450/11500
+2026-05-09 17:33:41,332 | INFO    | runner | [train] embedded 11500/11500
+2026-05-09 17:33:50,723 | INFO    | runner | Index built: 11500 docs, dim=1280, 9.4s
+2026-05-09 17:33:50,724 | INFO    | runner | [test:clean] embedded 50/2889
+2026-05-09 17:33:50,725 | INFO    | runner | [test:clean] embedded 100/2889
+2026-05-09 17:33:50,726 | INFO    | runner | [test:clean] embedded 150/2889
+2026-05-09 17:33:50,727 | INFO    | runner | [test:clean] embedded 200/2889
+2026-05-09 17:33:50,728 | INFO    | runner | [test:clean] embedded 250/2889
+2026-05-09 17:33:50,729 | INFO    | runner | [test:clean] embedded 300/2889
+2026-05-09 17:33:50,730 | INFO    | runner | [test:clean] embedded 350/2889
+2026-05-09 17:33:50,731 | INFO    | runner | [test:clean] embedded 400/2889
+2026-05-09 17:33:50,731 | INFO    | runner | [test:clean] embedded 450/2889
+2026-05-09 17:33:50,732 | INFO    | runner | [test:clean] embedded 500/2889
+2026-05-09 17:33:50,733 | INFO    | runner | [test:clean] embedded 550/2889
+2026-05-09 17:33:50,734 | INFO    | runner | [test:clean] embedded 600/2889
+2026-05-09 17:33:50,735 | INFO    | runner | [test:clean] embedded 650/2889
+2026-05-09 17:33:50,736 | INFO    | runner | [test:clean] embedded 700/2889
+2026-05-09 17:33:50,737 | INFO    | runner | [test:clean] embedded 750/2889
+2026-05-09 17:33:50,738 | INFO    | runner | [test:clean] embedded 800/2889
+2026-05-09 17:33:50,738 | INFO    | runner | [test:clean] embedded 850/2889
+2026-05-09 17:33:50,739 | INFO    | runner | [test:clean] embedded 900/2889
+2026-05-09 17:33:50,740 | INFO    | runner | [test:clean] embedded 950/2889
+2026-05-09 17:33:50,741 | INFO    | runner | [test:clean] embedded 1000/2889
+2026-05-09 17:33:50,742 | INFO    | runner | [test:clean] embedded 1050/2889
+2026-05-09 17:33:50,743 | INFO    | runner | [test:clean] embedded 1100/2889
+2026-05-09 17:33:50,744 | INFO    | runner | [test:clean] embedded 1150/2889
+2026-05-09 17:33:50,744 | INFO    | runner | [test:clean] embedded 1200/2889
+2026-05-09 17:33:50,745 | INFO    | runner | [test:clean] embedded 1250/2889
+2026-05-09 17:33:50,746 | INFO    | runner | [test:clean] embedded 1300/2889
+2026-05-09 17:33:50,747 | INFO    | runner | [test:clean] embedded 1350/2889
+2026-05-09 17:33:50,748 | INFO    | runner | [test:clean] embedded 1400/2889
+2026-05-09 17:33:50,749 | INFO    | runner | [test:clean] embedded 1450/2889
+2026-05-09 17:33:50,749 | INFO    | runner | [test:clean] embedded 1500/2889
+2026-05-09 17:33:50,750 | INFO    | runner | [test:clean] embedded 1550/2889
+2026-05-09 17:33:50,751 | INFO    | runner | [test:clean] embedded 1600/2889
+2026-05-09 17:33:50,752 | INFO    | runner | [test:clean] embedded 1650/2889
+2026-05-09 17:33:50,753 | INFO    | runner | [test:clean] embedded 1700/2889
+2026-05-09 17:33:50,753 | INFO    | runner | [test:clean] embedded 1750/2889
+2026-05-09 17:33:50,754 | INFO    | runner | [test:clean] embedded 1800/2889
+2026-05-09 17:33:50,755 | INFO    | runner | [test:clean] embedded 1850/2889
+2026-05-09 17:33:50,757 | INFO    | runner | [test:clean] embedded 1900/2889
+2026-05-09 17:33:50,757 | INFO    | runner | [test:clean] embedded 1950/2889
+2026-05-09 17:33:50,758 | INFO    | runner | [test:clean] embedded 2000/2889
+2026-05-09 17:33:50,759 | INFO    | runner | [test:clean] embedded 2050/2889
+2026-05-09 17:33:50,760 | INFO    | runner | [test:clean] embedded 2100/2889
+2026-05-09 17:33:50,761 | INFO    | runner | [test:clean] embedded 2150/2889
+2026-05-09 17:33:50,761 | INFO    | runner | [test:clean] embedded 2200/2889
+2026-05-09 17:33:50,762 | INFO    | runner | [test:clean] embedded 2250/2889
+2026-05-09 17:33:50,763 | INFO    | runner | [test:clean] embedded 2300/2889
+2026-05-09 17:33:50,764 | INFO    | runner | [test:clean] embedded 2350/2889
+2026-05-09 17:33:50,765 | INFO    | runner | [test:clean] embedded 2400/2889
+2026-05-09 17:33:50,765 | INFO    | runner | [test:clean] embedded 2450/2889
+2026-05-09 17:33:50,766 | INFO    | runner | [test:clean] embedded 2500/2889
+2026-05-09 17:33:50,767 | INFO    | runner | [test:clean] embedded 2550/2889
+2026-05-09 17:33:50,768 | INFO    | runner | [test:clean] embedded 2600/2889
+2026-05-09 17:33:50,769 | INFO    | runner | [test:clean] embedded 2650/2889
+2026-05-09 17:33:50,769 | INFO    | runner | [test:clean] embedded 2700/2889
+2026-05-09 17:33:50,770 | INFO    | runner | [test:clean] embedded 2750/2889
+2026-05-09 17:33:50,771 | INFO    | runner | [test:clean] embedded 2800/2889
+2026-05-09 17:33:50,772 | INFO    | runner | [test:clean] embedded 2850/2889
+2026-05-09 17:33:50,773 | INFO    | runner | [test:clean] embedded 2889/2889
+2026-05-09 17:33:59,754 | INFO    | runner | [clean] MAP=0.8008 MRR=0.8008 P@1=0.7497 nDCG=0.8245 n=2889
+/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+2026-05-09 17:34:05,033 | INFO    | runner | Experiment strategy2_super_embedding_torch done in 20.6s — MAP=0.8008 MRR=0.8008
+
+=== Strategy comparison ===
+
+| Metric | strategy1_segments_torch | strategy2_super_embedding_torch |
+|---|---|---|
+| MAP | 0.8050 | 0.8008 |
+| MRR | 0.8050 | 0.8008 |
+| P@1 | 0.7574 | 0.7497 |
+| P@5 | 0.2253 | 0.1730 |
+| R@1 | 0.0011 | 0.0129 |
+| R@5 | 0.0013 | 0.0150 |
+| R@10 | 0.0014 | 0.0156 |
+| nDCG | 0.8280 | 0.8245 |
+| latency | 8.6 / p95 12.4 ms | 2.6 / p95 2.7 ms |
+| n_documents | 149119 | 11500 |
+| index_build_time_s | 20.0 | 9.4 |
+| embedding_dim | 1280 | 1280 |
+
+Saved → /home/cnt-computadores/Pedro/results/strategy_compare

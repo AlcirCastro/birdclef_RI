@@ -1,0 +1,468 @@
+{
+  "sample": {
+    "item_id": 3047,
+    "scientific_name": "Dendrocygna autumnalis",
+    "common_name": "Black-bellied Whistling Duck",
+    "primary_label": "bbwduc",
+    "audio_path": "/home/cnt-computadores/Pedro/birdclef_cache/train_audio/bbwduc/iNat1273530.ogg"
+  },
+  "top_k": 10,
+  "results": [
+    {
+      "strategy": "strategy1_segments_torch",
+      "representation": "segment",
+      "ranking": [
+        {
+          "rank": 1,
+          "species": "bbwduc",
+          "scientific_name": "Dendrocygna autumnalis",
+          "common_name": "Black-bellied Whistling Duck",
+          "score": 0.1457702354053491
+        },
+        {
+          "rank": 2,
+          "species": "greyel",
+          "scientific_name": "Tringa melanoleuca",
+          "common_name": "Greater Yellowlegs",
+          "score": 0.05737627971566973
+        },
+        {
+          "rank": 3,
+          "species": "pluibi1",
+          "scientific_name": "Theristicus caerulescens",
+          "common_name": "Plumbeous Ibis",
+          "score": 0.048992134904899884
+        },
+        {
+          "rank": 4,
+          "species": "osprey",
+          "scientific_name": "Pandion haliaetus",
+          "common_name": "Osprey",
+          "score": 0.045607398066414465
+        },
+        {
+          "rank": 5,
+          "species": "rufhor2",
+          "scientific_name": "Furnarius rufus",
+          "common_name": "Rufous Hornero",
+          "score": 0.045011529386529386
+        },
+        {
+          "rank": 6,
+          "species": "gretho2",
+          "scientific_name": "Phacellodomus ruber",
+          "common_name": "Greater Thornbird",
+          "score": 0.04317562190249722
+        },
+        {
+          "rank": 7,
+          "species": "bkcdon",
+          "scientific_name": "Donacobius atricapilla",
+          "common_name": "Black-capped Donacobius",
+          "score": 0.03897786789193985
+        },
+        {
+          "rank": 8,
+          "species": "saytan1",
+          "scientific_name": "Thraupis sayaca",
+          "common_name": "Sayaca Tanager",
+          "score": 0.034174597132343616
+        },
+        {
+          "rank": 9,
+          "species": "whtdov",
+          "scientific_name": "Leptotila verreauxi",
+          "common_name": "White-tipped Dove",
+          "score": 0.029827688651218064
+        },
+        {
+          "rank": 10,
+          "species": "bncfly",
+          "scientific_name": "Myiarchus tyrannulus",
+          "common_name": "Brown-crested Flycatcher",
+          "score": 0.029764395876927845
+        }
+      ]
+    },
+    {
+      "strategy": "strategy2_super_embedding_torch",
+      "representation": "audio",
+      "ranking": [
+        {
+          "rank": 1,
+          "species": "bbwduc",
+          "scientific_name": "Dendrocygna autumnalis",
+          "common_name": "Black-bellied Whistling Duck",
+          "score": 0.6027820110321045
+        },
+        {
+          "rank": 2,
+          "species": "fepowl",
+          "scientific_name": "Glaucidium brasilianum",
+          "common_name": "Ferruginous Pygmy Owl",
+          "score": 0.5312806963920593
+        },
+        {
+          "rank": 3,
+          "species": "linwoo1",
+          "scientific_name": "Dryocopus lineatus",
+          "common_name": "Lineated Woodpecker",
+          "score": 0.5074771046638489
+        },
+        {
+          "rank": 4,
+          "species": "wfwduc1",
+          "scientific_name": "Dendrocygna viduata",
+          "common_name": "White-faced Whistling Duck",
+          "score": 0.5025918483734131
+        },
+        {
+          "rank": 5,
+          "species": "sofspi1",
+          "scientific_name": "Synallaxis frontalis",
+          "common_name": "Sooty-fronted Spinetail",
+          "score": 0.49214625358581543
+        },
+        {
+          "rank": 6,
+          "species": "pluibi1",
+          "scientific_name": "Theristicus caerulescens",
+          "common_name": "Plumbeous Ibis",
+          "score": 0.48367226123809814
+        },
+        {
+          "rank": 7,
+          "species": "greyel",
+          "scientific_name": "Tringa melanoleuca",
+          "common_name": "Greater Yellowlegs",
+          "score": 0.4818412959575653
+        },
+        {
+          "rank": 8,
+          "species": "gretho2",
+          "scientific_name": "Phacellodomus ruber",
+          "common_name": "Greater Thornbird",
+          "score": 0.47770726680755615
+        },
+        {
+          "rank": 9,
+          "species": "tattin1",
+          "scientific_name": "Crypturellus tataupa",
+          "common_name": "Tataupa Tinamou",
+          "score": 0.47227391600608826
+        },
+        {
+          "rank": 10,
+          "species": "roahaw",
+          "scientific_name": "Rupornis magnirostris",
+          "common_name": "Roadside Hawk",
+          "score": 0.4632801413536072
+        }
+      ]
+    },
+    {
+      "strategy": "strategy1_segments_no_overlap_torch",
+      "representation": "segment",
+      "ranking": [
+        {
+          "rank": 1,
+          "species": "bbwduc",
+          "scientific_name": "Dendrocygna autumnalis",
+          "common_name": "Black-bellied Whistling Duck",
+          "score": 0.08118237599993286
+        },
+        {
+          "rank": 2,
+          "species": "pluibi1",
+          "scientific_name": "Theristicus caerulescens",
+          "common_name": "Plumbeous Ibis",
+          "score": 0.04252339369009539
+        },
+        {
+          "rank": 3,
+          "species": "osprey",
+          "scientific_name": "Pandion haliaetus",
+          "common_name": "Osprey",
+          "score": 0.03751053691077681
+        },
+        {
+          "rank": 4,
+          "species": "linwoo1",
+          "scientific_name": "Dryocopus lineatus",
+          "common_name": "Lineated Woodpecker",
+          "score": 0.03696062954458477
+        },
+        {
+          "rank": 5,
+          "species": "whtdov",
+          "scientific_name": "Leptotila verreauxi",
+          "common_name": "White-tipped Dove",
+          "score": 0.03462443988759778
+        },
+        {
+          "rank": 6,
+          "species": "greyel",
+          "scientific_name": "Tringa melanoleuca",
+          "common_name": "Greater Yellowlegs",
+          "score": 0.03344653699701554
+        },
+        {
+          "rank": 7,
+          "species": "roahaw",
+          "scientific_name": "Rupornis magnirostris",
+          "common_name": "Roadside Hawk",
+          "score": 0.029052646699705524
+        },
+        {
+          "rank": 8,
+          "species": "wfwduc1",
+          "scientific_name": "Dendrocygna viduata",
+          "common_name": "White-faced Whistling Duck",
+          "score": 0.026452380952380953
+        },
+        {
+          "rank": 9,
+          "species": "bkcdon",
+          "scientific_name": "Donacobius atricapilla",
+          "common_name": "Black-capped Donacobius",
+          "score": 0.02623004235907462
+        },
+        {
+          "rank": 10,
+          "species": "brnowl",
+          "scientific_name": "Tyto furcata",
+          "common_name": "American Barn Owl",
+          "score": 0.025588697017268444
+        }
+      ]
+    },
+    {
+      "strategy": "strategy1_segments_no_overlap_noise_torch",
+      "representation": "segment",
+      "ranking": [
+        {
+          "rank": 1,
+          "species": "bbwduc",
+          "scientific_name": "Dendrocygna autumnalis",
+          "common_name": "Black-bellied Whistling Duck",
+          "score": 0.062358531255903814
+        },
+        {
+          "rank": 2,
+          "species": "swtman1",
+          "scientific_name": "Chiroxiphia caudata",
+          "common_name": "Swallow-tailed Manakin",
+          "score": 0.04177658438540292
+        },
+        {
+          "rank": 3,
+          "species": "soulap1",
+          "scientific_name": "Vanellus chilensis",
+          "common_name": "Southern Lapwing",
+          "score": 0.041599025974025976
+        },
+        {
+          "rank": 4,
+          "species": "greyel",
+          "scientific_name": "Tringa melanoleuca",
+          "common_name": "Greater Yellowlegs",
+          "score": 0.038647113211335356
+        },
+        {
+          "rank": 5,
+          "species": "houspa",
+          "scientific_name": "Passer domesticus",
+          "common_name": "House Sparrow",
+          "score": 0.03850228616036579
+        },
+        {
+          "rank": 6,
+          "species": "limpki",
+          "scientific_name": "Aramus guarauna",
+          "common_name": "Limpkin",
+          "score": 0.03777821939586645
+        },
+        {
+          "rank": 7,
+          "species": "squcuc1",
+          "scientific_name": "Piaya cayana",
+          "common_name": "Common Squirrel-Cuckoo",
+          "score": 0.03657569993171397
+        },
+        {
+          "rank": 8,
+          "species": "yecpar",
+          "scientific_name": "Brotogeris chiriri",
+          "common_name": "Yellow-chevroned Parakeet",
+          "score": 0.03650505685389406
+        },
+        {
+          "rank": 9,
+          "species": "chbmoc1",
+          "scientific_name": "Mimus saturninus",
+          "common_name": "Chalk-browed Mockingbird",
+          "score": 0.03447996237370052
+        },
+        {
+          "rank": 10,
+          "species": "sobcac1",
+          "scientific_name": "Cacicus solitarius",
+          "common_name": "Solitary Cacique",
+          "score": 0.03287669715829808
+        }
+      ]
+    },
+    {
+      "strategy": "strategy2_super_embedding_no_overlap_torch",
+      "representation": "audio",
+      "ranking": [
+        {
+          "rank": 1,
+          "species": "bbwduc",
+          "scientific_name": "Dendrocygna autumnalis",
+          "common_name": "Black-bellied Whistling Duck",
+          "score": 0.6152594685554504
+        },
+        {
+          "rank": 2,
+          "species": "gretho2",
+          "scientific_name": "Phacellodomus ruber",
+          "common_name": "Greater Thornbird",
+          "score": 0.520463228225708
+        },
+        {
+          "rank": 3,
+          "species": "pluibi1",
+          "scientific_name": "Theristicus caerulescens",
+          "common_name": "Plumbeous Ibis",
+          "score": 0.5184969902038574
+        },
+        {
+          "rank": 4,
+          "species": "fepowl",
+          "scientific_name": "Glaucidium brasilianum",
+          "common_name": "Ferruginous Pygmy Owl",
+          "score": 0.5170778036117554
+        },
+        {
+          "rank": 5,
+          "species": "linwoo1",
+          "scientific_name": "Dryocopus lineatus",
+          "common_name": "Lineated Woodpecker",
+          "score": 0.5151599645614624
+        },
+        {
+          "rank": 6,
+          "species": "compau",
+          "scientific_name": "Nyctidromus albicollis",
+          "common_name": "Pauraque",
+          "score": 0.5144987106323242
+        },
+        {
+          "rank": 7,
+          "species": "greyel",
+          "scientific_name": "Tringa melanoleuca",
+          "common_name": "Greater Yellowlegs",
+          "score": 0.5109710693359375
+        },
+        {
+          "rank": 8,
+          "species": "wfwduc1",
+          "scientific_name": "Dendrocygna viduata",
+          "common_name": "White-faced Whistling Duck",
+          "score": 0.5050060153007507
+        },
+        {
+          "rank": 9,
+          "species": "sofspi1",
+          "scientific_name": "Synallaxis frontalis",
+          "common_name": "Sooty-fronted Spinetail",
+          "score": 0.5038343667984009
+        },
+        {
+          "rank": 10,
+          "species": "yebela1",
+          "scientific_name": "Elaenia flavogaster",
+          "common_name": "Yellow-bellied Elaenia",
+          "score": 0.5032224655151367
+        }
+      ]
+    },
+    {
+      "strategy": "strategy2_super_embedding_no_overlap_noise_torch",
+      "representation": "audio",
+      "ranking": [
+        {
+          "rank": 1,
+          "species": "bbwduc",
+          "scientific_name": "Dendrocygna autumnalis",
+          "common_name": "Black-bellied Whistling Duck",
+          "score": 0.7830759286880493
+        },
+        {
+          "rank": 2,
+          "species": "sobcac1",
+          "scientific_name": "Cacicus solitarius",
+          "common_name": "Solitary Cacique",
+          "score": 0.759843111038208
+        },
+        {
+          "rank": 3,
+          "species": "strcuc1",
+          "scientific_name": "Tapera naevia",
+          "common_name": "Striped Cuckoo",
+          "score": 0.736431896686554
+        },
+        {
+          "rank": 4,
+          "species": "wfwduc1",
+          "scientific_name": "Dendrocygna viduata",
+          "common_name": "White-faced Whistling Duck",
+          "score": 0.7342168688774109
+        },
+        {
+          "rank": 5,
+          "species": "limpki",
+          "scientific_name": "Aramus guarauna",
+          "common_name": "Limpkin",
+          "score": 0.7291193008422852
+        },
+        {
+          "rank": 6,
+          "species": "osprey",
+          "scientific_name": "Pandion haliaetus",
+          "common_name": "Osprey",
+          "score": 0.7262634038925171
+        },
+        {
+          "rank": 7,
+          "species": "rufhor2",
+          "scientific_name": "Furnarius rufus",
+          "common_name": "Rufous Hornero",
+          "score": 0.719598650932312
+        },
+        {
+          "rank": 8,
+          "species": "pabspi1",
+          "scientific_name": "Synallaxis albescens",
+          "common_name": "Pale-breasted Spinetail",
+          "score": 0.7149071097373962
+        },
+        {
+          "rank": 9,
+          "species": "roahaw",
+          "scientific_name": "Rupornis magnirostris",
+          "common_name": "Roadside Hawk",
+          "score": 0.7117451429367065
+        },
+        {
+          "rank": 10,
+          "species": "houspa",
+          "scientific_name": "Passer domesticus",
+          "common_name": "House Sparrow",
+          "score": 0.710918128490448
+        }
+      ]
+    }
+  ]
+}

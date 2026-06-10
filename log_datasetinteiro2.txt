@@ -1,0 +1,1780 @@
+nohup: ignorando entrada
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778363362.116719  366461 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1778363362.167463  366461 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778363363.323661  366461 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-05-09 17:49:24,242 | INFO    | runner | Experiment strategy1_segments_torch starting
+2026-05-09 17:50:01,789 | INFO    | runner | Loaded 34144 records
+2026-05-09 17:50:01,797 | INFO    | runner | Split: train=27309 test=6835
+/home/cnt-computadores/Pedro/src/embeddings/perch_torch.py:204: RuntimeWarning: Perch v2 ONNX export failed; falling back to TensorFlow runtime for this backend. Cause: Failed to export Perch v2 to ONNX.
+Command: /home/cnt-computadores/Pedro/venv/bin/python -m tf2onnx.convert --saved-model /home/cnt-computadores/.cache/kagglehub/models/google/bird-vocalization-classifier/tensorFlow2/bird-vocalization-classifier/8 --output birdclef_cache/torch_models/google__bird-vocalization-classifier__tensorFlow2__bird-vocalization-classifier/model.onnx --opset 17
+stdout:
+
+stderr:
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778363404.484281  366861 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778363405.408647  366861 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-05-09 17:50:06,605 - WARNING - '--tag' not specified for saved_model. Using --tag serve
+2026-05-09 17:50:08,306 - INFO - Fingerprint not found. Saved model loading will continue.
+2026-05-09 17:50:08,306 - INFO - path_and_singleprint metric could not be logged. Saved model loading will continue.
+2026-05-09 17:50:08,306 - INFO - Signatures found in model: [serving_default].
+2026-05-09 17:50:08,306 - WARNING - '--signature_def' not specified, using first signature: serving_default
+2026-05-09 17:50:08,307 - INFO - Output names: ['embedding', 'family', 'frontend', 'genus', 'label', 'order']
+2026-05-09 17:50:15,462 - INFO - Using tensorflow=2.21.0, onnx=1.21.0, tf2onnx=1.17.0/None
+2026-05-09 17:50:15,462 - INFO - Using opset <onnx, 17>
+2026-05-09 17:50:16,957 - INFO - Computed 0 values for constant folding
+2026-05-09 17:50:16,958 - INFO - Computed 0 values for constant folding
+2026-05-09 17:50:17,073 - INFO - Computed 3 values for constant folding
+2026-05-09 17:50:17,327 - INFO - folding node using tf type=PadV2, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/pjit__pad_/PadV2
+2026-05-09 17:50:17,328 - INFO - folding node using tf type=Reshape, name=jax2tf_infer_fn_/TaxonomyModel/frontend/frontend._magnitude_scale/Reshape_15
+2026-05-09 17:50:17,329 - INFO - folding node using tf type=Transpose, name=jax2tf_infer_fn_/TaxonomyModel/frontend/transpose_7
+2026-05-09 17:50:17,566 - INFO - Computed 0 values for constant folding
+2026-05-09 17:50:18,355 - INFO - folding node type=Sub, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/Sub_3
+2026-05-09 17:50:18,356 - INFO - folding node type=Sub, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/Sub_5
+2026-05-09 17:50:18,356 - INFO - folding node type=Mul, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/truediv_4
+2026-05-09 17:50:18,357 - INFO - folding node type=Mul, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/truediv_5
+2026-05-09 17:50:19,301 - ERROR - Failed to convert node 'jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft' (fct=<bound method RFFTOp.version_13 of <class 'tf2onnx.onnx_opset.signal.RFFTOp'>>)
+'OP=RFFT\nName=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft\nInputs:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit__pad_/PadV2_9:0=Pad, [-1, 501, 1024], 1\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft/fft_length:0=Const, [1], 6\nOutpus:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft:0=[-1, 501, 513], 14'
+Traceback (most recent call last):
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 360, in version_13
+    return cls.any_version(True, 13, ctx, node, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 119, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: Current implementation of RFFT or FFT only allows ComplexAbs as consumer not {'EnsureShape'}
+2026-05-09 17:50:19,302 - ERROR - Failed to convert node 'jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs' (fct=<bound method ComplexAbsOp.version_13 of <class 'tf2onnx.onnx_opset.signal.ComplexAbsOp'>>)
+'OP=ComplexAbs\nName=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs\nInputs:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_swapaxes_/transpose:0=Transpose, [-1, 500, 513], 14\nOutpus:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs:0=[-1, 500, 513], 1'
+Traceback (most recent call last):
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 982, in version_13
+    cls.any_version(13, ctx, node, **kwargs)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 940, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: ComplexAbs expected the first dimension to be 2 but shape is [-1, 500, 513]
+2026-05-09 17:50:19,366 - ERROR - Tensorflow op [PreventGradient_5: PreventGradient] is not supported
+2026-05-09 17:50:19,366 - ERROR - Tensorflow op [PreventGradient_1: PreventGradient] is not supported
+2026-05-09 17:50:19,366 - ERROR - Tensorflow op [PreventGradient_3: PreventGradient] is not supported
+2026-05-09 17:50:19,366 - ERROR - Tensorflow op [PreventGradient_4: PreventGradient] is not supported
+2026-05-09 17:50:19,366 - ERROR - Tensorflow op [PreventGradient: PreventGradient] is not supported
+2026-05-09 17:50:19,366 - ERROR - Tensorflow op [PreventGradient_2: PreventGradient] is not supported
+2026-05-09 17:50:19,366 - ERROR - Unsupported ops: Counter({'PreventGradient': 6})
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 752, in <module>
+    main()
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 299, in main
+    model_proto, _ = _convert_common(
+                     ^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 194, in _convert_common
+    g = process_tf_graph(tf_graph, const_node_values=const_node_values,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 464, in process_tf_graph
+    g = process_graphs(main_g, subgraphs, custom_op_handlers, inputs_as_nchw, outputs_as_nchw, continue_on_error,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 513, in process_graphs
+    fg = process_parsed_graph(g, custom_op_handlers, inputs_as_nchw, outputs_as_nchw, continue_on_error,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 627, in process_parsed_graph
+    raise exceptions[0]
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 360, in version_13
+    return cls.any_version(True, 13, ctx, node, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 119, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: Current implementation of RFFT or FFT only allows ComplexAbs as consumer not {'EnsureShape'}
+
+  warnings.warn(
+I0000 00:00:1778363420.931678  366461 gpu_device.cc:2043] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 140829 MB memory:  -> device: 0, name: NVIDIA H200 NVL, pci bus id: 0000:21:00.0, compute capability: 9.0a
+I0000 00:00:1778363420.933479  366461 gpu_device.cc:2043] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 140829 MB memory:  -> device: 1, name: NVIDIA H200 NVL, pci bus id: 0000:a1:00.0, compute capability: 9.0a
+2026-05-09 17:50:24,662 | INFO    | absl | Fingerprint not found. Saved model loading will continue.
+2026-05-09 17:50:24,662 | INFO    | absl | path_and_singleprint metric could not be logged. Saved model loading will continue.
+I0000 00:00:1778363425.334877  368736 service.cc:153] XLA service 0x7dc600075610 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1778363425.334956  368736 service.cc:161]   StreamExecutor [0]: NVIDIA H200 NVL, Compute Capability 9.0a (Driver: 13.0.0; Runtime: 12.8.0; Toolkit: 12.5.0; DNN: 9.10.2)
+I0000 00:00:1778363425.334975  368736 service.cc:161]   StreamExecutor [1]: NVIDIA H200 NVL, Compute Capability 9.0a (Driver: 13.0.0; Runtime: 12.8.0; Toolkit: 12.5.0; DNN: 9.10.2)
+I0000 00:00:1778363425.539918  368736 dump_mlir_util.cc:269] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+W0000 00:00:1778363426.109279  368736 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363426.136666  368736 cuda_dnn.cc:461] Loaded cuDNN version 91002
+I0000 00:00:1778363426.191934  368736 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778363430.730023  368995 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+E0000 00:00:1778363432.298721  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363439.655418  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363440.796876  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363441.970221  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363443.510226  369013 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 68 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778363443.537944  368987 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 64 bytes spill loads
+
+I0000 00:00:1778363443.705051  368999 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 648 bytes spill stores, 648 bytes spill loads
+
+I0000 00:00:1778363444.021688  369028 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2088 bytes spill stores, 2104 bytes spill loads
+
+I0000 00:00:1778363452.202506  368736 device_compiler.h:208] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+W0000 00:00:1778363457.427972  368736 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363457.499043  368736 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363459.367737  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363463.853079  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363466.170118  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363467.478562  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363467.653956  370656 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778363475.632519  370642 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778363475.756856  370632 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 96 bytes spill stores, 96 bytes spill loads
+
+I0000 00:00:1778363475.767627  370643 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778363475.771201  370646 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 184 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778363475.877384  370625 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 684 bytes spill stores, 684 bytes spill loads
+
+I0000 00:00:1778363476.320238  370651 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2404 bytes spill stores, 2456 bytes spill loads
+
+W0000 00:00:1778363487.974960  368735 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363488.043477  368735 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363489.441689  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363491.440433  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363492.818416  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363501.408021  372159 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778363501.522012  372151 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 76 bytes spill stores, 92 bytes spill loads
+
+I0000 00:00:1778363501.541808  372178 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 176 bytes spill stores, 176 bytes spill loads
+
+I0000 00:00:1778363501.548304  372142 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 136 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778363501.632773  372167 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778363501.719103  372157 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 716 bytes spill stores, 716 bytes spill loads
+
+I0000 00:00:1778363502.087948  372152 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2460 bytes spill stores, 3148 bytes spill loads
+
+E0000 00:00:1778363506.172106  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363517.909278  368736 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363517.976740  368736 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778363518.522433  373693 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 104 bytes spill stores, 112 bytes spill loads
+
+I0000 00:00:1778363518.533170  373698 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 96 bytes spill stores, 104 bytes spill loads
+
+I0000 00:00:1778363518.717396  373704 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 644 bytes spill stores, 644 bytes spill loads
+
+I0000 00:00:1778363519.031646  373687 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1384 bytes spill stores, 1400 bytes spill loads
+
+E0000 00:00:1778363521.754914  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363525.089250  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363526.911890  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363529.148701  373672 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 128 bytes spill stores, 80 bytes spill loads
+
+E0000 00:00:1778363534.843451  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363547.568324  368732 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363547.638134  368732 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363549.642985  368732 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363550.175363  375207 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778363550.179225  375217 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778363550.202689  375199 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778363550.206938  375189 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 108 bytes spill stores, 140 bytes spill loads
+
+I0000 00:00:1778363550.339202  375222 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 684 bytes spill stores, 684 bytes spill loads
+
+I0000 00:00:1778363550.725150  375213 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2444 bytes spill stores, 3116 bytes spill loads
+
+E0000 00:00:1778363554.395479  368732 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363555.300992  368732 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363564.288396  368732 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363577.614479  368731 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+E0000 00:00:1778363584.127044  368731 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363587.637690  376706 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_51', 8 bytes spill stores, 8 bytes spill loads
+
+E0000 00:00:1778363588.532904  368731 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363602.734630  368735 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363602.805220  368735 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778363604.194436  377931 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778363604.270492  377917 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778363604.359260  377939 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 628 bytes spill stores, 628 bytes spill loads
+
+I0000 00:00:1778363604.697971  377942 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2108 bytes spill stores, 2108 bytes spill loads
+
+E0000 00:00:1778363606.597080  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363611.924599  377936 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+E0000 00:00:1778363613.995501  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363620.603856  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363631.191267  368736 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363631.265542  368736 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363634.660739  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363636.755957  379323 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 68 bytes spill stores, 52 bytes spill loads
+
+E0000 00:00:1778363639.300291  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363642.470102  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363643.589551  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363645.298611  379316 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 96 bytes spill loads
+
+I0000 00:00:1778363645.304819  379349 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 80 bytes spill loads
+
+I0000 00:00:1778363645.474095  379323 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 628 bytes spill stores, 628 bytes spill loads
+
+I0000 00:00:1778363645.763858  379342 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1384 bytes spill stores, 1400 bytes spill loads
+
+W0000 00:00:1778363660.677954  368736 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363660.752937  368736 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363662.060597  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363668.081700  380810 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 68 bytes spill stores, 52 bytes spill loads
+
+I0000 00:00:1778363672.256211  380824 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778363672.375669  380815 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778363672.505375  380834 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 632 bytes spill stores, 632 bytes spill loads
+
+I0000 00:00:1778363672.832312  380829 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2112 bytes spill stores, 2116 bytes spill loads
+
+E0000 00:00:1778363674.157809  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363677.050528  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363689.954210  368730 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363690.023717  368730 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363693.649482  368730 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363702.482110  382285 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778363702.534039  382288 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 80 bytes spill stores, 80 bytes spill loads
+
+I0000 00:00:1778363702.711724  382269 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 608 bytes spill stores, 608 bytes spill loads
+
+I0000 00:00:1778363703.014423  382275 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1376 bytes spill stores, 1376 bytes spill loads
+
+I0000 00:00:1778363706.386858  382297 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+E0000 00:00:1778363707.353763  368730 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363708.610400  368730 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363718.740310  368733 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363718.810754  368733 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363720.335359  368733 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363723.569295  383731 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778363723.694081  383772 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 156 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778363723.700327  383773 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 124 bytes spill loads
+
+I0000 00:00:1778363723.737422  383750 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778363723.765677  383752 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 132 bytes spill stores, 132 bytes spill loads
+
+I0000 00:00:1778363723.871486  383735 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 668 bytes spill stores, 668 bytes spill loads
+
+I0000 00:00:1778363724.339084  383757 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2316 bytes spill stores, 2880 bytes spill loads
+
+I0000 00:00:1778363727.056799  383759 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+E0000 00:00:1778363728.487358  368733 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363731.235091  368733 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363732.325102  368733 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363748.780544  368736 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363748.857355  368736 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778363749.501114  385238 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778363749.576095  385269 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778363749.735133  385260 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 588 bytes spill stores, 588 bytes spill loads
+
+I0000 00:00:1778363750.029920  385248 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1372 bytes spill stores, 1372 bytes spill loads
+
+E0000 00:00:1778363756.168233  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363762.779609  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363764.519238  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363777.893895  368735 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363777.967363  368735 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778363780.510873  386655 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778363782.100008  386664 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778363784.707953  386685 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778363784.716232  386652 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778363784.758930  386648 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 148 bytes spill loads
+
+I0000 00:00:1778363784.801003  386646 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 100 bytes spill stores, 132 bytes spill loads
+
+I0000 00:00:1778363784.899664  386671 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 668 bytes spill stores, 668 bytes spill loads
+
+I0000 00:00:1778363785.248938  386675 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2432 bytes spill stores, 3092 bytes spill loads
+
+E0000 00:00:1778363786.632107  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363789.191337  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363790.449385  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363792.389899  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778363808.389212  368730 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363808.459821  368730 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363816.643619  368730 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363818.401426  388183 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778363818.425880  388163 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 168 bytes spill loads
+
+I0000 00:00:1778363818.437351  388152 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778363818.470278  388159 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 108 bytes spill stores, 148 bytes spill loads
+
+I0000 00:00:1778363818.600220  388141 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 700 bytes spill stores, 700 bytes spill loads
+
+I0000 00:00:1778363818.931308  388154 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2448 bytes spill stores, 3124 bytes spill loads
+
+E0000 00:00:1778363822.047862  368730 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363824.622131  368730 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363827.273989  368730 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+2026-05-09 17:57:18,959 | INFO    | runner | [train] embedded 50/27309
+W0000 00:00:1778363840.206669  368736 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363840.281849  368736 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778363840.790408  389730 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 156 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778363840.809586  389707 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 184 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778363840.840590  389721 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778363840.844451  389740 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 124 bytes spill loads
+
+I0000 00:00:1778363840.951218  389719 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 700 bytes spill stores, 700 bytes spill loads
+
+I0000 00:00:1778363841.380215  389723 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2340 bytes spill stores, 2932 bytes spill loads
+
+E0000 00:00:1778363846.261419  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363849.398028  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363857.537035  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363858.817389  368736 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+2026-05-09 17:57:50,683 | INFO    | runner | [train] embedded 100/27309
+2026-05-09 17:57:52,083 | INFO    | runner | [train] embedded 150/27309
+W0000 00:00:1778363873.039647  368735 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778363873.112819  368735 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778363875.680386  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363877.636061  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778363879.666227  391267 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778363879.715659  391260 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778363879.734293  391282 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778363879.743147  391280 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778363879.875572  391253 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 716 bytes spill stores, 716 bytes spill loads
+
+I0000 00:00:1778363880.321576  391279 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2404 bytes spill stores, 2488 bytes spill loads
+
+E0000 00:00:1778363883.302409  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778363893.032638  368735 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+2026-05-09 17:58:24,081 | INFO    | runner | [train] embedded 200/27309
+2026-05-09 17:58:25,355 | INFO    | runner | [train] embedded 250/27309
+2026-05-09 17:58:27,393 | INFO    | runner | [train] embedded 300/27309
+2026-05-09 17:58:28,446 | INFO    | runner | [train] embedded 350/27309
+2026-05-09 17:58:29,811 | INFO    | runner | [train] embedded 400/27309
+2026-05-09 17:58:31,095 | INFO    | runner | [train] embedded 450/27309
+2026-05-09 17:58:32,282 | INFO    | runner | [train] embedded 500/27309
+2026-05-09 17:58:33,675 | INFO    | runner | [train] embedded 550/27309
+2026-05-09 17:58:36,560 | INFO    | runner | [train] embedded 600/27309
+2026-05-09 17:58:38,002 | INFO    | runner | [train] embedded 650/27309
+2026-05-09 17:58:39,529 | INFO    | runner | [train] embedded 700/27309
+2026-05-09 17:58:41,179 | INFO    | runner | [train] embedded 750/27309
+2026-05-09 17:58:43,036 | INFO    | runner | [train] embedded 800/27309
+2026-05-09 17:58:45,119 | INFO    | runner | [train] embedded 850/27309
+2026-05-09 17:58:47,401 | INFO    | runner | [train] embedded 900/27309
+2026-05-09 17:58:49,944 | INFO    | runner | [train] embedded 950/27309
+2026-05-09 17:58:52,653 | INFO    | runner | [train] embedded 1000/27309
+2026-05-09 17:58:55,160 | INFO    | runner | [train] embedded 1050/27309
+2026-05-09 17:58:56,777 | INFO    | runner | [train] embedded 1100/27309
+2026-05-09 17:58:58,342 | INFO    | runner | [train] embedded 1150/27309
+2026-05-09 17:59:00,048 | INFO    | runner | [train] embedded 1200/27309
+2026-05-09 17:59:01,773 | INFO    | runner | [train] embedded 1250/27309
+2026-05-09 17:59:03,109 | INFO    | runner | [train] embedded 1300/27309
+2026-05-09 17:59:04,844 | INFO    | runner | [train] embedded 1350/27309
+2026-05-09 17:59:06,585 | INFO    | runner | [train] embedded 1400/27309
+2026-05-09 17:59:08,584 | INFO    | runner | [train] embedded 1450/27309
+2026-05-09 17:59:10,415 | INFO    | runner | [train] embedded 1500/27309
+2026-05-09 17:59:12,130 | INFO    | runner | [train] embedded 1550/27309
+2026-05-09 17:59:13,971 | INFO    | runner | [train] embedded 1600/27309
+2026-05-09 17:59:15,419 | INFO    | runner | [train] embedded 1650/27309
+2026-05-09 17:59:17,083 | INFO    | runner | [train] embedded 1700/27309
+2026-05-09 17:59:19,030 | INFO    | runner | [train] embedded 1750/27309
+2026-05-09 17:59:20,835 | INFO    | runner | [train] embedded 1800/27309
+2026-05-09 17:59:23,028 | INFO    | runner | [train] embedded 1850/27309
+2026-05-09 17:59:26,326 | INFO    | runner | [train] embedded 1900/27309
+2026-05-09 17:59:29,598 | INFO    | runner | [train] embedded 1950/27309
+2026-05-09 17:59:32,211 | INFO    | runner | [train] embedded 2000/27309
+2026-05-09 17:59:33,501 | INFO    | runner | [train] embedded 2050/27309
+2026-05-09 17:59:35,040 | INFO    | runner | [train] embedded 2100/27309
+2026-05-09 17:59:36,097 | INFO    | runner | [train] embedded 2150/27309
+2026-05-09 17:59:37,451 | INFO    | runner | [train] embedded 2200/27309
+2026-05-09 17:59:38,484 | INFO    | runner | [train] embedded 2250/27309
+2026-05-09 17:59:39,563 | INFO    | runner | [train] embedded 2300/27309
+2026-05-09 17:59:40,619 | INFO    | runner | [train] embedded 2350/27309
+2026-05-09 17:59:41,753 | INFO    | runner | [train] embedded 2400/27309
+2026-05-09 17:59:42,756 | INFO    | runner | [train] embedded 2450/27309
+2026-05-09 17:59:44,307 | INFO    | runner | [train] embedded 2500/27309
+2026-05-09 17:59:46,054 | INFO    | runner | [train] embedded 2550/27309
+2026-05-09 17:59:49,197 | INFO    | runner | [train] embedded 2600/27309
+2026-05-09 17:59:50,863 | INFO    | runner | [train] embedded 2650/27309
+2026-05-09 17:59:51,974 | INFO    | runner | [train] embedded 2700/27309
+2026-05-09 17:59:52,863 | INFO    | runner | [train] embedded 2750/27309
+2026-05-09 17:59:54,306 | INFO    | runner | [train] embedded 2800/27309
+2026-05-09 17:59:57,090 | INFO    | runner | [train] embedded 2850/27309
+2026-05-09 17:59:58,406 | INFO    | runner | [train] embedded 2900/27309
+2026-05-09 17:59:59,512 | INFO    | runner | [train] embedded 2950/27309
+2026-05-09 18:00:02,062 | INFO    | runner | [train] embedded 3000/27309
+2026-05-09 18:00:04,283 | INFO    | runner | [train] embedded 3050/27309
+2026-05-09 18:00:07,175 | INFO    | runner | [train] embedded 3100/27309
+2026-05-09 18:00:09,790 | INFO    | runner | [train] embedded 3150/27309
+2026-05-09 18:00:12,142 | INFO    | runner | [train] embedded 3200/27309
+2026-05-09 18:00:13,885 | INFO    | runner | [train] embedded 3250/27309
+2026-05-09 18:00:16,808 | INFO    | runner | [train] embedded 3300/27309
+2026-05-09 18:00:19,144 | INFO    | runner | [train] embedded 3350/27309
+2026-05-09 18:00:20,734 | INFO    | runner | [train] embedded 3400/27309
+2026-05-09 18:00:21,878 | INFO    | runner | [train] embedded 3450/27309
+2026-05-09 18:00:23,548 | INFO    | runner | [train] embedded 3500/27309
+2026-05-09 18:00:25,205 | INFO    | runner | [train] embedded 3550/27309
+2026-05-09 18:00:26,664 | INFO    | runner | [train] embedded 3600/27309
+2026-05-09 18:00:27,946 | INFO    | runner | [train] embedded 3650/27309
+2026-05-09 18:00:29,347 | INFO    | runner | [train] embedded 3700/27309
+2026-05-09 18:00:31,044 | INFO    | runner | [train] embedded 3750/27309
+2026-05-09 18:00:32,503 | INFO    | runner | [train] embedded 3800/27309
+2026-05-09 18:00:34,036 | INFO    | runner | [train] embedded 3850/27309
+2026-05-09 18:00:35,703 | INFO    | runner | [train] embedded 3900/27309
+2026-05-09 18:00:37,180 | INFO    | runner | [train] embedded 3950/27309
+2026-05-09 18:00:38,291 | INFO    | runner | [train] embedded 4000/27309
+2026-05-09 18:00:39,734 | INFO    | runner | [train] embedded 4050/27309
+2026-05-09 18:00:41,083 | INFO    | runner | [train] embedded 4100/27309
+2026-05-09 18:00:42,428 | INFO    | runner | [train] embedded 4150/27309
+2026-05-09 18:00:43,642 | INFO    | runner | [train] embedded 4200/27309
+2026-05-09 18:00:45,265 | INFO    | runner | [train] embedded 4250/27309
+2026-05-09 18:00:47,631 | INFO    | runner | [train] embedded 4300/27309
+2026-05-09 18:00:49,889 | INFO    | runner | [train] embedded 4350/27309
+2026-05-09 18:00:51,050 | INFO    | runner | [train] embedded 4400/27309
+2026-05-09 18:00:52,326 | INFO    | runner | [train] embedded 4450/27309
+2026-05-09 18:00:53,567 | INFO    | runner | [train] embedded 4500/27309
+2026-05-09 18:00:55,374 | INFO    | runner | [train] embedded 4550/27309
+2026-05-09 18:00:56,493 | INFO    | runner | [train] embedded 4600/27309
+2026-05-09 18:00:57,797 | INFO    | runner | [train] embedded 4650/27309
+2026-05-09 18:00:59,624 | INFO    | runner | [train] embedded 4700/27309
+2026-05-09 18:01:00,809 | INFO    | runner | [train] embedded 4750/27309
+2026-05-09 18:01:02,279 | INFO    | runner | [train] embedded 4800/27309
+2026-05-09 18:01:03,613 | INFO    | runner | [train] embedded 4850/27309
+2026-05-09 18:01:05,558 | INFO    | runner | [train] embedded 4900/27309
+2026-05-09 18:01:06,517 | INFO    | runner | [train] embedded 4950/27309
+2026-05-09 18:01:07,864 | INFO    | runner | [train] embedded 5000/27309
+2026-05-09 18:01:10,497 | INFO    | runner | [train] embedded 5050/27309
+2026-05-09 18:01:12,168 | INFO    | runner | [train] embedded 5100/27309
+2026-05-09 18:01:14,093 | INFO    | runner | [train] embedded 5150/27309
+2026-05-09 18:01:15,652 | INFO    | runner | [train] embedded 5200/27309
+2026-05-09 18:01:18,423 | INFO    | runner | [train] embedded 5250/27309
+2026-05-09 18:01:19,828 | INFO    | runner | [train] embedded 5300/27309
+2026-05-09 18:01:21,108 | INFO    | runner | [train] embedded 5350/27309
+2026-05-09 18:01:22,752 | INFO    | runner | [train] embedded 5400/27309
+2026-05-09 18:01:26,147 | INFO    | runner | [train] embedded 5450/27309
+2026-05-09 18:01:28,532 | INFO    | runner | [train] embedded 5500/27309
+2026-05-09 18:01:30,577 | INFO    | runner | [train] embedded 5550/27309
+2026-05-09 18:01:32,957 | INFO    | runner | [train] embedded 5600/27309
+2026-05-09 18:01:35,550 | INFO    | runner | [train] embedded 5650/27309
+2026-05-09 18:01:39,043 | INFO    | runner | [train] embedded 5700/27309
+2026-05-09 18:01:41,951 | INFO    | runner | [train] embedded 5750/27309
+2026-05-09 18:01:57,569 | INFO    | runner | [train] embedded 5800/27309
+2026-05-09 18:01:59,774 | INFO    | runner | [train] embedded 5850/27309
+2026-05-09 18:02:01,840 | INFO    | runner | [train] embedded 5900/27309
+2026-05-09 18:02:04,379 | INFO    | runner | [train] embedded 5950/27309
+2026-05-09 18:02:05,806 | INFO    | runner | [train] embedded 6000/27309
+2026-05-09 18:02:07,252 | INFO    | runner | [train] embedded 6050/27309
+2026-05-09 18:02:09,554 | INFO    | runner | [train] embedded 6100/27309
+2026-05-09 18:02:12,076 | INFO    | runner | [train] embedded 6150/27309
+2026-05-09 18:02:14,159 | INFO    | runner | [train] embedded 6200/27309
+2026-05-09 18:02:16,027 | INFO    | runner | [train] embedded 6250/27309
+2026-05-09 18:02:17,987 | INFO    | runner | [train] embedded 6300/27309
+2026-05-09 18:02:19,330 | INFO    | runner | [train] embedded 6350/27309
+2026-05-09 18:02:20,563 | INFO    | runner | [train] embedded 6400/27309
+2026-05-09 18:02:22,615 | INFO    | runner | [train] embedded 6450/27309
+2026-05-09 18:02:24,760 | INFO    | runner | [train] embedded 6500/27309
+2026-05-09 18:02:26,240 | INFO    | runner | [train] embedded 6550/27309
+2026-05-09 18:02:28,718 | INFO    | runner | [train] embedded 6600/27309
+2026-05-09 18:02:30,295 | INFO    | runner | [train] embedded 6650/27309
+2026-05-09 18:02:32,577 | INFO    | runner | [train] embedded 6700/27309
+2026-05-09 18:02:35,027 | INFO    | runner | [train] embedded 6750/27309
+2026-05-09 18:02:38,158 | INFO    | runner | [train] embedded 6800/27309
+2026-05-09 18:02:40,845 | INFO    | runner | [train] embedded 6850/27309
+2026-05-09 18:02:42,282 | INFO    | runner | [train] embedded 6900/27309
+2026-05-09 18:02:44,300 | INFO    | runner | [train] embedded 6950/27309
+2026-05-09 18:02:45,773 | INFO    | runner | [train] embedded 7000/27309
+2026-05-09 18:02:47,147 | INFO    | runner | [train] embedded 7050/27309
+2026-05-09 18:02:48,977 | INFO    | runner | [train] embedded 7100/27309
+2026-05-09 18:02:51,034 | INFO    | runner | [train] embedded 7150/27309
+2026-05-09 18:02:52,736 | INFO    | runner | [train] embedded 7200/27309
+2026-05-09 18:02:54,382 | INFO    | runner | [train] embedded 7250/27309
+2026-05-09 18:02:55,870 | INFO    | runner | [train] embedded 7300/27309
+2026-05-09 18:02:57,726 | INFO    | runner | [train] embedded 7350/27309
+2026-05-09 18:03:00,232 | INFO    | runner | [train] embedded 7400/27309
+2026-05-09 18:03:01,902 | INFO    | runner | [train] embedded 7450/27309
+2026-05-09 18:03:03,608 | INFO    | runner | [train] embedded 7500/27309
+2026-05-09 18:03:05,022 | INFO    | runner | [train] embedded 7550/27309
+2026-05-09 18:03:06,567 | INFO    | runner | [train] embedded 7600/27309
+2026-05-09 18:03:08,161 | INFO    | runner | [train] embedded 7650/27309
+2026-05-09 18:03:09,482 | INFO    | runner | [train] embedded 7700/27309
+2026-05-09 18:03:11,426 | INFO    | runner | [train] embedded 7750/27309
+2026-05-09 18:03:13,067 | INFO    | runner | [train] embedded 7800/27309
+2026-05-09 18:03:14,625 | INFO    | runner | [train] embedded 7850/27309
+2026-05-09 18:03:16,352 | INFO    | runner | [train] embedded 7900/27309
+2026-05-09 18:03:18,850 | INFO    | runner | [train] embedded 7950/27309
+2026-05-09 18:03:21,005 | INFO    | runner | [train] embedded 8000/27309
+2026-05-09 18:03:23,076 | INFO    | runner | [train] embedded 8050/27309
+2026-05-09 18:03:24,750 | INFO    | runner | [train] embedded 8100/27309
+2026-05-09 18:03:26,280 | INFO    | runner | [train] embedded 8150/27309
+2026-05-09 18:03:27,946 | INFO    | runner | [train] embedded 8200/27309
+2026-05-09 18:03:29,511 | INFO    | runner | [train] embedded 8250/27309
+2026-05-09 18:03:30,720 | INFO    | runner | [train] embedded 8300/27309
+2026-05-09 18:03:32,642 | INFO    | runner | [train] embedded 8350/27309
+2026-05-09 18:03:34,403 | INFO    | runner | [train] embedded 8400/27309
+2026-05-09 18:03:36,515 | INFO    | runner | [train] embedded 8450/27309
+2026-05-09 18:03:37,997 | INFO    | runner | [train] embedded 8500/27309
+2026-05-09 18:03:41,002 | INFO    | runner | [train] embedded 8550/27309
+2026-05-09 18:03:42,728 | INFO    | runner | [train] embedded 8600/27309
+2026-05-09 18:03:44,889 | INFO    | runner | [train] embedded 8650/27309
+2026-05-09 18:03:46,717 | INFO    | runner | [train] embedded 8700/27309
+2026-05-09 18:03:48,385 | INFO    | runner | [train] embedded 8750/27309
+2026-05-09 18:03:50,750 | INFO    | runner | [train] embedded 8800/27309
+2026-05-09 18:03:52,812 | INFO    | runner | [train] embedded 8850/27309
+2026-05-09 18:03:55,469 | INFO    | runner | [train] embedded 8900/27309
+2026-05-09 18:03:57,117 | INFO    | runner | [train] embedded 8950/27309
+2026-05-09 18:03:58,674 | INFO    | runner | [train] embedded 9000/27309
+2026-05-09 18:04:00,848 | INFO    | runner | [train] embedded 9050/27309
+2026-05-09 18:04:02,786 | INFO    | runner | [train] embedded 9100/27309
+2026-05-09 18:04:04,753 | INFO    | runner | [train] embedded 9150/27309
+2026-05-09 18:04:06,902 | INFO    | runner | [train] embedded 9200/27309
+2026-05-09 18:04:08,746 | INFO    | runner | [train] embedded 9250/27309
+2026-05-09 18:04:10,425 | INFO    | runner | [train] embedded 9300/27309
+2026-05-09 18:04:12,211 | INFO    | runner | [train] embedded 9350/27309
+2026-05-09 18:04:13,865 | INFO    | runner | [train] embedded 9400/27309
+2026-05-09 18:04:15,625 | INFO    | runner | [train] embedded 9450/27309
+2026-05-09 18:04:16,677 | INFO    | runner | [train] embedded 9500/27309
+2026-05-09 18:04:18,521 | INFO    | runner | [train] embedded 9550/27309
+2026-05-09 18:04:20,797 | INFO    | runner | [train] embedded 9600/27309
+2026-05-09 18:04:21,928 | INFO    | runner | [train] embedded 9650/27309
+2026-05-09 18:04:23,413 | INFO    | runner | [train] embedded 9700/27309
+2026-05-09 18:04:25,070 | INFO    | runner | [train] embedded 9750/27309
+2026-05-09 18:04:26,696 | INFO    | runner | [train] embedded 9800/27309
+2026-05-09 18:04:28,492 | INFO    | runner | [train] embedded 9850/27309
+2026-05-09 18:04:29,881 | INFO    | runner | [train] embedded 9900/27309
+2026-05-09 18:04:31,257 | INFO    | runner | [train] embedded 9950/27309
+2026-05-09 18:04:32,081 | INFO    | runner | [train] embedded 10000/27309
+2026-05-09 18:04:33,336 | INFO    | runner | [train] embedded 10050/27309
+2026-05-09 18:04:34,259 | INFO    | runner | [train] embedded 10100/27309
+2026-05-09 18:04:35,257 | INFO    | runner | [train] embedded 10150/27309
+2026-05-09 18:04:36,155 | INFO    | runner | [train] embedded 10200/27309
+2026-05-09 18:04:37,211 | INFO    | runner | [train] embedded 10250/27309
+2026-05-09 18:04:38,094 | INFO    | runner | [train] embedded 10300/27309
+2026-05-09 18:04:39,691 | INFO    | runner | [train] embedded 10350/27309
+2026-05-09 18:04:42,049 | INFO    | runner | [train] embedded 10400/27309
+2026-05-09 18:04:44,996 | INFO    | runner | [train] embedded 10450/27309
+2026-05-09 18:04:46,368 | INFO    | runner | [train] embedded 10500/27309
+2026-05-09 18:04:48,350 | INFO    | runner | [train] embedded 10550/27309
+2026-05-09 18:04:50,442 | INFO    | runner | [train] embedded 10600/27309
+2026-05-09 18:04:52,387 | INFO    | runner | [train] embedded 10650/27309
+2026-05-09 18:04:55,383 | INFO    | runner | [train] embedded 10700/27309
+2026-05-09 18:04:57,732 | INFO    | runner | [train] embedded 10750/27309
+2026-05-09 18:04:59,783 | INFO    | runner | [train] embedded 10800/27309
+2026-05-09 18:05:01,884 | INFO    | runner | [train] embedded 10850/27309
+2026-05-09 18:05:03,457 | INFO    | runner | [train] embedded 10900/27309
+2026-05-09 18:05:05,080 | INFO    | runner | [train] embedded 10950/27309
+2026-05-09 18:05:06,284 | INFO    | runner | [train] embedded 11000/27309
+2026-05-09 18:05:07,215 | INFO    | runner | [train] embedded 11050/27309
+2026-05-09 18:05:08,241 | INFO    | runner | [train] embedded 11100/27309
+2026-05-09 18:05:09,811 | INFO    | runner | [train] embedded 11150/27309
+2026-05-09 18:05:11,064 | INFO    | runner | [train] embedded 11200/27309
+2026-05-09 18:05:12,144 | INFO    | runner | [train] embedded 11250/27309
+2026-05-09 18:05:13,242 | INFO    | runner | [train] embedded 11300/27309
+2026-05-09 18:05:14,868 | INFO    | runner | [train] embedded 11350/27309
+2026-05-09 18:05:16,875 | INFO    | runner | [train] embedded 11400/27309
+2026-05-09 18:05:18,272 | INFO    | runner | [train] embedded 11450/27309
+2026-05-09 18:05:20,080 | INFO    | runner | [train] embedded 11500/27309
+2026-05-09 18:05:21,897 | INFO    | runner | [train] embedded 11550/27309
+2026-05-09 18:05:24,016 | INFO    | runner | [train] embedded 11600/27309
+2026-05-09 18:05:25,431 | INFO    | runner | [train] embedded 11650/27309
+2026-05-09 18:05:27,066 | INFO    | runner | [train] embedded 11700/27309
+2026-05-09 18:05:28,659 | INFO    | runner | [train] embedded 11750/27309
+2026-05-09 18:05:29,632 | INFO    | runner | [train] embedded 11800/27309
+2026-05-09 18:05:30,964 | INFO    | runner | [train] embedded 11850/27309
+2026-05-09 18:05:32,033 | INFO    | runner | [train] embedded 11900/27309
+2026-05-09 18:05:33,442 | INFO    | runner | [train] embedded 11950/27309
+2026-05-09 18:05:34,997 | INFO    | runner | [train] embedded 12000/27309
+2026-05-09 18:05:36,122 | INFO    | runner | [train] embedded 12050/27309
+2026-05-09 18:05:37,564 | INFO    | runner | [train] embedded 12100/27309
+2026-05-09 18:05:39,156 | INFO    | runner | [train] embedded 12150/27309
+2026-05-09 18:05:40,995 | INFO    | runner | [train] embedded 12200/27309
+2026-05-09 18:05:42,465 | INFO    | runner | [train] embedded 12250/27309
+2026-05-09 18:05:44,154 | INFO    | runner | [train] embedded 12300/27309
+2026-05-09 18:05:46,080 | INFO    | runner | [train] embedded 12350/27309
+2026-05-09 18:05:47,092 | INFO    | runner | [train] embedded 12400/27309
+2026-05-09 18:05:48,305 | INFO    | runner | [train] embedded 12450/27309
+2026-05-09 18:05:50,400 | INFO    | runner | [train] embedded 12500/27309
+2026-05-09 18:05:51,855 | INFO    | runner | [train] embedded 12550/27309
+2026-05-09 18:05:53,145 | INFO    | runner | [train] embedded 12600/27309
+2026-05-09 18:05:54,768 | INFO    | runner | [train] embedded 12650/27309
+2026-05-09 18:05:56,726 | INFO    | runner | [train] embedded 12700/27309
+2026-05-09 18:05:58,057 | INFO    | runner | [train] embedded 12750/27309
+2026-05-09 18:05:59,263 | INFO    | runner | [train] embedded 12800/27309
+2026-05-09 18:06:01,090 | INFO    | runner | [train] embedded 12850/27309
+2026-05-09 18:06:02,433 | INFO    | runner | [train] embedded 12900/27309
+2026-05-09 18:06:04,086 | INFO    | runner | [train] embedded 12950/27309
+2026-05-09 18:06:05,773 | INFO    | runner | [train] embedded 13000/27309
+2026-05-09 18:06:06,485 | INFO    | runner | [train] embedded 13050/27309
+2026-05-09 18:06:07,854 | INFO    | runner | [train] embedded 13100/27309
+2026-05-09 18:06:09,549 | INFO    | runner | [train] embedded 13150/27309
+2026-05-09 18:06:11,306 | INFO    | runner | [train] embedded 13200/27309
+2026-05-09 18:06:12,566 | INFO    | runner | [train] embedded 13250/27309
+2026-05-09 18:06:14,145 | INFO    | runner | [train] embedded 13300/27309
+2026-05-09 18:06:15,189 | INFO    | runner | [train] embedded 13350/27309
+2026-05-09 18:06:16,374 | INFO    | runner | [train] embedded 13400/27309
+2026-05-09 18:06:17,490 | INFO    | runner | [train] embedded 13450/27309
+2026-05-09 18:06:18,689 | INFO    | runner | [train] embedded 13500/27309
+2026-05-09 18:06:20,107 | INFO    | runner | [train] embedded 13550/27309
+2026-05-09 18:06:21,657 | INFO    | runner | [train] embedded 13600/27309
+2026-05-09 18:06:23,536 | INFO    | runner | [train] embedded 13650/27309
+2026-05-09 18:06:24,414 | INFO    | runner | [train] embedded 13700/27309
+2026-05-09 18:06:25,791 | INFO    | runner | [train] embedded 13750/27309
+2026-05-09 18:06:27,298 | INFO    | runner | [train] embedded 13800/27309
+2026-05-09 18:06:29,024 | INFO    | runner | [train] embedded 13850/27309
+2026-05-09 18:06:30,894 | INFO    | runner | [train] embedded 13900/27309
+2026-05-09 18:06:32,619 | INFO    | runner | [train] embedded 13950/27309
+2026-05-09 18:06:33,814 | INFO    | runner | [train] embedded 14000/27309
+2026-05-09 18:06:35,861 | INFO    | runner | [train] embedded 14050/27309
+2026-05-09 18:06:37,360 | INFO    | runner | [train] embedded 14100/27309
+2026-05-09 18:06:40,005 | INFO    | runner | [train] embedded 14150/27309
+2026-05-09 18:06:41,933 | INFO    | runner | [train] embedded 14200/27309
+2026-05-09 18:06:43,789 | INFO    | runner | [train] embedded 14250/27309
+2026-05-09 18:06:44,979 | INFO    | runner | [train] embedded 14300/27309
+2026-05-09 18:06:46,168 | INFO    | runner | [train] embedded 14350/27309
+2026-05-09 18:06:47,595 | INFO    | runner | [train] embedded 14400/27309
+2026-05-09 18:06:49,647 | INFO    | runner | [train] embedded 14450/27309
+2026-05-09 18:06:52,589 | INFO    | runner | [train] embedded 14500/27309
+2026-05-09 18:06:54,347 | INFO    | runner | [train] embedded 14550/27309
+2026-05-09 18:06:56,235 | INFO    | runner | [train] embedded 14600/27309
+2026-05-09 18:06:58,073 | INFO    | runner | [train] embedded 14650/27309
+2026-05-09 18:06:59,947 | INFO    | runner | [train] embedded 14700/27309
+2026-05-09 18:07:01,790 | INFO    | runner | [train] embedded 14750/27309
+2026-05-09 18:07:03,516 | INFO    | runner | [train] embedded 14800/27309
+2026-05-09 18:07:04,777 | INFO    | runner | [train] embedded 14850/27309
+2026-05-09 18:07:06,173 | INFO    | runner | [train] embedded 14900/27309
+2026-05-09 18:07:08,015 | INFO    | runner | [train] embedded 14950/27309
+2026-05-09 18:07:11,134 | INFO    | runner | [train] embedded 15000/27309
+2026-05-09 18:07:12,740 | INFO    | runner | [train] embedded 15050/27309
+2026-05-09 18:07:14,564 | INFO    | runner | [train] embedded 15100/27309
+2026-05-09 18:07:16,596 | INFO    | runner | [train] embedded 15150/27309
+2026-05-09 18:07:18,382 | INFO    | runner | [train] embedded 15200/27309
+2026-05-09 18:07:20,169 | INFO    | runner | [train] embedded 15250/27309
+2026-05-09 18:07:21,999 | INFO    | runner | [train] embedded 15300/27309
+2026-05-09 18:07:24,013 | INFO    | runner | [train] embedded 15350/27309
+2026-05-09 18:07:25,443 | INFO    | runner | [train] embedded 15400/27309
+2026-05-09 18:07:27,021 | INFO    | runner | [train] embedded 15450/27309
+2026-05-09 18:07:29,635 | INFO    | runner | [train] embedded 15500/27309
+2026-05-09 18:07:31,782 | INFO    | runner | [train] embedded 15550/27309
+2026-05-09 18:07:33,248 | INFO    | runner | [train] embedded 15600/27309
+2026-05-09 18:07:34,688 | INFO    | runner | [train] embedded 15650/27309
+2026-05-09 18:07:36,860 | INFO    | runner | [train] embedded 15700/27309
+2026-05-09 18:07:38,830 | INFO    | runner | [train] embedded 15750/27309
+2026-05-09 18:07:40,776 | INFO    | runner | [train] embedded 15800/27309
+2026-05-09 18:07:42,049 | INFO    | runner | [train] embedded 15850/27309
+2026-05-09 18:07:43,173 | INFO    | runner | [train] embedded 15900/27309
+2026-05-09 18:07:44,581 | INFO    | runner | [train] embedded 15950/27309
+2026-05-09 18:07:46,044 | INFO    | runner | [train] embedded 16000/27309
+2026-05-09 18:07:47,826 | INFO    | runner | [train] embedded 16050/27309
+2026-05-09 18:07:49,631 | INFO    | runner | [train] embedded 16100/27309
+2026-05-09 18:07:52,038 | INFO    | runner | [train] embedded 16150/27309
+2026-05-09 18:07:53,858 | INFO    | runner | [train] embedded 16200/27309
+2026-05-09 18:07:55,802 | INFO    | runner | [train] embedded 16250/27309
+2026-05-09 18:07:57,706 | INFO    | runner | [train] embedded 16300/27309
+2026-05-09 18:08:00,313 | INFO    | runner | [train] embedded 16350/27309
+2026-05-09 18:08:01,948 | INFO    | runner | [train] embedded 16400/27309
+2026-05-09 18:08:03,398 | INFO    | runner | [train] embedded 16450/27309
+2026-05-09 18:08:05,700 | INFO    | runner | [train] embedded 16500/27309
+2026-05-09 18:08:07,836 | INFO    | runner | [train] embedded 16550/27309
+2026-05-09 18:08:09,085 | INFO    | runner | [train] embedded 16600/27309
+2026-05-09 18:08:11,065 | INFO    | runner | [train] embedded 16650/27309
+2026-05-09 18:08:12,999 | INFO    | runner | [train] embedded 16700/27309
+2026-05-09 18:08:14,353 | INFO    | runner | [train] embedded 16750/27309
+2026-05-09 18:08:16,563 | INFO    | runner | [train] embedded 16800/27309
+2026-05-09 18:08:18,323 | INFO    | runner | [train] embedded 16850/27309
+2026-05-09 18:08:19,827 | INFO    | runner | [train] embedded 16900/27309
+2026-05-09 18:08:21,287 | INFO    | runner | [train] embedded 16950/27309
+2026-05-09 18:08:22,733 | INFO    | runner | [train] embedded 17000/27309
+2026-05-09 18:08:24,228 | INFO    | runner | [train] embedded 17050/27309
+2026-05-09 18:08:25,119 | INFO    | runner | [train] embedded 17100/27309
+2026-05-09 18:08:26,451 | INFO    | runner | [train] embedded 17150/27309
+2026-05-09 18:08:27,490 | INFO    | runner | [train] embedded 17200/27309
+2026-05-09 18:08:28,432 | INFO    | runner | [train] embedded 17250/27309
+2026-05-09 18:08:30,668 | INFO    | runner | [train] embedded 17300/27309
+2026-05-09 18:08:39,349 | INFO    | runner | [train] embedded 17350/27309
+2026-05-09 18:08:45,839 | INFO    | runner | [train] embedded 17400/27309
+2026-05-09 18:08:53,718 | INFO    | runner | [train] embedded 17450/27309
+2026-05-09 18:08:55,320 | INFO    | runner | [train] embedded 17500/27309
+2026-05-09 18:08:56,735 | INFO    | runner | [train] embedded 17550/27309
+2026-05-09 18:08:58,277 | INFO    | runner | [train] embedded 17600/27309
+2026-05-09 18:08:59,657 | INFO    | runner | [train] embedded 17650/27309
+2026-05-09 18:09:01,233 | INFO    | runner | [train] embedded 17700/27309
+2026-05-09 18:09:02,607 | INFO    | runner | [train] embedded 17750/27309
+2026-05-09 18:09:04,379 | INFO    | runner | [train] embedded 17800/27309
+2026-05-09 18:09:06,445 | INFO    | runner | [train] embedded 17850/27309
+2026-05-09 18:09:07,580 | INFO    | runner | [train] embedded 17900/27309
+2026-05-09 18:09:08,905 | INFO    | runner | [train] embedded 17950/27309
+2026-05-09 18:09:10,245 | INFO    | runner | [train] embedded 18000/27309
+2026-05-09 18:09:12,033 | INFO    | runner | [train] embedded 18050/27309
+2026-05-09 18:09:14,053 | INFO    | runner | [train] embedded 18100/27309
+2026-05-09 18:09:15,129 | INFO    | runner | [train] embedded 18150/27309
+2026-05-09 18:09:16,409 | INFO    | runner | [train] embedded 18200/27309
+2026-05-09 18:09:18,129 | INFO    | runner | [train] embedded 18250/27309
+2026-05-09 18:09:19,717 | INFO    | runner | [train] embedded 18300/27309
+2026-05-09 18:09:21,340 | INFO    | runner | [train] embedded 18350/27309
+2026-05-09 18:09:23,937 | INFO    | runner | [train] embedded 18400/27309
+2026-05-09 18:09:26,263 | INFO    | runner | [train] embedded 18450/27309
+2026-05-09 18:09:27,830 | INFO    | runner | [train] embedded 18500/27309
+2026-05-09 18:09:29,234 | INFO    | runner | [train] embedded 18550/27309
+2026-05-09 18:09:30,523 | INFO    | runner | [train] embedded 18600/27309
+2026-05-09 18:09:32,084 | INFO    | runner | [train] embedded 18650/27309
+2026-05-09 18:09:34,403 | INFO    | runner | [train] embedded 18700/27309
+2026-05-09 18:09:35,772 | INFO    | runner | [train] embedded 18750/27309
+2026-05-09 18:09:36,980 | INFO    | runner | [train] embedded 18800/27309
+2026-05-09 18:09:38,281 | INFO    | runner | [train] embedded 18850/27309
+2026-05-09 18:09:39,739 | INFO    | runner | [train] embedded 18900/27309
+2026-05-09 18:09:40,960 | INFO    | runner | [train] embedded 18950/27309
+2026-05-09 18:09:42,706 | INFO    | runner | [train] embedded 19000/27309
+2026-05-09 18:09:44,042 | INFO    | runner | [train] embedded 19050/27309
+2026-05-09 18:09:45,430 | INFO    | runner | [train] embedded 19100/27309
+2026-05-09 18:09:47,091 | INFO    | runner | [train] embedded 19150/27309
+2026-05-09 18:09:48,309 | INFO    | runner | [train] embedded 19200/27309
+2026-05-09 18:09:50,392 | INFO    | runner | [train] embedded 19250/27309
+2026-05-09 18:09:51,996 | INFO    | runner | [train] embedded 19300/27309
+2026-05-09 18:09:53,400 | INFO    | runner | [train] embedded 19350/27309
+2026-05-09 18:09:54,728 | INFO    | runner | [train] embedded 19400/27309
+2026-05-09 18:09:56,349 | INFO    | runner | [train] embedded 19450/27309
+2026-05-09 18:09:58,034 | INFO    | runner | [train] embedded 19500/27309
+2026-05-09 18:09:59,569 | INFO    | runner | [train] embedded 19550/27309
+2026-05-09 18:10:00,943 | INFO    | runner | [train] embedded 19600/27309
+2026-05-09 18:10:02,149 | INFO    | runner | [train] embedded 19650/27309
+2026-05-09 18:10:03,411 | INFO    | runner | [train] embedded 19700/27309
+2026-05-09 18:10:05,562 | INFO    | runner | [train] embedded 19750/27309
+2026-05-09 18:10:06,826 | INFO    | runner | [train] embedded 19800/27309
+2026-05-09 18:10:07,880 | INFO    | runner | [train] embedded 19850/27309
+2026-05-09 18:10:09,517 | INFO    | runner | [train] embedded 19900/27309
+2026-05-09 18:10:11,258 | INFO    | runner | [train] embedded 19950/27309
+2026-05-09 18:10:13,168 | INFO    | runner | [train] embedded 20000/27309
+2026-05-09 18:10:14,986 | INFO    | runner | [train] embedded 20050/27309
+2026-05-09 18:10:16,244 | INFO    | runner | [train] embedded 20100/27309
+2026-05-09 18:10:18,203 | INFO    | runner | [train] embedded 20150/27309
+2026-05-09 18:10:19,882 | INFO    | runner | [train] embedded 20200/27309
+2026-05-09 18:10:21,621 | INFO    | runner | [train] embedded 20250/27309
+2026-05-09 18:10:22,952 | INFO    | runner | [train] embedded 20300/27309
+2026-05-09 18:10:24,342 | INFO    | runner | [train] embedded 20350/27309
+2026-05-09 18:10:26,252 | INFO    | runner | [train] embedded 20400/27309
+2026-05-09 18:10:27,751 | INFO    | runner | [train] embedded 20450/27309
+2026-05-09 18:10:29,837 | INFO    | runner | [train] embedded 20500/27309
+2026-05-09 18:10:31,283 | INFO    | runner | [train] embedded 20550/27309
+2026-05-09 18:10:32,532 | INFO    | runner | [train] embedded 20600/27309
+2026-05-09 18:10:34,314 | INFO    | runner | [train] embedded 20650/27309
+2026-05-09 18:10:35,773 | INFO    | runner | [train] embedded 20700/27309
+2026-05-09 18:10:37,033 | INFO    | runner | [train] embedded 20750/27309
+2026-05-09 18:10:38,548 | INFO    | runner | [train] embedded 20800/27309
+2026-05-09 18:10:39,731 | INFO    | runner | [train] embedded 20850/27309
+2026-05-09 18:10:41,196 | INFO    | runner | [train] embedded 20900/27309
+2026-05-09 18:10:42,623 | INFO    | runner | [train] embedded 20950/27309
+2026-05-09 18:10:44,391 | INFO    | runner | [train] embedded 21000/27309
+2026-05-09 18:10:46,181 | INFO    | runner | [train] embedded 21050/27309
+2026-05-09 18:10:47,755 | INFO    | runner | [train] embedded 21100/27309
+2026-05-09 18:10:50,040 | INFO    | runner | [train] embedded 21150/27309
+2026-05-09 18:10:51,616 | INFO    | runner | [train] embedded 21200/27309
+2026-05-09 18:10:53,409 | INFO    | runner | [train] embedded 21250/27309
+2026-05-09 18:10:54,577 | INFO    | runner | [train] embedded 21300/27309
+2026-05-09 18:10:56,237 | INFO    | runner | [train] embedded 21350/27309
+2026-05-09 18:10:57,493 | INFO    | runner | [train] embedded 21400/27309
+2026-05-09 18:10:58,664 | INFO    | runner | [train] embedded 21450/27309
+2026-05-09 18:11:00,134 | INFO    | runner | [train] embedded 21500/27309
+2026-05-09 18:11:01,333 | INFO    | runner | [train] embedded 21550/27309
+2026-05-09 18:11:02,489 | INFO    | runner | [train] embedded 21600/27309
+2026-05-09 18:11:03,977 | INFO    | runner | [train] embedded 21650/27309
+2026-05-09 18:11:05,739 | INFO    | runner | [train] embedded 21700/27309
+2026-05-09 18:11:07,029 | INFO    | runner | [train] embedded 21750/27309
+2026-05-09 18:11:08,600 | INFO    | runner | [train] embedded 21800/27309
+2026-05-09 18:11:11,322 | INFO    | runner | [train] embedded 21850/27309
+2026-05-09 18:11:12,345 | INFO    | runner | [train] embedded 21900/27309
+2026-05-09 18:11:13,351 | INFO    | runner | [train] embedded 21950/27309
+2026-05-09 18:11:14,432 | INFO    | runner | [train] embedded 22000/27309
+2026-05-09 18:11:16,396 | INFO    | runner | [train] embedded 22050/27309
+2026-05-09 18:11:17,337 | INFO    | runner | [train] embedded 22100/27309
+2026-05-09 18:11:18,875 | INFO    | runner | [train] embedded 22150/27309
+2026-05-09 18:11:19,883 | INFO    | runner | [train] embedded 22200/27309
+2026-05-09 18:11:21,145 | INFO    | runner | [train] embedded 22250/27309
+2026-05-09 18:11:22,638 | INFO    | runner | [train] embedded 22300/27309
+2026-05-09 18:11:24,032 | INFO    | runner | [train] embedded 22350/27309
+2026-05-09 18:11:27,205 | INFO    | runner | [train] embedded 22400/27309
+2026-05-09 18:11:28,909 | INFO    | runner | [train] embedded 22450/27309
+2026-05-09 18:11:30,320 | INFO    | runner | [train] embedded 22500/27309
+2026-05-09 18:11:31,652 | INFO    | runner | [train] embedded 22550/27309
+2026-05-09 18:11:32,806 | INFO    | runner | [train] embedded 22600/27309
+2026-05-09 18:11:34,327 | INFO    | runner | [train] embedded 22650/27309
+2026-05-09 18:11:35,974 | INFO    | runner | [train] embedded 22700/27309
+2026-05-09 18:11:38,473 | INFO    | runner | [train] embedded 22750/27309
+2026-05-09 18:11:40,375 | INFO    | runner | [train] embedded 22800/27309
+2026-05-09 18:11:41,915 | INFO    | runner | [train] embedded 22850/27309
+2026-05-09 18:11:43,849 | INFO    | runner | [train] embedded 22900/27309
+2026-05-09 18:11:44,881 | INFO    | runner | [train] embedded 22950/27309
+2026-05-09 18:11:45,570 | INFO    | runner | [train] embedded 23000/27309
+2026-05-09 18:11:46,772 | INFO    | runner | [train] embedded 23050/27309
+2026-05-09 18:11:48,597 | INFO    | runner | [train] embedded 23100/27309
+2026-05-09 18:11:50,722 | INFO    | runner | [train] embedded 23150/27309
+2026-05-09 18:11:52,503 | INFO    | runner | [train] embedded 23200/27309
+2026-05-09 18:11:53,585 | INFO    | runner | [train] embedded 23250/27309
+2026-05-09 18:11:55,576 | INFO    | runner | [train] embedded 23300/27309
+2026-05-09 18:11:57,479 | INFO    | runner | [train] embedded 23350/27309
+2026-05-09 18:11:59,577 | INFO    | runner | [train] embedded 23400/27309
+2026-05-09 18:12:02,429 | INFO    | runner | [train] embedded 23450/27309
+2026-05-09 18:12:04,356 | INFO    | runner | [train] embedded 23500/27309
+2026-05-09 18:12:05,805 | INFO    | runner | [train] embedded 23550/27309
+2026-05-09 18:12:07,048 | INFO    | runner | [train] embedded 23600/27309
+2026-05-09 18:12:08,735 | INFO    | runner | [train] embedded 23650/27309
+2026-05-09 18:12:09,938 | INFO    | runner | [train] embedded 23700/27309
+2026-05-09 18:12:12,826 | INFO    | runner | [train] embedded 23750/27309
+2026-05-09 18:12:14,207 | INFO    | runner | [train] embedded 23800/27309
+2026-05-09 18:12:15,611 | INFO    | runner | [train] embedded 23850/27309
+2026-05-09 18:12:17,262 | INFO    | runner | [train] embedded 23900/27309
+2026-05-09 18:12:18,678 | INFO    | runner | [train] embedded 23950/27309
+2026-05-09 18:12:20,606 | INFO    | runner | [train] embedded 24000/27309
+2026-05-09 18:12:22,772 | INFO    | runner | [train] embedded 24050/27309
+2026-05-09 18:12:23,901 | INFO    | runner | [train] embedded 24100/27309
+2026-05-09 18:12:25,866 | INFO    | runner | [train] embedded 24150/27309
+2026-05-09 18:12:27,096 | INFO    | runner | [train] embedded 24200/27309
+2026-05-09 18:12:28,598 | INFO    | runner | [train] embedded 24250/27309
+2026-05-09 18:12:30,275 | INFO    | runner | [train] embedded 24300/27309
+2026-05-09 18:12:32,835 | INFO    | runner | [train] embedded 24350/27309
+2026-05-09 18:12:34,793 | INFO    | runner | [train] embedded 24400/27309
+2026-05-09 18:12:36,186 | INFO    | runner | [train] embedded 24450/27309
+2026-05-09 18:12:37,889 | INFO    | runner | [train] embedded 24500/27309
+2026-05-09 18:12:39,591 | INFO    | runner | [train] embedded 24550/27309
+2026-05-09 18:12:41,540 | INFO    | runner | [train] embedded 24600/27309
+2026-05-09 18:12:44,507 | INFO    | runner | [train] embedded 24650/27309
+2026-05-09 18:12:46,389 | INFO    | runner | [train] embedded 24700/27309
+2026-05-09 18:12:50,354 | INFO    | runner | [train] embedded 24750/27309
+2026-05-09 18:12:53,380 | INFO    | runner | [train] embedded 24800/27309
+2026-05-09 18:12:54,557 | INFO    | runner | [train] embedded 24850/27309
+2026-05-09 18:12:55,818 | INFO    | runner | [train] embedded 24900/27309
+2026-05-09 18:12:57,527 | INFO    | runner | [train] embedded 24950/27309
+2026-05-09 18:12:59,569 | INFO    | runner | [train] embedded 25000/27309
+2026-05-09 18:13:01,530 | INFO    | runner | [train] embedded 25050/27309
+2026-05-09 18:13:02,908 | INFO    | runner | [train] embedded 25100/27309
+2026-05-09 18:13:04,905 | INFO    | runner | [train] embedded 25150/27309
+2026-05-09 18:13:07,220 | INFO    | runner | [train] embedded 25200/27309
+2026-05-09 18:13:10,642 | INFO    | runner | [train] embedded 25250/27309
+2026-05-09 18:13:11,571 | INFO    | runner | [train] embedded 25300/27309
+2026-05-09 18:13:12,967 | INFO    | runner | [train] embedded 25350/27309
+2026-05-09 18:13:14,975 | INFO    | runner | [train] embedded 25400/27309
+2026-05-09 18:13:16,502 | INFO    | runner | [train] embedded 25450/27309
+2026-05-09 18:13:17,769 | INFO    | runner | [train] embedded 25500/27309
+2026-05-09 18:13:19,400 | INFO    | runner | [train] embedded 25550/27309
+2026-05-09 18:13:20,779 | INFO    | runner | [train] embedded 25600/27309
+2026-05-09 18:13:22,037 | INFO    | runner | [train] embedded 25650/27309
+2026-05-09 18:13:23,612 | INFO    | runner | [train] embedded 25700/27309
+2026-05-09 18:13:26,023 | INFO    | runner | [train] embedded 25750/27309
+2026-05-09 18:13:27,903 | INFO    | runner | [train] embedded 25800/27309
+2026-05-09 18:13:29,312 | INFO    | runner | [train] embedded 25850/27309
+2026-05-09 18:13:31,391 | INFO    | runner | [train] embedded 25900/27309
+2026-05-09 18:13:34,487 | INFO    | runner | [train] embedded 25950/27309
+2026-05-09 18:13:36,177 | INFO    | runner | [train] embedded 26000/27309
+2026-05-09 18:13:37,909 | INFO    | runner | [train] embedded 26050/27309
+2026-05-09 18:13:39,729 | INFO    | runner | [train] embedded 26100/27309
+2026-05-09 18:13:42,070 | INFO    | runner | [train] embedded 26150/27309
+2026-05-09 18:13:43,811 | INFO    | runner | [train] embedded 26200/27309
+2026-05-09 18:13:45,171 | INFO    | runner | [train] embedded 26250/27309
+2026-05-09 18:13:46,302 | INFO    | runner | [train] embedded 26300/27309
+2026-05-09 18:13:47,589 | INFO    | runner | [train] embedded 26350/27309
+2026-05-09 18:13:48,834 | INFO    | runner | [train] embedded 26400/27309
+2026-05-09 18:13:50,103 | INFO    | runner | [train] embedded 26450/27309
+2026-05-09 18:13:51,193 | INFO    | runner | [train] embedded 26500/27309
+2026-05-09 18:13:52,791 | INFO    | runner | [train] embedded 26550/27309
+2026-05-09 18:13:54,057 | INFO    | runner | [train] embedded 26600/27309
+2026-05-09 18:13:55,953 | INFO    | runner | [train] embedded 26650/27309
+2026-05-09 18:13:57,272 | INFO    | runner | [train] embedded 26700/27309
+2026-05-09 18:13:58,483 | INFO    | runner | [train] embedded 26750/27309
+2026-05-09 18:13:59,701 | INFO    | runner | [train] embedded 26800/27309
+2026-05-09 18:14:02,022 | INFO    | runner | [train] embedded 26850/27309
+2026-05-09 18:14:03,095 | INFO    | runner | [train] embedded 26900/27309
+2026-05-09 18:14:04,304 | INFO    | runner | [train] embedded 26950/27309
+2026-05-09 18:14:05,838 | INFO    | runner | [train] embedded 27000/27309
+2026-05-09 18:14:07,320 | INFO    | runner | [train] embedded 27050/27309
+2026-05-09 18:14:09,488 | INFO    | runner | [train] embedded 27100/27309
+2026-05-09 18:14:11,094 | INFO    | runner | [train] embedded 27150/27309
+2026-05-09 18:14:12,870 | INFO    | runner | [train] embedded 27200/27309
+2026-05-09 18:14:14,431 | INFO    | runner | [train] embedded 27250/27309
+2026-05-09 18:14:16,141 | INFO    | runner | [train] embedded 27300/27309
+2026-05-09 18:14:16,532 | INFO    | runner | [train] embedded 27309/27309
+2026-05-09 18:14:41,721 | INFO    | faiss.loader | Loading faiss with AVX512 support.
+2026-05-09 18:14:41,741 | INFO    | faiss.loader | Successfully loaded faiss with AVX512 support.
+2026-05-09 18:15:04,356 | INFO    | runner | Index built: 363917 docs, dim=1280, 47.8s
+2026-05-09 18:15:05,786 | INFO    | runner | [test:clean] embedded 50/6835
+2026-05-09 18:15:07,223 | INFO    | runner | [test:clean] embedded 100/6835
+2026-05-09 18:15:08,691 | INFO    | runner | [test:clean] embedded 150/6835
+2026-05-09 18:15:10,017 | INFO    | runner | [test:clean] embedded 200/6835
+2026-05-09 18:15:13,041 | INFO    | runner | [test:clean] embedded 250/6835
+2026-05-09 18:15:14,827 | INFO    | runner | [test:clean] embedded 300/6835
+2026-05-09 18:15:16,360 | INFO    | runner | [test:clean] embedded 350/6835
+2026-05-09 18:15:17,564 | INFO    | runner | [test:clean] embedded 400/6835
+2026-05-09 18:15:19,877 | INFO    | runner | [test:clean] embedded 450/6835
+2026-05-09 18:15:23,502 | INFO    | runner | [test:clean] embedded 500/6835
+2026-05-09 18:15:25,134 | INFO    | runner | [test:clean] embedded 550/6835
+2026-05-09 18:15:26,400 | INFO    | runner | [test:clean] embedded 600/6835
+2026-05-09 18:15:27,880 | INFO    | runner | [test:clean] embedded 650/6835
+2026-05-09 18:15:29,693 | INFO    | runner | [test:clean] embedded 700/6835
+2026-05-09 18:15:31,672 | INFO    | runner | [test:clean] embedded 750/6835
+2026-05-09 18:15:34,763 | INFO    | runner | [test:clean] embedded 800/6835
+2026-05-09 18:15:36,775 | INFO    | runner | [test:clean] embedded 850/6835
+2026-05-09 18:15:38,308 | INFO    | runner | [test:clean] embedded 900/6835
+2026-05-09 18:15:40,250 | INFO    | runner | [test:clean] embedded 950/6835
+2026-05-09 18:15:41,484 | INFO    | runner | [test:clean] embedded 1000/6835
+2026-05-09 18:15:43,236 | INFO    | runner | [test:clean] embedded 1050/6835
+2026-05-09 18:15:44,785 | INFO    | runner | [test:clean] embedded 1100/6835
+2026-05-09 18:15:46,151 | INFO    | runner | [test:clean] embedded 1150/6835
+2026-05-09 18:15:47,854 | INFO    | runner | [test:clean] embedded 1200/6835
+2026-05-09 18:15:49,644 | INFO    | runner | [test:clean] embedded 1250/6835
+2026-05-09 18:15:52,087 | INFO    | runner | [test:clean] embedded 1300/6835
+2026-05-09 18:15:53,944 | INFO    | runner | [test:clean] embedded 1350/6835
+2026-05-09 18:15:55,638 | INFO    | runner | [test:clean] embedded 1400/6835
+2026-05-09 18:15:58,022 | INFO    | runner | [test:clean] embedded 1450/6835
+2026-05-09 18:16:01,758 | INFO    | runner | [test:clean] embedded 1500/6835
+2026-05-09 18:16:03,156 | INFO    | runner | [test:clean] embedded 1550/6835
+2026-05-09 18:16:04,882 | INFO    | runner | [test:clean] embedded 1600/6835
+2026-05-09 18:16:06,646 | INFO    | runner | [test:clean] embedded 1650/6835
+2026-05-09 18:16:08,798 | INFO    | runner | [test:clean] embedded 1700/6835
+2026-05-09 18:16:11,518 | INFO    | runner | [test:clean] embedded 1750/6835
+2026-05-09 18:16:13,237 | INFO    | runner | [test:clean] embedded 1800/6835
+2026-05-09 18:16:14,691 | INFO    | runner | [test:clean] embedded 1850/6835
+2026-05-09 18:16:16,421 | INFO    | runner | [test:clean] embedded 1900/6835
+2026-05-09 18:16:18,400 | INFO    | runner | [test:clean] embedded 1950/6835
+2026-05-09 18:16:20,120 | INFO    | runner | [test:clean] embedded 2000/6835
+2026-05-09 18:16:21,518 | INFO    | runner | [test:clean] embedded 2050/6835
+2026-05-09 18:16:22,951 | INFO    | runner | [test:clean] embedded 2100/6835
+2026-05-09 18:16:24,427 | INFO    | runner | [test:clean] embedded 2150/6835
+2026-05-09 18:16:27,087 | INFO    | runner | [test:clean] embedded 2200/6835
+2026-05-09 18:16:28,868 | INFO    | runner | [test:clean] embedded 2250/6835
+2026-05-09 18:16:31,261 | INFO    | runner | [test:clean] embedded 2300/6835
+2026-05-09 18:16:33,206 | INFO    | runner | [test:clean] embedded 2350/6835
+2026-05-09 18:16:34,933 | INFO    | runner | [test:clean] embedded 2400/6835
+2026-05-09 18:16:36,279 | INFO    | runner | [test:clean] embedded 2450/6835
+2026-05-09 18:16:37,661 | INFO    | runner | [test:clean] embedded 2500/6835
+2026-05-09 18:16:39,017 | INFO    | runner | [test:clean] embedded 2550/6835
+2026-05-09 18:16:40,280 | INFO    | runner | [test:clean] embedded 2600/6835
+2026-05-09 18:16:41,782 | INFO    | runner | [test:clean] embedded 2650/6835
+2026-05-09 18:16:43,926 | INFO    | runner | [test:clean] embedded 2700/6835
+2026-05-09 18:16:45,491 | INFO    | runner | [test:clean] embedded 2750/6835
+2026-05-09 18:16:47,509 | INFO    | runner | [test:clean] embedded 2800/6835
+2026-05-09 18:16:51,655 | INFO    | runner | [test:clean] embedded 2850/6835
+2026-05-09 18:16:53,641 | INFO    | runner | [test:clean] embedded 2900/6835
+2026-05-09 18:16:55,793 | INFO    | runner | [test:clean] embedded 2950/6835
+2026-05-09 18:16:57,114 | INFO    | runner | [test:clean] embedded 3000/6835
+2026-05-09 18:16:58,622 | INFO    | runner | [test:clean] embedded 3050/6835
+2026-05-09 18:17:00,158 | INFO    | runner | [test:clean] embedded 3100/6835
+2026-05-09 18:17:01,701 | INFO    | runner | [test:clean] embedded 3150/6835
+2026-05-09 18:17:03,437 | INFO    | runner | [test:clean] embedded 3200/6835
+2026-05-09 18:17:05,029 | INFO    | runner | [test:clean] embedded 3250/6835
+2026-05-09 18:17:06,055 | INFO    | runner | [test:clean] embedded 3300/6835
+2026-05-09 18:17:07,572 | INFO    | runner | [test:clean] embedded 3350/6835
+2026-05-09 18:17:08,826 | INFO    | runner | [test:clean] embedded 3400/6835
+2026-05-09 18:17:10,224 | INFO    | runner | [test:clean] embedded 3450/6835
+2026-05-09 18:17:11,777 | INFO    | runner | [test:clean] embedded 3500/6835
+2026-05-09 18:17:13,389 | INFO    | runner | [test:clean] embedded 3550/6835
+2026-05-09 18:17:14,999 | INFO    | runner | [test:clean] embedded 3600/6835
+2026-05-09 18:17:16,743 | INFO    | runner | [test:clean] embedded 3650/6835
+2026-05-09 18:17:18,951 | INFO    | runner | [test:clean] embedded 3700/6835
+2026-05-09 18:17:20,442 | INFO    | runner | [test:clean] embedded 3750/6835
+2026-05-09 18:17:22,670 | INFO    | runner | [test:clean] embedded 3800/6835
+2026-05-09 18:17:23,777 | INFO    | runner | [test:clean] embedded 3850/6835
+2026-05-09 18:17:25,355 | INFO    | runner | [test:clean] embedded 3900/6835
+2026-05-09 18:17:26,715 | INFO    | runner | [test:clean] embedded 3950/6835
+2026-05-09 18:17:27,804 | INFO    | runner | [test:clean] embedded 4000/6835
+2026-05-09 18:17:29,750 | INFO    | runner | [test:clean] embedded 4050/6835
+2026-05-09 18:17:31,277 | INFO    | runner | [test:clean] embedded 4100/6835
+2026-05-09 18:17:33,397 | INFO    | runner | [test:clean] embedded 4150/6835
+2026-05-09 18:17:35,063 | INFO    | runner | [test:clean] embedded 4200/6835
+2026-05-09 18:17:37,203 | INFO    | runner | [test:clean] embedded 4250/6835
+2026-05-09 18:17:38,500 | INFO    | runner | [test:clean] embedded 4300/6835
+2026-05-09 18:17:40,587 | INFO    | runner | [test:clean] embedded 4350/6835
+2026-05-09 18:17:42,731 | INFO    | runner | [test:clean] embedded 4400/6835
+2026-05-09 18:17:44,741 | INFO    | runner | [test:clean] embedded 4450/6835
+2026-05-09 18:17:46,551 | INFO    | runner | [test:clean] embedded 4500/6835
+2026-05-09 18:17:47,946 | INFO    | runner | [test:clean] embedded 4550/6835
+2026-05-09 18:17:49,733 | INFO    | runner | [test:clean] embedded 4600/6835
+2026-05-09 18:17:51,332 | INFO    | runner | [test:clean] embedded 4650/6835
+2026-05-09 18:17:52,668 | INFO    | runner | [test:clean] embedded 4700/6835
+2026-05-09 18:17:54,088 | INFO    | runner | [test:clean] embedded 4750/6835
+2026-05-09 18:17:55,623 | INFO    | runner | [test:clean] embedded 4800/6835
+2026-05-09 18:17:57,253 | INFO    | runner | [test:clean] embedded 4850/6835
+2026-05-09 18:17:59,354 | INFO    | runner | [test:clean] embedded 4900/6835
+2026-05-09 18:18:00,487 | INFO    | runner | [test:clean] embedded 4950/6835
+2026-05-09 18:18:01,652 | INFO    | runner | [test:clean] embedded 5000/6835
+2026-05-09 18:18:02,954 | INFO    | runner | [test:clean] embedded 5050/6835
+2026-05-09 18:18:04,319 | INFO    | runner | [test:clean] embedded 5100/6835
+2026-05-09 18:18:06,265 | INFO    | runner | [test:clean] embedded 5150/6835
+2026-05-09 18:18:07,969 | INFO    | runner | [test:clean] embedded 5200/6835
+2026-05-09 18:18:09,801 | INFO    | runner | [test:clean] embedded 5250/6835
+2026-05-09 18:18:11,282 | INFO    | runner | [test:clean] embedded 5300/6835
+2026-05-09 18:18:12,604 | INFO    | runner | [test:clean] embedded 5350/6835
+2026-05-09 18:18:13,560 | INFO    | runner | [test:clean] embedded 5400/6835
+2026-05-09 18:18:14,836 | INFO    | runner | [test:clean] embedded 5450/6835
+2026-05-09 18:18:16,318 | INFO    | runner | [test:clean] embedded 5500/6835
+2026-05-09 18:18:17,881 | INFO    | runner | [test:clean] embedded 5550/6835
+2026-05-09 18:18:19,503 | INFO    | runner | [test:clean] embedded 5600/6835
+2026-05-09 18:18:21,514 | INFO    | runner | [test:clean] embedded 5650/6835
+2026-05-09 18:18:22,723 | INFO    | runner | [test:clean] embedded 5700/6835
+2026-05-09 18:18:23,999 | INFO    | runner | [test:clean] embedded 5750/6835
+2026-05-09 18:18:25,438 | INFO    | runner | [test:clean] embedded 5800/6835
+2026-05-09 18:18:26,766 | INFO    | runner | [test:clean] embedded 5850/6835
+2026-05-09 18:18:29,552 | INFO    | runner | [test:clean] embedded 5900/6835
+2026-05-09 18:18:31,224 | INFO    | runner | [test:clean] embedded 5950/6835
+2026-05-09 18:18:33,255 | INFO    | runner | [test:clean] embedded 6000/6835
+2026-05-09 18:18:34,548 | INFO    | runner | [test:clean] embedded 6050/6835
+2026-05-09 18:18:35,602 | INFO    | runner | [test:clean] embedded 6100/6835
+2026-05-09 18:18:37,833 | INFO    | runner | [test:clean] embedded 6150/6835
+2026-05-09 18:18:40,411 | INFO    | runner | [test:clean] embedded 6200/6835
+2026-05-09 18:18:42,027 | INFO    | runner | [test:clean] embedded 6250/6835
+2026-05-09 18:18:43,817 | INFO    | runner | [test:clean] embedded 6300/6835
+2026-05-09 18:18:45,210 | INFO    | runner | [test:clean] embedded 6350/6835
+2026-05-09 18:18:46,804 | INFO    | runner | [test:clean] embedded 6400/6835
+2026-05-09 18:18:48,508 | INFO    | runner | [test:clean] embedded 6450/6835
+2026-05-09 18:18:50,923 | INFO    | runner | [test:clean] embedded 6500/6835
+2026-05-09 18:18:53,323 | INFO    | runner | [test:clean] embedded 6550/6835
+2026-05-09 18:18:54,527 | INFO    | runner | [test:clean] embedded 6600/6835
+2026-05-09 18:18:55,808 | INFO    | runner | [test:clean] embedded 6650/6835
+2026-05-09 18:18:56,798 | INFO    | runner | [test:clean] embedded 6700/6835
+2026-05-09 18:18:58,063 | INFO    | runner | [test:clean] embedded 6750/6835
+2026-05-09 18:19:00,020 | INFO    | runner | [test:clean] embedded 6800/6835
+2026-05-09 18:19:00,981 | INFO    | runner | [test:clean] embedded 6835/6835
+2026-05-09 18:21:39,215 | INFO    | runner | [clean] MAP=0.8191 MRR=0.8191 P@1=0.7697 nDCG=0.8417 n=6835
+/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+2026-05-09 18:21:56,517 | INFO    | runner | Experiment strategy1_segments_torch done in 1935.0s — MAP=0.8191 MRR=0.8191
+2026-05-09 18:21:56,530 | INFO    | runner | Experiment strategy2_super_embedding_torch starting
+2026-05-09 18:21:57,443 | INFO    | runner | Loaded 34144 records
+2026-05-09 18:21:57,450 | INFO    | runner | Split: train=27309 test=6835
+2026-05-09 18:21:57,451 | INFO    | runner | [train] embedded 50/27309
+2026-05-09 18:21:57,452 | INFO    | runner | [train] embedded 100/27309
+2026-05-09 18:21:57,453 | INFO    | runner | [train] embedded 150/27309
+2026-05-09 18:21:57,454 | INFO    | runner | [train] embedded 200/27309
+2026-05-09 18:21:57,455 | INFO    | runner | [train] embedded 250/27309
+2026-05-09 18:21:57,456 | INFO    | runner | [train] embedded 300/27309
+2026-05-09 18:21:57,456 | INFO    | runner | [train] embedded 350/27309
+2026-05-09 18:21:57,457 | INFO    | runner | [train] embedded 400/27309
+2026-05-09 18:21:57,458 | INFO    | runner | [train] embedded 450/27309
+2026-05-09 18:21:57,459 | INFO    | runner | [train] embedded 500/27309
+2026-05-09 18:21:57,460 | INFO    | runner | [train] embedded 550/27309
+2026-05-09 18:21:57,461 | INFO    | runner | [train] embedded 600/27309
+2026-05-09 18:21:57,461 | INFO    | runner | [train] embedded 650/27309
+2026-05-09 18:21:57,462 | INFO    | runner | [train] embedded 700/27309
+2026-05-09 18:21:57,463 | INFO    | runner | [train] embedded 750/27309
+2026-05-09 18:21:57,464 | INFO    | runner | [train] embedded 800/27309
+2026-05-09 18:21:57,465 | INFO    | runner | [train] embedded 850/27309
+2026-05-09 18:21:57,466 | INFO    | runner | [train] embedded 900/27309
+2026-05-09 18:21:57,466 | INFO    | runner | [train] embedded 950/27309
+2026-05-09 18:21:57,467 | INFO    | runner | [train] embedded 1000/27309
+2026-05-09 18:21:57,468 | INFO    | runner | [train] embedded 1050/27309
+2026-05-09 18:21:57,469 | INFO    | runner | [train] embedded 1100/27309
+2026-05-09 18:21:57,470 | INFO    | runner | [train] embedded 1150/27309
+2026-05-09 18:21:57,471 | INFO    | runner | [train] embedded 1200/27309
+2026-05-09 18:21:57,471 | INFO    | runner | [train] embedded 1250/27309
+2026-05-09 18:21:57,472 | INFO    | runner | [train] embedded 1300/27309
+2026-05-09 18:21:57,474 | INFO    | runner | [train] embedded 1350/27309
+2026-05-09 18:21:57,475 | INFO    | runner | [train] embedded 1400/27309
+2026-05-09 18:21:57,476 | INFO    | runner | [train] embedded 1450/27309
+2026-05-09 18:21:57,476 | INFO    | runner | [train] embedded 1500/27309
+2026-05-09 18:21:57,477 | INFO    | runner | [train] embedded 1550/27309
+2026-05-09 18:21:57,478 | INFO    | runner | [train] embedded 1600/27309
+2026-05-09 18:21:57,479 | INFO    | runner | [train] embedded 1650/27309
+2026-05-09 18:21:57,480 | INFO    | runner | [train] embedded 1700/27309
+2026-05-09 18:21:57,480 | INFO    | runner | [train] embedded 1750/27309
+2026-05-09 18:21:57,481 | INFO    | runner | [train] embedded 1800/27309
+2026-05-09 18:21:57,482 | INFO    | runner | [train] embedded 1850/27309
+2026-05-09 18:21:57,483 | INFO    | runner | [train] embedded 1900/27309
+2026-05-09 18:21:57,484 | INFO    | runner | [train] embedded 1950/27309
+2026-05-09 18:21:57,484 | INFO    | runner | [train] embedded 2000/27309
+2026-05-09 18:21:57,485 | INFO    | runner | [train] embedded 2050/27309
+2026-05-09 18:21:57,486 | INFO    | runner | [train] embedded 2100/27309
+2026-05-09 18:21:57,487 | INFO    | runner | [train] embedded 2150/27309
+2026-05-09 18:21:57,487 | INFO    | runner | [train] embedded 2200/27309
+2026-05-09 18:21:57,488 | INFO    | runner | [train] embedded 2250/27309
+2026-05-09 18:21:57,489 | INFO    | runner | [train] embedded 2300/27309
+2026-05-09 18:21:57,490 | INFO    | runner | [train] embedded 2350/27309
+2026-05-09 18:21:57,491 | INFO    | runner | [train] embedded 2400/27309
+2026-05-09 18:21:57,491 | INFO    | runner | [train] embedded 2450/27309
+2026-05-09 18:21:57,492 | INFO    | runner | [train] embedded 2500/27309
+2026-05-09 18:21:57,493 | INFO    | runner | [train] embedded 2550/27309
+2026-05-09 18:21:57,494 | INFO    | runner | [train] embedded 2600/27309
+2026-05-09 18:21:57,495 | INFO    | runner | [train] embedded 2650/27309
+2026-05-09 18:21:57,495 | INFO    | runner | [train] embedded 2700/27309
+2026-05-09 18:21:57,496 | INFO    | runner | [train] embedded 2750/27309
+2026-05-09 18:21:57,497 | INFO    | runner | [train] embedded 2800/27309
+2026-05-09 18:21:57,498 | INFO    | runner | [train] embedded 2850/27309
+2026-05-09 18:21:57,499 | INFO    | runner | [train] embedded 2900/27309
+2026-05-09 18:21:57,499 | INFO    | runner | [train] embedded 2950/27309
+2026-05-09 18:21:57,500 | INFO    | runner | [train] embedded 3000/27309
+2026-05-09 18:21:57,501 | INFO    | runner | [train] embedded 3050/27309
+2026-05-09 18:21:57,502 | INFO    | runner | [train] embedded 3100/27309
+2026-05-09 18:21:57,503 | INFO    | runner | [train] embedded 3150/27309
+2026-05-09 18:21:57,503 | INFO    | runner | [train] embedded 3200/27309
+2026-05-09 18:21:57,504 | INFO    | runner | [train] embedded 3250/27309
+2026-05-09 18:21:57,505 | INFO    | runner | [train] embedded 3300/27309
+2026-05-09 18:21:57,506 | INFO    | runner | [train] embedded 3350/27309
+2026-05-09 18:21:57,507 | INFO    | runner | [train] embedded 3400/27309
+2026-05-09 18:21:57,508 | INFO    | runner | [train] embedded 3450/27309
+2026-05-09 18:21:57,509 | INFO    | runner | [train] embedded 3500/27309
+2026-05-09 18:21:57,509 | INFO    | runner | [train] embedded 3550/27309
+2026-05-09 18:21:57,510 | INFO    | runner | [train] embedded 3600/27309
+2026-05-09 18:21:57,511 | INFO    | runner | [train] embedded 3650/27309
+2026-05-09 18:21:57,512 | INFO    | runner | [train] embedded 3700/27309
+2026-05-09 18:21:57,512 | INFO    | runner | [train] embedded 3750/27309
+2026-05-09 18:21:57,513 | INFO    | runner | [train] embedded 3800/27309
+2026-05-09 18:21:57,514 | INFO    | runner | [train] embedded 3850/27309
+2026-05-09 18:21:57,515 | INFO    | runner | [train] embedded 3900/27309
+2026-05-09 18:21:57,516 | INFO    | runner | [train] embedded 3950/27309
+2026-05-09 18:21:57,516 | INFO    | runner | [train] embedded 4000/27309
+2026-05-09 18:21:57,517 | INFO    | runner | [train] embedded 4050/27309
+2026-05-09 18:21:57,518 | INFO    | runner | [train] embedded 4100/27309
+2026-05-09 18:21:57,519 | INFO    | runner | [train] embedded 4150/27309
+2026-05-09 18:21:57,520 | INFO    | runner | [train] embedded 4200/27309
+2026-05-09 18:21:57,520 | INFO    | runner | [train] embedded 4250/27309
+2026-05-09 18:21:57,521 | INFO    | runner | [train] embedded 4300/27309
+2026-05-09 18:21:57,522 | INFO    | runner | [train] embedded 4350/27309
+2026-05-09 18:21:57,523 | INFO    | runner | [train] embedded 4400/27309
+2026-05-09 18:21:57,523 | INFO    | runner | [train] embedded 4450/27309
+2026-05-09 18:21:57,524 | INFO    | runner | [train] embedded 4500/27309
+2026-05-09 18:21:57,525 | INFO    | runner | [train] embedded 4550/27309
+2026-05-09 18:21:57,526 | INFO    | runner | [train] embedded 4600/27309
+2026-05-09 18:21:57,527 | INFO    | runner | [train] embedded 4650/27309
+2026-05-09 18:21:57,527 | INFO    | runner | [train] embedded 4700/27309
+2026-05-09 18:21:57,528 | INFO    | runner | [train] embedded 4750/27309
+2026-05-09 18:21:57,529 | INFO    | runner | [train] embedded 4800/27309
+2026-05-09 18:21:57,530 | INFO    | runner | [train] embedded 4850/27309
+2026-05-09 18:21:57,531 | INFO    | runner | [train] embedded 4900/27309
+2026-05-09 18:21:57,531 | INFO    | runner | [train] embedded 4950/27309
+2026-05-09 18:21:57,532 | INFO    | runner | [train] embedded 5000/27309
+2026-05-09 18:21:57,533 | INFO    | runner | [train] embedded 5050/27309
+2026-05-09 18:21:57,534 | INFO    | runner | [train] embedded 5100/27309
+2026-05-09 18:21:57,535 | INFO    | runner | [train] embedded 5150/27309
+2026-05-09 18:21:57,535 | INFO    | runner | [train] embedded 5200/27309
+2026-05-09 18:21:57,536 | INFO    | runner | [train] embedded 5250/27309
+2026-05-09 18:21:57,537 | INFO    | runner | [train] embedded 5300/27309
+2026-05-09 18:21:57,538 | INFO    | runner | [train] embedded 5350/27309
+2026-05-09 18:21:57,539 | INFO    | runner | [train] embedded 5400/27309
+2026-05-09 18:21:57,539 | INFO    | runner | [train] embedded 5450/27309
+2026-05-09 18:21:57,541 | INFO    | runner | [train] embedded 5500/27309
+2026-05-09 18:21:57,541 | INFO    | runner | [train] embedded 5550/27309
+2026-05-09 18:21:57,542 | INFO    | runner | [train] embedded 5600/27309
+2026-05-09 18:21:57,543 | INFO    | runner | [train] embedded 5650/27309
+2026-05-09 18:21:57,544 | INFO    | runner | [train] embedded 5700/27309
+2026-05-09 18:21:57,544 | INFO    | runner | [train] embedded 5750/27309
+2026-05-09 18:21:57,545 | INFO    | runner | [train] embedded 5800/27309
+2026-05-09 18:21:57,546 | INFO    | runner | [train] embedded 5850/27309
+2026-05-09 18:21:57,547 | INFO    | runner | [train] embedded 5900/27309
+2026-05-09 18:21:57,548 | INFO    | runner | [train] embedded 5950/27309
+2026-05-09 18:21:57,548 | INFO    | runner | [train] embedded 6000/27309
+2026-05-09 18:21:57,549 | INFO    | runner | [train] embedded 6050/27309
+2026-05-09 18:21:57,550 | INFO    | runner | [train] embedded 6100/27309
+2026-05-09 18:21:57,551 | INFO    | runner | [train] embedded 6150/27309
+2026-05-09 18:21:57,552 | INFO    | runner | [train] embedded 6200/27309
+2026-05-09 18:21:57,552 | INFO    | runner | [train] embedded 6250/27309
+2026-05-09 18:21:57,553 | INFO    | runner | [train] embedded 6300/27309
+2026-05-09 18:21:57,554 | INFO    | runner | [train] embedded 6350/27309
+2026-05-09 18:21:57,555 | INFO    | runner | [train] embedded 6400/27309
+2026-05-09 18:21:57,556 | INFO    | runner | [train] embedded 6450/27309
+2026-05-09 18:21:57,556 | INFO    | runner | [train] embedded 6500/27309
+2026-05-09 18:21:57,557 | INFO    | runner | [train] embedded 6550/27309
+2026-05-09 18:21:57,558 | INFO    | runner | [train] embedded 6600/27309
+2026-05-09 18:21:57,559 | INFO    | runner | [train] embedded 6650/27309
+2026-05-09 18:21:57,559 | INFO    | runner | [train] embedded 6700/27309
+2026-05-09 18:21:57,560 | INFO    | runner | [train] embedded 6750/27309
+2026-05-09 18:21:57,561 | INFO    | runner | [train] embedded 6800/27309
+2026-05-09 18:21:57,562 | INFO    | runner | [train] embedded 6850/27309
+2026-05-09 18:21:57,563 | INFO    | runner | [train] embedded 6900/27309
+2026-05-09 18:21:57,563 | INFO    | runner | [train] embedded 6950/27309
+2026-05-09 18:21:57,564 | INFO    | runner | [train] embedded 7000/27309
+2026-05-09 18:21:57,565 | INFO    | runner | [train] embedded 7050/27309
+2026-05-09 18:21:57,566 | INFO    | runner | [train] embedded 7100/27309
+2026-05-09 18:21:57,567 | INFO    | runner | [train] embedded 7150/27309
+2026-05-09 18:21:57,567 | INFO    | runner | [train] embedded 7200/27309
+2026-05-09 18:21:57,568 | INFO    | runner | [train] embedded 7250/27309
+2026-05-09 18:21:57,569 | INFO    | runner | [train] embedded 7300/27309
+2026-05-09 18:21:57,570 | INFO    | runner | [train] embedded 7350/27309
+2026-05-09 18:21:57,570 | INFO    | runner | [train] embedded 7400/27309
+2026-05-09 18:21:57,571 | INFO    | runner | [train] embedded 7450/27309
+2026-05-09 18:21:57,572 | INFO    | runner | [train] embedded 7500/27309
+2026-05-09 18:21:57,573 | INFO    | runner | [train] embedded 7550/27309
+2026-05-09 18:21:57,574 | INFO    | runner | [train] embedded 7600/27309
+2026-05-09 18:21:57,575 | INFO    | runner | [train] embedded 7650/27309
+2026-05-09 18:21:57,576 | INFO    | runner | [train] embedded 7700/27309
+2026-05-09 18:21:57,577 | INFO    | runner | [train] embedded 7750/27309
+2026-05-09 18:21:57,577 | INFO    | runner | [train] embedded 7800/27309
+2026-05-09 18:21:57,578 | INFO    | runner | [train] embedded 7850/27309
+2026-05-09 18:21:57,579 | INFO    | runner | [train] embedded 7900/27309
+2026-05-09 18:21:57,580 | INFO    | runner | [train] embedded 7950/27309
+2026-05-09 18:21:57,580 | INFO    | runner | [train] embedded 8000/27309
+2026-05-09 18:21:57,581 | INFO    | runner | [train] embedded 8050/27309
+2026-05-09 18:21:57,582 | INFO    | runner | [train] embedded 8100/27309
+2026-05-09 18:21:57,583 | INFO    | runner | [train] embedded 8150/27309
+2026-05-09 18:21:57,584 | INFO    | runner | [train] embedded 8200/27309
+2026-05-09 18:21:57,584 | INFO    | runner | [train] embedded 8250/27309
+2026-05-09 18:21:57,585 | INFO    | runner | [train] embedded 8300/27309
+2026-05-09 18:21:57,586 | INFO    | runner | [train] embedded 8350/27309
+2026-05-09 18:21:57,587 | INFO    | runner | [train] embedded 8400/27309
+2026-05-09 18:21:57,587 | INFO    | runner | [train] embedded 8450/27309
+2026-05-09 18:21:57,588 | INFO    | runner | [train] embedded 8500/27309
+2026-05-09 18:21:57,589 | INFO    | runner | [train] embedded 8550/27309
+2026-05-09 18:21:57,590 | INFO    | runner | [train] embedded 8600/27309
+2026-05-09 18:21:57,591 | INFO    | runner | [train] embedded 8650/27309
+2026-05-09 18:21:57,591 | INFO    | runner | [train] embedded 8700/27309
+2026-05-09 18:21:57,592 | INFO    | runner | [train] embedded 8750/27309
+2026-05-09 18:21:57,593 | INFO    | runner | [train] embedded 8800/27309
+2026-05-09 18:21:57,594 | INFO    | runner | [train] embedded 8850/27309
+2026-05-09 18:21:57,595 | INFO    | runner | [train] embedded 8900/27309
+2026-05-09 18:21:57,595 | INFO    | runner | [train] embedded 8950/27309
+2026-05-09 18:21:57,596 | INFO    | runner | [train] embedded 9000/27309
+2026-05-09 18:21:57,597 | INFO    | runner | [train] embedded 9050/27309
+2026-05-09 18:21:57,598 | INFO    | runner | [train] embedded 9100/27309
+2026-05-09 18:21:57,599 | INFO    | runner | [train] embedded 9150/27309
+2026-05-09 18:21:57,599 | INFO    | runner | [train] embedded 9200/27309
+2026-05-09 18:21:57,600 | INFO    | runner | [train] embedded 9250/27309
+2026-05-09 18:21:57,601 | INFO    | runner | [train] embedded 9300/27309
+2026-05-09 18:21:57,602 | INFO    | runner | [train] embedded 9350/27309
+2026-05-09 18:21:57,602 | INFO    | runner | [train] embedded 9400/27309
+2026-05-09 18:21:57,603 | INFO    | runner | [train] embedded 9450/27309
+2026-05-09 18:21:57,604 | INFO    | runner | [train] embedded 9500/27309
+2026-05-09 18:21:57,605 | INFO    | runner | [train] embedded 9550/27309
+2026-05-09 18:21:57,606 | INFO    | runner | [train] embedded 9600/27309
+2026-05-09 18:21:57,607 | INFO    | runner | [train] embedded 9650/27309
+2026-05-09 18:21:57,608 | INFO    | runner | [train] embedded 9700/27309
+2026-05-09 18:21:57,608 | INFO    | runner | [train] embedded 9750/27309
+2026-05-09 18:21:57,609 | INFO    | runner | [train] embedded 9800/27309
+2026-05-09 18:21:57,610 | INFO    | runner | [train] embedded 9850/27309
+2026-05-09 18:21:57,611 | INFO    | runner | [train] embedded 9900/27309
+2026-05-09 18:21:57,612 | INFO    | runner | [train] embedded 9950/27309
+2026-05-09 18:21:57,612 | INFO    | runner | [train] embedded 10000/27309
+2026-05-09 18:21:57,613 | INFO    | runner | [train] embedded 10050/27309
+2026-05-09 18:21:57,614 | INFO    | runner | [train] embedded 10100/27309
+2026-05-09 18:21:57,615 | INFO    | runner | [train] embedded 10150/27309
+2026-05-09 18:21:57,616 | INFO    | runner | [train] embedded 10200/27309
+2026-05-09 18:21:57,616 | INFO    | runner | [train] embedded 10250/27309
+2026-05-09 18:21:57,617 | INFO    | runner | [train] embedded 10300/27309
+2026-05-09 18:21:57,618 | INFO    | runner | [train] embedded 10350/27309
+2026-05-09 18:21:57,619 | INFO    | runner | [train] embedded 10400/27309
+2026-05-09 18:21:57,619 | INFO    | runner | [train] embedded 10450/27309
+2026-05-09 18:21:57,620 | INFO    | runner | [train] embedded 10500/27309
+2026-05-09 18:21:57,621 | INFO    | runner | [train] embedded 10550/27309
+2026-05-09 18:21:57,622 | INFO    | runner | [train] embedded 10600/27309
+2026-05-09 18:21:57,623 | INFO    | runner | [train] embedded 10650/27309
+2026-05-09 18:21:57,623 | INFO    | runner | [train] embedded 10700/27309
+2026-05-09 18:21:57,624 | INFO    | runner | [train] embedded 10750/27309
+2026-05-09 18:21:57,625 | INFO    | runner | [train] embedded 10800/27309
+2026-05-09 18:21:57,626 | INFO    | runner | [train] embedded 10850/27309
+2026-05-09 18:21:57,627 | INFO    | runner | [train] embedded 10900/27309
+2026-05-09 18:21:57,627 | INFO    | runner | [train] embedded 10950/27309
+2026-05-09 18:21:57,628 | INFO    | runner | [train] embedded 11000/27309
+2026-05-09 18:21:57,629 | INFO    | runner | [train] embedded 11050/27309
+2026-05-09 18:21:57,630 | INFO    | runner | [train] embedded 11100/27309
+2026-05-09 18:21:57,630 | INFO    | runner | [train] embedded 11150/27309
+2026-05-09 18:21:57,631 | INFO    | runner | [train] embedded 11200/27309
+2026-05-09 18:21:57,632 | INFO    | runner | [train] embedded 11250/27309
+2026-05-09 18:21:57,633 | INFO    | runner | [train] embedded 11300/27309
+2026-05-09 18:21:57,634 | INFO    | runner | [train] embedded 11350/27309
+2026-05-09 18:21:57,634 | INFO    | runner | [train] embedded 11400/27309
+2026-05-09 18:21:57,635 | INFO    | runner | [train] embedded 11450/27309
+2026-05-09 18:21:57,636 | INFO    | runner | [train] embedded 11500/27309
+2026-05-09 18:21:57,637 | INFO    | runner | [train] embedded 11550/27309
+2026-05-09 18:21:57,637 | INFO    | runner | [train] embedded 11600/27309
+2026-05-09 18:21:57,638 | INFO    | runner | [train] embedded 11650/27309
+2026-05-09 18:21:57,639 | INFO    | runner | [train] embedded 11700/27309
+2026-05-09 18:21:57,640 | INFO    | runner | [train] embedded 11750/27309
+2026-05-09 18:21:57,641 | INFO    | runner | [train] embedded 11800/27309
+2026-05-09 18:21:57,642 | INFO    | runner | [train] embedded 11850/27309
+2026-05-09 18:21:57,643 | INFO    | runner | [train] embedded 11900/27309
+2026-05-09 18:21:57,643 | INFO    | runner | [train] embedded 11950/27309
+2026-05-09 18:21:57,644 | INFO    | runner | [train] embedded 12000/27309
+2026-05-09 18:21:57,645 | INFO    | runner | [train] embedded 12050/27309
+2026-05-09 18:21:57,646 | INFO    | runner | [train] embedded 12100/27309
+2026-05-09 18:21:57,647 | INFO    | runner | [train] embedded 12150/27309
+2026-05-09 18:21:57,647 | INFO    | runner | [train] embedded 12200/27309
+2026-05-09 18:21:57,648 | INFO    | runner | [train] embedded 12250/27309
+2026-05-09 18:21:57,649 | INFO    | runner | [train] embedded 12300/27309
+2026-05-09 18:21:57,650 | INFO    | runner | [train] embedded 12350/27309
+2026-05-09 18:21:57,650 | INFO    | runner | [train] embedded 12400/27309
+2026-05-09 18:21:57,651 | INFO    | runner | [train] embedded 12450/27309
+2026-05-09 18:21:57,652 | INFO    | runner | [train] embedded 12500/27309
+2026-05-09 18:21:57,653 | INFO    | runner | [train] embedded 12550/27309
+2026-05-09 18:21:57,654 | INFO    | runner | [train] embedded 12600/27309
+2026-05-09 18:21:57,654 | INFO    | runner | [train] embedded 12650/27309
+2026-05-09 18:21:57,655 | INFO    | runner | [train] embedded 12700/27309
+2026-05-09 18:21:57,656 | INFO    | runner | [train] embedded 12750/27309
+2026-05-09 18:21:57,657 | INFO    | runner | [train] embedded 12800/27309
+2026-05-09 18:21:57,658 | INFO    | runner | [train] embedded 12850/27309
+2026-05-09 18:21:57,658 | INFO    | runner | [train] embedded 12900/27309
+2026-05-09 18:21:57,659 | INFO    | runner | [train] embedded 12950/27309
+2026-05-09 18:21:57,660 | INFO    | runner | [train] embedded 13000/27309
+2026-05-09 18:21:57,661 | INFO    | runner | [train] embedded 13050/27309
+2026-05-09 18:21:57,661 | INFO    | runner | [train] embedded 13100/27309
+2026-05-09 18:21:57,663 | INFO    | runner | [train] embedded 13150/27309
+2026-05-09 18:21:57,663 | INFO    | runner | [train] embedded 13200/27309
+2026-05-09 18:21:57,664 | INFO    | runner | [train] embedded 13250/27309
+2026-05-09 18:21:57,665 | INFO    | runner | [train] embedded 13300/27309
+2026-05-09 18:21:57,666 | INFO    | runner | [train] embedded 13350/27309
+2026-05-09 18:21:57,666 | INFO    | runner | [train] embedded 13400/27309
+2026-05-09 18:21:57,667 | INFO    | runner | [train] embedded 13450/27309
+2026-05-09 18:21:57,668 | INFO    | runner | [train] embedded 13500/27309
+2026-05-09 18:21:57,669 | INFO    | runner | [train] embedded 13550/27309
+2026-05-09 18:21:57,670 | INFO    | runner | [train] embedded 13600/27309
+2026-05-09 18:21:57,670 | INFO    | runner | [train] embedded 13650/27309
+2026-05-09 18:21:57,671 | INFO    | runner | [train] embedded 13700/27309
+2026-05-09 18:21:57,672 | INFO    | runner | [train] embedded 13750/27309
+2026-05-09 18:21:57,673 | INFO    | runner | [train] embedded 13800/27309
+2026-05-09 18:21:57,674 | INFO    | runner | [train] embedded 13850/27309
+2026-05-09 18:21:57,675 | INFO    | runner | [train] embedded 13900/27309
+2026-05-09 18:21:59,685 | INFO    | runner | [train] embedded 13950/27309
+2026-05-09 18:21:59,687 | INFO    | runner | [train] embedded 14000/27309
+2026-05-09 18:21:59,687 | INFO    | runner | [train] embedded 14050/27309
+2026-05-09 18:21:59,688 | INFO    | runner | [train] embedded 14100/27309
+2026-05-09 18:21:59,689 | INFO    | runner | [train] embedded 14150/27309
+2026-05-09 18:21:59,690 | INFO    | runner | [train] embedded 14200/27309
+2026-05-09 18:21:59,691 | INFO    | runner | [train] embedded 14250/27309
+2026-05-09 18:21:59,691 | INFO    | runner | [train] embedded 14300/27309
+2026-05-09 18:21:59,692 | INFO    | runner | [train] embedded 14350/27309
+2026-05-09 18:21:59,693 | INFO    | runner | [train] embedded 14400/27309
+2026-05-09 18:21:59,694 | INFO    | runner | [train] embedded 14450/27309
+2026-05-09 18:21:59,694 | INFO    | runner | [train] embedded 14500/27309
+2026-05-09 18:21:59,695 | INFO    | runner | [train] embedded 14550/27309
+2026-05-09 18:21:59,696 | INFO    | runner | [train] embedded 14600/27309
+2026-05-09 18:21:59,697 | INFO    | runner | [train] embedded 14650/27309
+2026-05-09 18:21:59,698 | INFO    | runner | [train] embedded 14700/27309
+2026-05-09 18:21:59,698 | INFO    | runner | [train] embedded 14750/27309
+2026-05-09 18:21:59,699 | INFO    | runner | [train] embedded 14800/27309
+2026-05-09 18:21:59,700 | INFO    | runner | [train] embedded 14850/27309
+2026-05-09 18:21:59,701 | INFO    | runner | [train] embedded 14900/27309
+2026-05-09 18:21:59,701 | INFO    | runner | [train] embedded 14950/27309
+2026-05-09 18:21:59,702 | INFO    | runner | [train] embedded 15000/27309
+2026-05-09 18:21:59,703 | INFO    | runner | [train] embedded 15050/27309
+2026-05-09 18:21:59,704 | INFO    | runner | [train] embedded 15100/27309
+2026-05-09 18:21:59,704 | INFO    | runner | [train] embedded 15150/27309
+2026-05-09 18:21:59,705 | INFO    | runner | [train] embedded 15200/27309
+2026-05-09 18:21:59,706 | INFO    | runner | [train] embedded 15250/27309
+2026-05-09 18:21:59,707 | INFO    | runner | [train] embedded 15300/27309
+2026-05-09 18:21:59,708 | INFO    | runner | [train] embedded 15350/27309
+2026-05-09 18:21:59,708 | INFO    | runner | [train] embedded 15400/27309
+2026-05-09 18:21:59,709 | INFO    | runner | [train] embedded 15450/27309
+2026-05-09 18:21:59,710 | INFO    | runner | [train] embedded 15500/27309
+2026-05-09 18:21:59,711 | INFO    | runner | [train] embedded 15550/27309
+2026-05-09 18:21:59,711 | INFO    | runner | [train] embedded 15600/27309
+2026-05-09 18:21:59,712 | INFO    | runner | [train] embedded 15650/27309
+2026-05-09 18:21:59,713 | INFO    | runner | [train] embedded 15700/27309
+2026-05-09 18:21:59,714 | INFO    | runner | [train] embedded 15750/27309
+2026-05-09 18:21:59,714 | INFO    | runner | [train] embedded 15800/27309
+2026-05-09 18:21:59,715 | INFO    | runner | [train] embedded 15850/27309
+2026-05-09 18:21:59,716 | INFO    | runner | [train] embedded 15900/27309
+2026-05-09 18:21:59,717 | INFO    | runner | [train] embedded 15950/27309
+2026-05-09 18:21:59,718 | INFO    | runner | [train] embedded 16000/27309
+2026-05-09 18:21:59,719 | INFO    | runner | [train] embedded 16050/27309
+2026-05-09 18:21:59,720 | INFO    | runner | [train] embedded 16100/27309
+2026-05-09 18:21:59,720 | INFO    | runner | [train] embedded 16150/27309
+2026-05-09 18:21:59,721 | INFO    | runner | [train] embedded 16200/27309
+2026-05-09 18:21:59,722 | INFO    | runner | [train] embedded 16250/27309
+2026-05-09 18:21:59,723 | INFO    | runner | [train] embedded 16300/27309
+2026-05-09 18:21:59,723 | INFO    | runner | [train] embedded 16350/27309
+2026-05-09 18:21:59,724 | INFO    | runner | [train] embedded 16400/27309
+2026-05-09 18:21:59,725 | INFO    | runner | [train] embedded 16450/27309
+2026-05-09 18:21:59,726 | INFO    | runner | [train] embedded 16500/27309
+2026-05-09 18:21:59,727 | INFO    | runner | [train] embedded 16550/27309
+2026-05-09 18:21:59,727 | INFO    | runner | [train] embedded 16600/27309
+2026-05-09 18:21:59,728 | INFO    | runner | [train] embedded 16650/27309
+2026-05-09 18:21:59,729 | INFO    | runner | [train] embedded 16700/27309
+2026-05-09 18:21:59,730 | INFO    | runner | [train] embedded 16750/27309
+2026-05-09 18:21:59,730 | INFO    | runner | [train] embedded 16800/27309
+2026-05-09 18:21:59,731 | INFO    | runner | [train] embedded 16850/27309
+2026-05-09 18:21:59,732 | INFO    | runner | [train] embedded 16900/27309
+2026-05-09 18:21:59,733 | INFO    | runner | [train] embedded 16950/27309
+2026-05-09 18:21:59,734 | INFO    | runner | [train] embedded 17000/27309
+2026-05-09 18:21:59,734 | INFO    | runner | [train] embedded 17050/27309
+2026-05-09 18:21:59,735 | INFO    | runner | [train] embedded 17100/27309
+2026-05-09 18:21:59,736 | INFO    | runner | [train] embedded 17150/27309
+2026-05-09 18:21:59,737 | INFO    | runner | [train] embedded 17200/27309
+2026-05-09 18:21:59,737 | INFO    | runner | [train] embedded 17250/27309
+2026-05-09 18:21:59,738 | INFO    | runner | [train] embedded 17300/27309
+2026-05-09 18:21:59,739 | INFO    | runner | [train] embedded 17350/27309
+2026-05-09 18:21:59,740 | INFO    | runner | [train] embedded 17400/27309
+2026-05-09 18:21:59,741 | INFO    | runner | [train] embedded 17450/27309
+2026-05-09 18:21:59,741 | INFO    | runner | [train] embedded 17500/27309
+2026-05-09 18:21:59,742 | INFO    | runner | [train] embedded 17550/27309
+2026-05-09 18:21:59,743 | INFO    | runner | [train] embedded 17600/27309
+2026-05-09 18:21:59,744 | INFO    | runner | [train] embedded 17650/27309
+2026-05-09 18:21:59,744 | INFO    | runner | [train] embedded 17700/27309
+2026-05-09 18:21:59,745 | INFO    | runner | [train] embedded 17750/27309
+2026-05-09 18:21:59,746 | INFO    | runner | [train] embedded 17800/27309
+2026-05-09 18:21:59,747 | INFO    | runner | [train] embedded 17850/27309
+2026-05-09 18:21:59,747 | INFO    | runner | [train] embedded 17900/27309
+2026-05-09 18:21:59,748 | INFO    | runner | [train] embedded 17950/27309
+2026-05-09 18:21:59,749 | INFO    | runner | [train] embedded 18000/27309
+2026-05-09 18:21:59,750 | INFO    | runner | [train] embedded 18050/27309
+2026-05-09 18:21:59,751 | INFO    | runner | [train] embedded 18100/27309
+2026-05-09 18:21:59,752 | INFO    | runner | [train] embedded 18150/27309
+2026-05-09 18:21:59,753 | INFO    | runner | [train] embedded 18200/27309
+2026-05-09 18:21:59,753 | INFO    | runner | [train] embedded 18250/27309
+2026-05-09 18:21:59,754 | INFO    | runner | [train] embedded 18300/27309
+2026-05-09 18:21:59,755 | INFO    | runner | [train] embedded 18350/27309
+2026-05-09 18:21:59,756 | INFO    | runner | [train] embedded 18400/27309
+2026-05-09 18:21:59,757 | INFO    | runner | [train] embedded 18450/27309
+2026-05-09 18:21:59,757 | INFO    | runner | [train] embedded 18500/27309
+2026-05-09 18:21:59,758 | INFO    | runner | [train] embedded 18550/27309
+2026-05-09 18:21:59,759 | INFO    | runner | [train] embedded 18600/27309
+2026-05-09 18:21:59,760 | INFO    | runner | [train] embedded 18650/27309
+2026-05-09 18:21:59,760 | INFO    | runner | [train] embedded 18700/27309
+2026-05-09 18:21:59,761 | INFO    | runner | [train] embedded 18750/27309
+2026-05-09 18:21:59,762 | INFO    | runner | [train] embedded 18800/27309
+2026-05-09 18:21:59,763 | INFO    | runner | [train] embedded 18850/27309
+2026-05-09 18:21:59,763 | INFO    | runner | [train] embedded 18900/27309
+2026-05-09 18:21:59,764 | INFO    | runner | [train] embedded 18950/27309
+2026-05-09 18:21:59,765 | INFO    | runner | [train] embedded 19000/27309
+2026-05-09 18:21:59,766 | INFO    | runner | [train] embedded 19050/27309
+2026-05-09 18:21:59,767 | INFO    | runner | [train] embedded 19100/27309
+2026-05-09 18:21:59,767 | INFO    | runner | [train] embedded 19150/27309
+2026-05-09 18:21:59,768 | INFO    | runner | [train] embedded 19200/27309
+2026-05-09 18:21:59,769 | INFO    | runner | [train] embedded 19250/27309
+2026-05-09 18:21:59,770 | INFO    | runner | [train] embedded 19300/27309
+2026-05-09 18:21:59,771 | INFO    | runner | [train] embedded 19350/27309
+2026-05-09 18:21:59,771 | INFO    | runner | [train] embedded 19400/27309
+2026-05-09 18:21:59,772 | INFO    | runner | [train] embedded 19450/27309
+2026-05-09 18:21:59,773 | INFO    | runner | [train] embedded 19500/27309
+2026-05-09 18:21:59,774 | INFO    | runner | [train] embedded 19550/27309
+2026-05-09 18:21:59,774 | INFO    | runner | [train] embedded 19600/27309
+2026-05-09 18:21:59,775 | INFO    | runner | [train] embedded 19650/27309
+2026-05-09 18:21:59,776 | INFO    | runner | [train] embedded 19700/27309
+2026-05-09 18:21:59,777 | INFO    | runner | [train] embedded 19750/27309
+2026-05-09 18:21:59,778 | INFO    | runner | [train] embedded 19800/27309
+2026-05-09 18:21:59,778 | INFO    | runner | [train] embedded 19850/27309
+2026-05-09 18:21:59,779 | INFO    | runner | [train] embedded 19900/27309
+2026-05-09 18:21:59,780 | INFO    | runner | [train] embedded 19950/27309
+2026-05-09 18:21:59,781 | INFO    | runner | [train] embedded 20000/27309
+2026-05-09 18:21:59,782 | INFO    | runner | [train] embedded 20050/27309
+2026-05-09 18:21:59,782 | INFO    | runner | [train] embedded 20100/27309
+2026-05-09 18:21:59,783 | INFO    | runner | [train] embedded 20150/27309
+2026-05-09 18:21:59,784 | INFO    | runner | [train] embedded 20200/27309
+2026-05-09 18:21:59,785 | INFO    | runner | [train] embedded 20250/27309
+2026-05-09 18:21:59,786 | INFO    | runner | [train] embedded 20300/27309
+2026-05-09 18:21:59,787 | INFO    | runner | [train] embedded 20350/27309
+2026-05-09 18:21:59,788 | INFO    | runner | [train] embedded 20400/27309
+2026-05-09 18:21:59,788 | INFO    | runner | [train] embedded 20450/27309
+2026-05-09 18:21:59,789 | INFO    | runner | [train] embedded 20500/27309
+2026-05-09 18:21:59,790 | INFO    | runner | [train] embedded 20550/27309
+2026-05-09 18:21:59,791 | INFO    | runner | [train] embedded 20600/27309
+2026-05-09 18:21:59,791 | INFO    | runner | [train] embedded 20650/27309
+2026-05-09 18:21:59,792 | INFO    | runner | [train] embedded 20700/27309
+2026-05-09 18:21:59,793 | INFO    | runner | [train] embedded 20750/27309
+2026-05-09 18:21:59,794 | INFO    | runner | [train] embedded 20800/27309
+2026-05-09 18:21:59,795 | INFO    | runner | [train] embedded 20850/27309
+2026-05-09 18:21:59,795 | INFO    | runner | [train] embedded 20900/27309
+2026-05-09 18:21:59,796 | INFO    | runner | [train] embedded 20950/27309
+2026-05-09 18:21:59,797 | INFO    | runner | [train] embedded 21000/27309
+2026-05-09 18:21:59,798 | INFO    | runner | [train] embedded 21050/27309
+2026-05-09 18:21:59,799 | INFO    | runner | [train] embedded 21100/27309
+2026-05-09 18:21:59,799 | INFO    | runner | [train] embedded 21150/27309
+2026-05-09 18:21:59,800 | INFO    | runner | [train] embedded 21200/27309
+2026-05-09 18:21:59,801 | INFO    | runner | [train] embedded 21250/27309
+2026-05-09 18:21:59,802 | INFO    | runner | [train] embedded 21300/27309
+2026-05-09 18:21:59,803 | INFO    | runner | [train] embedded 21350/27309
+2026-05-09 18:21:59,803 | INFO    | runner | [train] embedded 21400/27309
+2026-05-09 18:21:59,804 | INFO    | runner | [train] embedded 21450/27309
+2026-05-09 18:21:59,805 | INFO    | runner | [train] embedded 21500/27309
+2026-05-09 18:21:59,806 | INFO    | runner | [train] embedded 21550/27309
+2026-05-09 18:21:59,806 | INFO    | runner | [train] embedded 21600/27309
+2026-05-09 18:21:59,807 | INFO    | runner | [train] embedded 21650/27309
+2026-05-09 18:21:59,808 | INFO    | runner | [train] embedded 21700/27309
+2026-05-09 18:21:59,809 | INFO    | runner | [train] embedded 21750/27309
+2026-05-09 18:21:59,810 | INFO    | runner | [train] embedded 21800/27309
+2026-05-09 18:21:59,810 | INFO    | runner | [train] embedded 21850/27309
+2026-05-09 18:21:59,811 | INFO    | runner | [train] embedded 21900/27309
+2026-05-09 18:21:59,812 | INFO    | runner | [train] embedded 21950/27309
+2026-05-09 18:21:59,813 | INFO    | runner | [train] embedded 22000/27309
+2026-05-09 18:21:59,813 | INFO    | runner | [train] embedded 22050/27309
+2026-05-09 18:21:59,814 | INFO    | runner | [train] embedded 22100/27309
+2026-05-09 18:21:59,815 | INFO    | runner | [train] embedded 22150/27309
+2026-05-09 18:21:59,816 | INFO    | runner | [train] embedded 22200/27309
+2026-05-09 18:21:59,817 | INFO    | runner | [train] embedded 22250/27309
+2026-05-09 18:21:59,818 | INFO    | runner | [train] embedded 22300/27309
+2026-05-09 18:21:59,819 | INFO    | runner | [train] embedded 22350/27309
+2026-05-09 18:21:59,819 | INFO    | runner | [train] embedded 22400/27309
+2026-05-09 18:21:59,820 | INFO    | runner | [train] embedded 22450/27309
+2026-05-09 18:21:59,821 | INFO    | runner | [train] embedded 22500/27309
+2026-05-09 18:21:59,822 | INFO    | runner | [train] embedded 22550/27309
+2026-05-09 18:21:59,823 | INFO    | runner | [train] embedded 22600/27309
+2026-05-09 18:21:59,823 | INFO    | runner | [train] embedded 22650/27309
+2026-05-09 18:21:59,824 | INFO    | runner | [train] embedded 22700/27309
+2026-05-09 18:21:59,825 | INFO    | runner | [train] embedded 22750/27309
+2026-05-09 18:21:59,826 | INFO    | runner | [train] embedded 22800/27309
+2026-05-09 18:21:59,826 | INFO    | runner | [train] embedded 22850/27309
+2026-05-09 18:21:59,827 | INFO    | runner | [train] embedded 22900/27309
+2026-05-09 18:21:59,828 | INFO    | runner | [train] embedded 22950/27309
+2026-05-09 18:21:59,829 | INFO    | runner | [train] embedded 23000/27309
+2026-05-09 18:21:59,829 | INFO    | runner | [train] embedded 23050/27309
+2026-05-09 18:21:59,830 | INFO    | runner | [train] embedded 23100/27309
+2026-05-09 18:21:59,831 | INFO    | runner | [train] embedded 23150/27309
+2026-05-09 18:21:59,832 | INFO    | runner | [train] embedded 23200/27309
+2026-05-09 18:21:59,833 | INFO    | runner | [train] embedded 23250/27309
+2026-05-09 18:21:59,833 | INFO    | runner | [train] embedded 23300/27309
+2026-05-09 18:21:59,834 | INFO    | runner | [train] embedded 23350/27309
+2026-05-09 18:21:59,835 | INFO    | runner | [train] embedded 23400/27309
+2026-05-09 18:21:59,836 | INFO    | runner | [train] embedded 23450/27309
+2026-05-09 18:21:59,836 | INFO    | runner | [train] embedded 23500/27309
+2026-05-09 18:21:59,837 | INFO    | runner | [train] embedded 23550/27309
+2026-05-09 18:21:59,838 | INFO    | runner | [train] embedded 23600/27309
+2026-05-09 18:21:59,839 | INFO    | runner | [train] embedded 23650/27309
+2026-05-09 18:21:59,840 | INFO    | runner | [train] embedded 23700/27309
+2026-05-09 18:21:59,840 | INFO    | runner | [train] embedded 23750/27309
+2026-05-09 18:21:59,841 | INFO    | runner | [train] embedded 23800/27309
+2026-05-09 18:21:59,842 | INFO    | runner | [train] embedded 23850/27309
+2026-05-09 18:21:59,843 | INFO    | runner | [train] embedded 23900/27309
+2026-05-09 18:21:59,843 | INFO    | runner | [train] embedded 23950/27309
+2026-05-09 18:21:59,844 | INFO    | runner | [train] embedded 24000/27309
+2026-05-09 18:21:59,845 | INFO    | runner | [train] embedded 24050/27309
+2026-05-09 18:21:59,846 | INFO    | runner | [train] embedded 24100/27309
+2026-05-09 18:21:59,847 | INFO    | runner | [train] embedded 24150/27309
+2026-05-09 18:21:59,847 | INFO    | runner | [train] embedded 24200/27309
+2026-05-09 18:21:59,848 | INFO    | runner | [train] embedded 24250/27309
+2026-05-09 18:21:59,849 | INFO    | runner | [train] embedded 24300/27309
+2026-05-09 18:21:59,850 | INFO    | runner | [train] embedded 24350/27309
+2026-05-09 18:21:59,851 | INFO    | runner | [train] embedded 24400/27309
+2026-05-09 18:21:59,852 | INFO    | runner | [train] embedded 24450/27309
+2026-05-09 18:21:59,853 | INFO    | runner | [train] embedded 24500/27309
+2026-05-09 18:21:59,853 | INFO    | runner | [train] embedded 24550/27309
+2026-05-09 18:21:59,854 | INFO    | runner | [train] embedded 24600/27309
+2026-05-09 18:21:59,855 | INFO    | runner | [train] embedded 24650/27309
+2026-05-09 18:21:59,856 | INFO    | runner | [train] embedded 24700/27309
+2026-05-09 18:21:59,856 | INFO    | runner | [train] embedded 24750/27309
+2026-05-09 18:21:59,857 | INFO    | runner | [train] embedded 24800/27309
+2026-05-09 18:21:59,858 | INFO    | runner | [train] embedded 24850/27309
+2026-05-09 18:21:59,859 | INFO    | runner | [train] embedded 24900/27309
+2026-05-09 18:21:59,859 | INFO    | runner | [train] embedded 24950/27309
+2026-05-09 18:21:59,860 | INFO    | runner | [train] embedded 25000/27309
+2026-05-09 18:21:59,861 | INFO    | runner | [train] embedded 25050/27309
+2026-05-09 18:21:59,862 | INFO    | runner | [train] embedded 25100/27309
+2026-05-09 18:21:59,862 | INFO    | runner | [train] embedded 25150/27309
+2026-05-09 18:21:59,863 | INFO    | runner | [train] embedded 25200/27309
+2026-05-09 18:21:59,864 | INFO    | runner | [train] embedded 25250/27309
+2026-05-09 18:21:59,865 | INFO    | runner | [train] embedded 25300/27309
+2026-05-09 18:21:59,866 | INFO    | runner | [train] embedded 25350/27309
+2026-05-09 18:21:59,866 | INFO    | runner | [train] embedded 25400/27309
+2026-05-09 18:21:59,867 | INFO    | runner | [train] embedded 25450/27309
+2026-05-09 18:21:59,868 | INFO    | runner | [train] embedded 25500/27309
+2026-05-09 18:21:59,869 | INFO    | runner | [train] embedded 25550/27309
+2026-05-09 18:21:59,869 | INFO    | runner | [train] embedded 25600/27309
+2026-05-09 18:21:59,870 | INFO    | runner | [train] embedded 25650/27309
+2026-05-09 18:21:59,871 | INFO    | runner | [train] embedded 25700/27309
+2026-05-09 18:21:59,872 | INFO    | runner | [train] embedded 25750/27309
+2026-05-09 18:21:59,873 | INFO    | runner | [train] embedded 25800/27309
+2026-05-09 18:21:59,873 | INFO    | runner | [train] embedded 25850/27309
+2026-05-09 18:21:59,874 | INFO    | runner | [train] embedded 25900/27309
+2026-05-09 18:21:59,875 | INFO    | runner | [train] embedded 25950/27309
+2026-05-09 18:21:59,876 | INFO    | runner | [train] embedded 26000/27309
+2026-05-09 18:21:59,876 | INFO    | runner | [train] embedded 26050/27309
+2026-05-09 18:21:59,877 | INFO    | runner | [train] embedded 26100/27309
+2026-05-09 18:21:59,878 | INFO    | runner | [train] embedded 26150/27309
+2026-05-09 18:21:59,879 | INFO    | runner | [train] embedded 26200/27309
+2026-05-09 18:21:59,880 | INFO    | runner | [train] embedded 26250/27309
+2026-05-09 18:21:59,880 | INFO    | runner | [train] embedded 26300/27309
+2026-05-09 18:21:59,881 | INFO    | runner | [train] embedded 26350/27309
+2026-05-09 18:21:59,882 | INFO    | runner | [train] embedded 26400/27309
+2026-05-09 18:21:59,883 | INFO    | runner | [train] embedded 26450/27309
+2026-05-09 18:21:59,884 | INFO    | runner | [train] embedded 26500/27309
+2026-05-09 18:21:59,885 | INFO    | runner | [train] embedded 26550/27309
+2026-05-09 18:21:59,886 | INFO    | runner | [train] embedded 26600/27309
+2026-05-09 18:21:59,886 | INFO    | runner | [train] embedded 26650/27309
+2026-05-09 18:21:59,887 | INFO    | runner | [train] embedded 26700/27309
+2026-05-09 18:21:59,888 | INFO    | runner | [train] embedded 26750/27309
+2026-05-09 18:21:59,889 | INFO    | runner | [train] embedded 26800/27309
+2026-05-09 18:21:59,889 | INFO    | runner | [train] embedded 26850/27309
+2026-05-09 18:21:59,890 | INFO    | runner | [train] embedded 26900/27309
+2026-05-09 18:21:59,891 | INFO    | runner | [train] embedded 26950/27309
+2026-05-09 18:21:59,892 | INFO    | runner | [train] embedded 27000/27309
+2026-05-09 18:21:59,892 | INFO    | runner | [train] embedded 27050/27309
+2026-05-09 18:21:59,893 | INFO    | runner | [train] embedded 27100/27309
+2026-05-09 18:21:59,894 | INFO    | runner | [train] embedded 27150/27309
+2026-05-09 18:21:59,895 | INFO    | runner | [train] embedded 27200/27309
+2026-05-09 18:21:59,896 | INFO    | runner | [train] embedded 27250/27309
+2026-05-09 18:21:59,896 | INFO    | runner | [train] embedded 27300/27309
+2026-05-09 18:21:59,896 | INFO    | runner | [train] embedded 27309/27309
+2026-05-09 18:22:22,596 | INFO    | runner | Index built: 27309 docs, dim=1280, 22.7s
+2026-05-09 18:22:22,597 | INFO    | runner | [test:clean] embedded 50/6835
+2026-05-09 18:22:22,599 | INFO    | runner | [test:clean] embedded 100/6835
+2026-05-09 18:22:22,600 | INFO    | runner | [test:clean] embedded 150/6835
+2026-05-09 18:22:22,601 | INFO    | runner | [test:clean] embedded 200/6835
+2026-05-09 18:22:22,602 | INFO    | runner | [test:clean] embedded 250/6835
+2026-05-09 18:22:22,603 | INFO    | runner | [test:clean] embedded 300/6835
+2026-05-09 18:22:22,604 | INFO    | runner | [test:clean] embedded 350/6835
+2026-05-09 18:22:22,605 | INFO    | runner | [test:clean] embedded 400/6835
+2026-05-09 18:22:22,606 | INFO    | runner | [test:clean] embedded 450/6835
+2026-05-09 18:22:22,607 | INFO    | runner | [test:clean] embedded 500/6835
+2026-05-09 18:22:22,608 | INFO    | runner | [test:clean] embedded 550/6835
+2026-05-09 18:22:22,609 | INFO    | runner | [test:clean] embedded 600/6835
+2026-05-09 18:22:22,610 | INFO    | runner | [test:clean] embedded 650/6835
+2026-05-09 18:22:22,611 | INFO    | runner | [test:clean] embedded 700/6835
+2026-05-09 18:22:22,612 | INFO    | runner | [test:clean] embedded 750/6835
+2026-05-09 18:22:22,613 | INFO    | runner | [test:clean] embedded 800/6835
+2026-05-09 18:22:22,614 | INFO    | runner | [test:clean] embedded 850/6835
+2026-05-09 18:22:22,614 | INFO    | runner | [test:clean] embedded 900/6835
+2026-05-09 18:22:22,615 | INFO    | runner | [test:clean] embedded 950/6835
+2026-05-09 18:22:22,616 | INFO    | runner | [test:clean] embedded 1000/6835
+2026-05-09 18:22:22,617 | INFO    | runner | [test:clean] embedded 1050/6835
+2026-05-09 18:22:22,618 | INFO    | runner | [test:clean] embedded 1100/6835
+2026-05-09 18:22:22,619 | INFO    | runner | [test:clean] embedded 1150/6835
+2026-05-09 18:22:22,620 | INFO    | runner | [test:clean] embedded 1200/6835
+2026-05-09 18:22:22,621 | INFO    | runner | [test:clean] embedded 1250/6835
+2026-05-09 18:22:22,622 | INFO    | runner | [test:clean] embedded 1300/6835
+2026-05-09 18:22:22,623 | INFO    | runner | [test:clean] embedded 1350/6835
+2026-05-09 18:22:22,624 | INFO    | runner | [test:clean] embedded 1400/6835
+2026-05-09 18:22:22,625 | INFO    | runner | [test:clean] embedded 1450/6835
+2026-05-09 18:22:22,626 | INFO    | runner | [test:clean] embedded 1500/6835
+2026-05-09 18:22:22,626 | INFO    | runner | [test:clean] embedded 1550/6835
+2026-05-09 18:22:22,627 | INFO    | runner | [test:clean] embedded 1600/6835
+2026-05-09 18:22:22,628 | INFO    | runner | [test:clean] embedded 1650/6835
+2026-05-09 18:22:22,629 | INFO    | runner | [test:clean] embedded 1700/6835
+2026-05-09 18:22:22,630 | INFO    | runner | [test:clean] embedded 1750/6835
+2026-05-09 18:22:22,631 | INFO    | runner | [test:clean] embedded 1800/6835
+2026-05-09 18:22:22,632 | INFO    | runner | [test:clean] embedded 1850/6835
+2026-05-09 18:22:22,633 | INFO    | runner | [test:clean] embedded 1900/6835
+2026-05-09 18:22:22,634 | INFO    | runner | [test:clean] embedded 1950/6835
+2026-05-09 18:22:22,635 | INFO    | runner | [test:clean] embedded 2000/6835
+2026-05-09 18:22:22,635 | INFO    | runner | [test:clean] embedded 2050/6835
+2026-05-09 18:22:22,636 | INFO    | runner | [test:clean] embedded 2100/6835
+2026-05-09 18:22:22,637 | INFO    | runner | [test:clean] embedded 2150/6835
+2026-05-09 18:22:22,638 | INFO    | runner | [test:clean] embedded 2200/6835
+2026-05-09 18:22:22,639 | INFO    | runner | [test:clean] embedded 2250/6835
+2026-05-09 18:22:22,640 | INFO    | runner | [test:clean] embedded 2300/6835
+2026-05-09 18:22:22,641 | INFO    | runner | [test:clean] embedded 2350/6835
+2026-05-09 18:22:22,642 | INFO    | runner | [test:clean] embedded 2400/6835
+2026-05-09 18:22:22,642 | INFO    | runner | [test:clean] embedded 2450/6835
+2026-05-09 18:22:22,643 | INFO    | runner | [test:clean] embedded 2500/6835
+2026-05-09 18:22:22,644 | INFO    | runner | [test:clean] embedded 2550/6835
+2026-05-09 18:22:22,645 | INFO    | runner | [test:clean] embedded 2600/6835
+2026-05-09 18:22:22,646 | INFO    | runner | [test:clean] embedded 2650/6835
+2026-05-09 18:22:22,647 | INFO    | runner | [test:clean] embedded 2700/6835
+2026-05-09 18:22:22,648 | INFO    | runner | [test:clean] embedded 2750/6835
+2026-05-09 18:22:22,649 | INFO    | runner | [test:clean] embedded 2800/6835
+2026-05-09 18:22:22,650 | INFO    | runner | [test:clean] embedded 2850/6835
+2026-05-09 18:22:22,651 | INFO    | runner | [test:clean] embedded 2900/6835
+2026-05-09 18:22:22,652 | INFO    | runner | [test:clean] embedded 2950/6835
+2026-05-09 18:22:22,653 | INFO    | runner | [test:clean] embedded 3000/6835
+2026-05-09 18:22:22,654 | INFO    | runner | [test:clean] embedded 3050/6835
+2026-05-09 18:22:22,654 | INFO    | runner | [test:clean] embedded 3100/6835
+2026-05-09 18:22:22,655 | INFO    | runner | [test:clean] embedded 3150/6835
+2026-05-09 18:22:22,656 | INFO    | runner | [test:clean] embedded 3200/6835
+2026-05-09 18:22:22,657 | INFO    | runner | [test:clean] embedded 3250/6835
+2026-05-09 18:22:22,658 | INFO    | runner | [test:clean] embedded 3300/6835
+2026-05-09 18:22:22,659 | INFO    | runner | [test:clean] embedded 3350/6835
+2026-05-09 18:22:22,660 | INFO    | runner | [test:clean] embedded 3400/6835
+2026-05-09 18:22:22,661 | INFO    | runner | [test:clean] embedded 3450/6835
+2026-05-09 18:22:22,661 | INFO    | runner | [test:clean] embedded 3500/6835
+2026-05-09 18:22:22,662 | INFO    | runner | [test:clean] embedded 3550/6835
+2026-05-09 18:22:22,663 | INFO    | runner | [test:clean] embedded 3600/6835
+2026-05-09 18:22:22,664 | INFO    | runner | [test:clean] embedded 3650/6835
+2026-05-09 18:22:22,665 | INFO    | runner | [test:clean] embedded 3700/6835
+2026-05-09 18:22:22,666 | INFO    | runner | [test:clean] embedded 3750/6835
+2026-05-09 18:22:22,667 | INFO    | runner | [test:clean] embedded 3800/6835
+2026-05-09 18:22:22,668 | INFO    | runner | [test:clean] embedded 3850/6835
+2026-05-09 18:22:22,668 | INFO    | runner | [test:clean] embedded 3900/6835
+2026-05-09 18:22:22,669 | INFO    | runner | [test:clean] embedded 3950/6835
+2026-05-09 18:22:22,670 | INFO    | runner | [test:clean] embedded 4000/6835
+2026-05-09 18:22:22,671 | INFO    | runner | [test:clean] embedded 4050/6835
+2026-05-09 18:22:22,672 | INFO    | runner | [test:clean] embedded 4100/6835
+2026-05-09 18:22:22,673 | INFO    | runner | [test:clean] embedded 4150/6835
+2026-05-09 18:22:22,674 | INFO    | runner | [test:clean] embedded 4200/6835
+2026-05-09 18:22:22,674 | INFO    | runner | [test:clean] embedded 4250/6835
+2026-05-09 18:22:22,675 | INFO    | runner | [test:clean] embedded 4300/6835
+2026-05-09 18:22:22,676 | INFO    | runner | [test:clean] embedded 4350/6835
+2026-05-09 18:22:22,677 | INFO    | runner | [test:clean] embedded 4400/6835
+2026-05-09 18:22:22,678 | INFO    | runner | [test:clean] embedded 4450/6835
+2026-05-09 18:22:22,679 | INFO    | runner | [test:clean] embedded 4500/6835
+2026-05-09 18:22:22,680 | INFO    | runner | [test:clean] embedded 4550/6835
+2026-05-09 18:22:22,681 | INFO    | runner | [test:clean] embedded 4600/6835
+2026-05-09 18:22:22,681 | INFO    | runner | [test:clean] embedded 4650/6835
+2026-05-09 18:22:22,682 | INFO    | runner | [test:clean] embedded 4700/6835
+2026-05-09 18:22:22,683 | INFO    | runner | [test:clean] embedded 4750/6835
+2026-05-09 18:22:22,684 | INFO    | runner | [test:clean] embedded 4800/6835
+2026-05-09 18:22:22,685 | INFO    | runner | [test:clean] embedded 4850/6835
+2026-05-09 18:22:22,686 | INFO    | runner | [test:clean] embedded 4900/6835
+2026-05-09 18:22:22,687 | INFO    | runner | [test:clean] embedded 4950/6835
+2026-05-09 18:22:22,688 | INFO    | runner | [test:clean] embedded 5000/6835
+2026-05-09 18:22:22,689 | INFO    | runner | [test:clean] embedded 5050/6835
+2026-05-09 18:22:22,690 | INFO    | runner | [test:clean] embedded 5100/6835
+2026-05-09 18:22:22,691 | INFO    | runner | [test:clean] embedded 5150/6835
+2026-05-09 18:22:22,692 | INFO    | runner | [test:clean] embedded 5200/6835
+2026-05-09 18:22:22,692 | INFO    | runner | [test:clean] embedded 5250/6835
+2026-05-09 18:22:22,693 | INFO    | runner | [test:clean] embedded 5300/6835
+2026-05-09 18:22:22,694 | INFO    | runner | [test:clean] embedded 5350/6835
+2026-05-09 18:22:22,695 | INFO    | runner | [test:clean] embedded 5400/6835
+2026-05-09 18:22:22,696 | INFO    | runner | [test:clean] embedded 5450/6835
+2026-05-09 18:22:22,697 | INFO    | runner | [test:clean] embedded 5500/6835
+2026-05-09 18:22:22,698 | INFO    | runner | [test:clean] embedded 5550/6835
+2026-05-09 18:22:22,699 | INFO    | runner | [test:clean] embedded 5600/6835
+2026-05-09 18:22:22,699 | INFO    | runner | [test:clean] embedded 5650/6835
+2026-05-09 18:22:22,700 | INFO    | runner | [test:clean] embedded 5700/6835
+2026-05-09 18:22:22,701 | INFO    | runner | [test:clean] embedded 5750/6835
+2026-05-09 18:22:22,702 | INFO    | runner | [test:clean] embedded 5800/6835
+2026-05-09 18:22:22,703 | INFO    | runner | [test:clean] embedded 5850/6835
+2026-05-09 18:22:22,704 | INFO    | runner | [test:clean] embedded 5900/6835
+2026-05-09 18:22:22,705 | INFO    | runner | [test:clean] embedded 5950/6835
+2026-05-09 18:22:22,706 | INFO    | runner | [test:clean] embedded 6000/6835
+2026-05-09 18:22:22,706 | INFO    | runner | [test:clean] embedded 6050/6835
+2026-05-09 18:22:22,707 | INFO    | runner | [test:clean] embedded 6100/6835
+2026-05-09 18:22:22,708 | INFO    | runner | [test:clean] embedded 6150/6835
+2026-05-09 18:22:22,709 | INFO    | runner | [test:clean] embedded 6200/6835
+2026-05-09 18:22:22,710 | INFO    | runner | [test:clean] embedded 6250/6835
+2026-05-09 18:22:22,711 | INFO    | runner | [test:clean] embedded 6300/6835
+2026-05-09 18:22:22,712 | INFO    | runner | [test:clean] embedded 6350/6835
+2026-05-09 18:22:22,712 | INFO    | runner | [test:clean] embedded 6400/6835
+2026-05-09 18:22:22,713 | INFO    | runner | [test:clean] embedded 6450/6835
+2026-05-09 18:22:22,714 | INFO    | runner | [test:clean] embedded 6500/6835
+2026-05-09 18:22:22,715 | INFO    | runner | [test:clean] embedded 6550/6835
+2026-05-09 18:22:22,716 | INFO    | runner | [test:clean] embedded 6600/6835
+2026-05-09 18:22:22,717 | INFO    | runner | [test:clean] embedded 6650/6835
+2026-05-09 18:22:22,717 | INFO    | runner | [test:clean] embedded 6700/6835
+2026-05-09 18:22:22,718 | INFO    | runner | [test:clean] embedded 6750/6835
+2026-05-09 18:22:22,719 | INFO    | runner | [test:clean] embedded 6800/6835
+2026-05-09 18:22:22,720 | INFO    | runner | [test:clean] embedded 6835/6835
+2026-05-09 18:23:09,615 | INFO    | runner | [clean] MAP=0.8227 MRR=0.8227 P@1=0.7729 nDCG=0.8457 n=6835
+/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+2026-05-09 18:23:15,120 | INFO    | runner | Experiment strategy2_super_embedding_torch done in 73.1s — MAP=0.8227 MRR=0.8227
+
+=== Strategy comparison ===
+
+| Metric | strategy1_segments_torch | strategy2_super_embedding_torch |
+|---|---|---|
+| MAP | 0.8191 | 0.8227 |
+| MRR | 0.8191 | 0.8227 |
+| P@1 | 0.7697 | 0.7729 |
+| P@5 | 0.2518 | 0.2207 |
+| R@1 | 0.0004 | 0.0054 |
+| R@5 | 0.0005 | 0.0062 |
+| R@10 | 0.0006 | 0.0065 |
+| nDCG | 0.8417 | 0.8457 |
+| latency | 22.6 / p95 33.3 ms | 6.3 / p95 6.4 ms |
+| n_documents | 363917 | 27309 |
+| index_build_time_s | 47.8 | 22.7 |
+| embedding_dim | 1280 | 1280 |
+
+Saved → /home/cnt-computadores/Pedro/results/strategy_compare

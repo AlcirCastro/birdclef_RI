@@ -1,0 +1,482 @@
+nohup: ignorando entrada
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778358604.431043  259143 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1778358604.483119  259143 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778358605.623080  259143 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-05-09 16:30:06,528 | INFO    | runner | Experiment strategy1_segments_torch starting
+2026-05-09 16:30:07,081 | INFO    | runner | Loaded 1437 records
+2026-05-09 16:30:07,082 | INFO    | runner | Split: train=1131 test=306
+nohup: ignorando entrada
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778358638.085243  260931 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1778358638.132601  260931 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778358639.311856  260931 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-05-09 16:30:40,238 | INFO    | runner | Experiment strategy1_segments_torch starting
+2026-05-09 16:30:42,388 | INFO    | runner | Loaded 1437 records
+2026-05-09 16:30:42,389 | INFO    | runner | Split: train=1131 test=306
+/home/cnt-computadores/Pedro/src/embeddings/perch_torch.py:204: RuntimeWarning: Perch v2 ONNX export failed; falling back to TensorFlow runtime for this backend. Cause: Failed to export Perch v2 to ONNX.
+Command: /home/cnt-computadores/Pedro/venv/bin/python -m tf2onnx.convert --saved-model /home/cnt-computadores/.cache/kagglehub/models/google/bird-vocalization-classifier/tensorFlow2/bird-vocalization-classifier/8 --output birdclef_cache/torch_models/google__bird-vocalization-classifier__tensorFlow2__bird-vocalization-classifier/model.onnx --opset 17
+stdout:
+
+stderr:
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778358644.756681  261206 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1778358645.682496  261206 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-05-09 16:30:46,871 - WARNING - '--tag' not specified for saved_model. Using --tag serve
+2026-05-09 16:30:48,560 - INFO - Fingerprint not found. Saved model loading will continue.
+2026-05-09 16:30:48,560 - INFO - path_and_singleprint metric could not be logged. Saved model loading will continue.
+2026-05-09 16:30:48,560 - INFO - Signatures found in model: [serving_default].
+2026-05-09 16:30:48,560 - WARNING - '--signature_def' not specified, using first signature: serving_default
+2026-05-09 16:30:48,561 - INFO - Output names: ['embedding', 'family', 'frontend', 'genus', 'label', 'order']
+2026-05-09 16:30:55,608 - INFO - Using tensorflow=2.21.0, onnx=1.21.0, tf2onnx=1.17.0/None
+2026-05-09 16:30:55,609 - INFO - Using opset <onnx, 17>
+2026-05-09 16:30:57,109 - INFO - Computed 0 values for constant folding
+2026-05-09 16:30:57,109 - INFO - Computed 0 values for constant folding
+2026-05-09 16:30:57,224 - INFO - Computed 3 values for constant folding
+2026-05-09 16:30:57,479 - INFO - folding node using tf type=PadV2, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/pjit__pad_/PadV2
+2026-05-09 16:30:57,480 - INFO - folding node using tf type=Reshape, name=jax2tf_infer_fn_/TaxonomyModel/frontend/frontend._magnitude_scale/Reshape_15
+2026-05-09 16:30:57,480 - INFO - folding node using tf type=Transpose, name=jax2tf_infer_fn_/TaxonomyModel/frontend/transpose_7
+2026-05-09 16:30:57,717 - INFO - Computed 0 values for constant folding
+2026-05-09 16:30:58,512 - INFO - folding node type=Sub, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/Sub_3
+2026-05-09 16:30:58,513 - INFO - folding node type=Sub, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/Sub_5
+2026-05-09 16:30:58,514 - INFO - folding node type=Mul, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/truediv_4
+2026-05-09 16:30:58,514 - INFO - folding node type=Mul, name=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_linear_to_mel_weight_matrix_/truediv_5
+2026-05-09 16:30:59,468 - ERROR - Failed to convert node 'jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft' (fct=<bound method RFFTOp.version_13 of <class 'tf2onnx.onnx_opset.signal.RFFTOp'>>)
+'OP=RFFT\nName=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft\nInputs:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit__pad_/PadV2_9:0=Pad, [-1, 501, 1024], 1\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft/fft_length:0=Const, [1], 6\nOutpus:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_fft_/rfft:0=[-1, 501, 513], 14'
+Traceback (most recent call last):
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 360, in version_13
+    return cls.any_version(True, 13, ctx, node, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 119, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: Current implementation of RFFT or FFT only allows ComplexAbs as consumer not {'EnsureShape'}
+2026-05-09 16:30:59,470 - ERROR - Failed to convert node 'jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs' (fct=<bound method ComplexAbsOp.version_13 of <class 'tf2onnx.onnx_opset.signal.ComplexAbsOp'>>)
+'OP=ComplexAbs\nName=jax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs\nInputs:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_swapaxes_/transpose:0=Transpose, [-1, 500, 513], 14\nOutpus:\n\tjax2tf_infer_fn_/TaxonomyModel/frontend/pjit_absolute_/Abs:0=[-1, 500, 513], 1'
+Traceback (most recent call last):
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 982, in version_13
+    cls.any_version(13, ctx, node, **kwargs)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 940, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: ComplexAbs expected the first dimension to be 2 but shape is [-1, 500, 513]
+2026-05-09 16:30:59,534 - ERROR - Tensorflow op [PreventGradient_5: PreventGradient] is not supported
+2026-05-09 16:30:59,534 - ERROR - Tensorflow op [PreventGradient_1: PreventGradient] is not supported
+2026-05-09 16:30:59,535 - ERROR - Tensorflow op [PreventGradient_3: PreventGradient] is not supported
+2026-05-09 16:30:59,535 - ERROR - Tensorflow op [PreventGradient_4: PreventGradient] is not supported
+2026-05-09 16:30:59,535 - ERROR - Tensorflow op [PreventGradient: PreventGradient] is not supported
+2026-05-09 16:30:59,535 - ERROR - Tensorflow op [PreventGradient_2: PreventGradient] is not supported
+2026-05-09 16:30:59,535 - ERROR - Unsupported ops: Counter({'PreventGradient': 6})
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 752, in <module>
+    main()
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 299, in main
+    model_proto, _ = _convert_common(
+                     ^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/convert.py", line 194, in _convert_common
+    g = process_tf_graph(tf_graph, const_node_values=const_node_values,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 464, in process_tf_graph
+    g = process_graphs(main_g, subgraphs, custom_op_handlers, inputs_as_nchw, outputs_as_nchw, continue_on_error,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 513, in process_graphs
+    fg = process_parsed_graph(g, custom_op_handlers, inputs_as_nchw, outputs_as_nchw, continue_on_error,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 627, in process_parsed_graph
+    raise exceptions[0]
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/tfonnx.py", line 292, in tensorflow_onnx_mapping
+    func(g, node, **kwargs, initialized_tables=initialized_tables, dequantize=dequantize)
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 360, in version_13
+    return cls.any_version(True, 13, ctx, node, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/onnx_opset/signal.py", line 119, in any_version
+    utils.make_sure(
+  File "/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/tf2onnx/utils.py", line 306, in make_sure
+    raise ValueError("make_sure failure: " + error_msg % args)
+ValueError: make_sure failure: Current implementation of RFFT or FFT only allows ComplexAbs as consumer not {'EnsureShape'}
+
+  warnings.warn(
+I0000 00:00:1778358661.080819  260931 gpu_device.cc:2043] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 140829 MB memory:  -> device: 0, name: NVIDIA H200 NVL, pci bus id: 0000:21:00.0, compute capability: 9.0a
+I0000 00:00:1778358661.082603  260931 gpu_device.cc:2043] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 140829 MB memory:  -> device: 1, name: NVIDIA H200 NVL, pci bus id: 0000:a1:00.0, compute capability: 9.0a
+2026-05-09 16:31:04,792 | INFO    | absl | Fingerprint not found. Saved model loading will continue.
+2026-05-09 16:31:04,793 | INFO    | absl | path_and_singleprint metric could not be logged. Saved model loading will continue.
+I0000 00:00:1778358665.495555  262995 service.cc:153] XLA service 0x7d5514075610 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1778358665.495635  262995 service.cc:161]   StreamExecutor [0]: NVIDIA H200 NVL, Compute Capability 9.0a (Driver: 13.0.0; Runtime: 12.8.0; Toolkit: 12.5.0; DNN: 9.10.2)
+I0000 00:00:1778358665.495659  262995 service.cc:161]   StreamExecutor [1]: NVIDIA H200 NVL, Compute Capability 9.0a (Driver: 13.0.0; Runtime: 12.8.0; Toolkit: 12.5.0; DNN: 9.10.2)
+I0000 00:00:1778358665.702993  262995 dump_mlir_util.cc:269] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+W0000 00:00:1778358666.275879  262995 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358666.304808  262995 cuda_dnn.cc:461] Loaded cuDNN version 91002
+I0000 00:00:1778358666.360248  262995 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358673.188382  262995 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358675.793446  263260 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+E0000 00:00:1778358676.764742  262995 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358678.772082  262995 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358684.993682  263262 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778358685.011662  263284 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 80 bytes spill stores, 80 bytes spill loads
+
+I0000 00:00:1778358685.165368  263279 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 608 bytes spill stores, 608 bytes spill loads
+
+I0000 00:00:1778358685.492773  263288 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1376 bytes spill stores, 1376 bytes spill loads
+
+I0000 00:00:1778358691.937006  262995 device_compiler.h:208] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+W0000 00:00:1778358697.309644  262990 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+E0000 00:00:1778358705.074863  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358709.103933  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358711.706505  264723 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_51', 8 bytes spill stores, 8 bytes spill loads
+
+W0000 00:00:1778358722.897488  262994 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358722.967187  262994 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358726.957476  262994 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358728.936743  262994 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358730.576104  262994 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358735.038364  265903 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+E0000 00:00:1778358736.708898  262994 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358738.113811  265905 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778358738.133690  265892 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 184 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778358738.134556  265886 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 96 bytes spill stores, 96 bytes spill loads
+
+I0000 00:00:1778358738.141120  265872 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778358738.268769  265907 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 684 bytes spill stores, 684 bytes spill loads
+
+I0000 00:00:1778358738.773937  265890 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2404 bytes spill stores, 2456 bytes spill loads
+
+W0000 00:00:1778358753.268721  262988 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358753.338510  262988 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358758.923403  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358762.398845  267298 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778358762.552556  267299 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 76 bytes spill stores, 92 bytes spill loads
+
+I0000 00:00:1778358762.555718  267285 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 136 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778358762.573241  267308 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 176 bytes spill stores, 176 bytes spill loads
+
+I0000 00:00:1778358762.598859  267291 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778358762.716136  267284 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 716 bytes spill stores, 716 bytes spill loads
+
+I0000 00:00:1778358763.095155  267305 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2460 bytes spill stores, 3148 bytes spill loads
+
+E0000 00:00:1778358770.653632  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358772.213091  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358773.430421  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778358783.660209  262988 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358783.731904  262988 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358784.797495  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358788.227872  268839 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 128 bytes spill stores, 80 bytes spill loads
+
+E0000 00:00:1778358789.542181  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358795.069668  268873 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 104 bytes spill stores, 112 bytes spill loads
+
+I0000 00:00:1778358795.102481  268863 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 96 bytes spill stores, 104 bytes spill loads
+
+I0000 00:00:1778358795.302967  268856 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 644 bytes spill stores, 644 bytes spill loads
+
+I0000 00:00:1778358795.570354  268862 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1384 bytes spill stores, 1400 bytes spill loads
+
+E0000 00:00:1778358797.946563  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358802.612942  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778358813.251137  262989 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358813.320115  262989 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778358818.770082  270378 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778358818.776580  270353 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778358818.909466  270368 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 628 bytes spill stores, 628 bytes spill loads
+
+I0000 00:00:1778358819.330038  270382 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2108 bytes spill stores, 2108 bytes spill loads
+
+E0000 00:00:1778358820.216052  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358820.736436  270355 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+E0000 00:00:1778358828.117777  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358829.211332  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778358841.570797  262988 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358841.644888  262988 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+I0000 00:00:1778358845.432622  271758 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 68 bytes spill stores, 52 bytes spill loads
+
+E0000 00:00:1778358850.699802  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358855.625241  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358858.171632  262988 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358859.182828  271772 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778358859.184348  271761 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778358859.381216  271755 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 632 bytes spill stores, 632 bytes spill loads
+
+I0000 00:00:1778358859.703096  271771 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2112 bytes spill stores, 2116 bytes spill loads
+
+W0000 00:00:1778358870.809134  262989 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358870.878663  262989 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358871.977522  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358874.226956  273245 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 96 bytes spill loads
+
+I0000 00:00:1778358874.260404  273207 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 80 bytes spill loads
+
+I0000 00:00:1778358874.457145  273236 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 628 bytes spill stores, 628 bytes spill loads
+
+I0000 00:00:1778358874.722264  273225 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1384 bytes spill stores, 1400 bytes spill loads
+
+E0000 00:00:1778358875.660845  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358884.823968  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358889.214559  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358889.481200  273216 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 68 bytes spill stores, 52 bytes spill loads
+
+W0000 00:00:1778358900.726249  262992 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358900.794162  262992 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358908.883988  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358910.775101  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358911.697800  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358913.541913  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358914.540525  274705 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778358914.591367  274716 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 148 bytes spill loads
+
+I0000 00:00:1778358914.599147  274680 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778358914.604331  274701 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 100 bytes spill stores, 132 bytes spill loads
+
+I0000 00:00:1778358914.722457  274682 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 668 bytes spill stores, 668 bytes spill loads
+
+I0000 00:00:1778358915.110242  274718 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2432 bytes spill stores, 3092 bytes spill loads
+
+I0000 00:00:1778358919.227280  274708 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778358919.825762  274707 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+W0000 00:00:1778358930.764727  262990 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358930.835109  262990 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358933.023054  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358934.531085  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358935.884634  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358942.861526  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358947.040301  276193 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 4 bytes spill stores, 4 bytes spill loads
+
+I0000 00:00:1778358947.131784  276207 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 156 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778358947.146193  276180 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 88 bytes spill stores, 88 bytes spill loads
+
+I0000 00:00:1778358947.151225  276175 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 124 bytes spill loads
+
+I0000 00:00:1778358947.263304  276177 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 132 bytes spill stores, 132 bytes spill loads
+
+I0000 00:00:1778358947.329587  276197 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 668 bytes spill stores, 668 bytes spill loads
+
+I0000 00:00:1778358947.783086  276181 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2316 bytes spill stores, 2880 bytes spill loads
+
+I0000 00:00:1778358949.749344  276183 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 4 bytes spill stores, 4 bytes spill loads
+
+W0000 00:00:1778358961.224374  262992 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358961.294671  262992 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358963.666095  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358966.181323  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358968.918585  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778358970.092129  277697 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778358970.121029  277698 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778358970.127076  277668 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 168 bytes spill loads
+
+I0000 00:00:1778358970.156470  277675 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 108 bytes spill stores, 148 bytes spill loads
+
+I0000 00:00:1778358970.274416  277701 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 700 bytes spill stores, 700 bytes spill loads
+
+I0000 00:00:1778358970.645694  277705 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2448 bytes spill stores, 3124 bytes spill loads
+
+E0000 00:00:1778358975.476244  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778358992.070560  262994 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778358992.135548  262994 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778358993.131124  262994 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778358997.566369  262994 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778359005.955061  279233 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 120 bytes spill stores, 120 bytes spill loads
+
+I0000 00:00:1778359006.008412  279247 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 108 bytes spill stores, 140 bytes spill loads
+
+I0000 00:00:1778359006.014683  279240 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778359006.032144  279241 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778359006.135207  279250 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 684 bytes spill stores, 684 bytes spill loads
+
+I0000 00:00:1778359006.575223  279262 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2444 bytes spill stores, 3116 bytes spill loads
+
+E0000 00:00:1778359008.437199  262994 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778359009.691054  262994 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778359023.098459  262992 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778359023.170241  262992 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778359028.133540  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778359029.505339  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778359030.610100  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778359032.219287  280771 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 68 bytes spill stores, 68 bytes spill loads
+
+I0000 00:00:1778359032.273822  280781 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 64 bytes spill stores, 64 bytes spill loads
+
+I0000 00:00:1778359032.429096  280764 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 648 bytes spill stores, 648 bytes spill loads
+
+I0000 00:00:1778359032.759578  280745 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2088 bytes spill stores, 2104 bytes spill loads
+
+I0000 00:00:1778359038.531568  280774 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_MatMul_188', 12 bytes spill stores, 12 bytes spill loads
+
+E0000 00:00:1778359039.914956  262992 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+2026-05-09 16:37:32,061 | INFO    | runner | [train] embedded 50/1131
+W0000 00:00:1778359052.915836  262990 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778359052.988155  262990 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778359053.964880  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778359057.903500  282266 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778359057.914514  282286 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 72 bytes spill stores, 72 bytes spill loads
+
+I0000 00:00:1778359058.115604  282262 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 588 bytes spill stores, 588 bytes spill loads
+
+I0000 00:00:1778359058.395147  282280 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 1372 bytes spill stores, 1372 bytes spill loads
+
+E0000 00:00:1778359062.260068  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778359069.392302  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778359081.353097  262989 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778359081.428254  262989 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778359083.086561  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778359091.778781  283693 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 156 bytes spill stores, 156 bytes spill loads
+
+I0000 00:00:1778359091.781314  283694 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 184 bytes spill stores, 184 bytes spill loads
+
+I0000 00:00:1778359091.792680  283699 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 124 bytes spill stores, 124 bytes spill loads
+
+I0000 00:00:1778359091.841444  283689 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778359091.949831  283710 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 700 bytes spill stores, 700 bytes spill loads
+
+I0000 00:00:1778359092.348279  283714 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2340 bytes spill stores, 2932 bytes spill loads
+
+E0000 00:00:1778359093.532520  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778359094.503182  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778359099.309347  262989 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+W0000 00:00:1778359112.261418  262990 assert_op.cc:39] Ignoring Assert operator jax2tf_infer_fn_/assert_equal_1/Assert/AssertGuard/Assert
+I0000 00:00:1778359112.333416  262990 dot_merger.cc:481] Merging Dots in computation: a_inference__lambda__6678__.27
+E0000 00:00:1778359115.442728  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778359118.246245  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+I0000 00:00:1778359121.676034  285236 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778359121.705871  285223 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778359121.714050  285226 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 192 bytes spill stores, 192 bytes spill loads
+
+I0000 00:00:1778359121.769958  285224 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 116 bytes spill stores, 116 bytes spill loads
+
+I0000 00:00:1778359121.866234  285222 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 716 bytes spill stores, 716 bytes spill loads
+
+I0000 00:00:1778359122.284796  285251 subprocess_compilation.cc:348] ptxas warning : Registers are spilled to local memory in function 'gemm_fusion_dot_3', 2404 bytes spill stores, 2488 bytes spill loads
+
+E0000 00:00:1778359123.914348  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+E0000 00:00:1778359127.051237  262990 cuda_timer.cc:87] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+2026-05-09 16:39:02,672 | INFO    | runner | [train] embedded 100/1131
+2026-05-09 16:39:03,896 | INFO    | runner | [train] embedded 150/1131
+2026-05-09 16:39:06,779 | INFO    | runner | [train] embedded 200/1131
+2026-05-09 16:39:08,900 | INFO    | runner | [train] embedded 250/1131
+2026-05-09 16:39:10,952 | INFO    | runner | [train] embedded 300/1131
+2026-05-09 16:39:12,240 | INFO    | runner | [train] embedded 350/1131
+2026-05-09 16:39:14,124 | INFO    | runner | [train] embedded 400/1131
+2026-05-09 16:39:16,124 | INFO    | runner | [train] embedded 450/1131
+2026-05-09 16:39:17,640 | INFO    | runner | [train] embedded 500/1131
+2026-05-09 16:39:19,275 | INFO    | runner | [train] embedded 550/1131
+2026-05-09 16:39:21,115 | INFO    | runner | [train] embedded 600/1131
+2026-05-09 16:39:22,428 | INFO    | runner | [train] embedded 650/1131
+2026-05-09 16:39:24,803 | INFO    | runner | [train] embedded 700/1131
+2026-05-09 16:39:26,639 | INFO    | runner | [train] embedded 750/1131
+2026-05-09 16:39:28,725 | INFO    | runner | [train] embedded 800/1131
+2026-05-09 16:39:30,105 | INFO    | runner | [train] embedded 850/1131
+2026-05-09 16:39:31,891 | INFO    | runner | [train] embedded 900/1131
+2026-05-09 16:39:33,641 | INFO    | runner | [train] embedded 950/1131
+2026-05-09 16:39:35,251 | INFO    | runner | [train] embedded 1000/1131
+2026-05-09 16:39:37,138 | INFO    | runner | [train] embedded 1050/1131
+2026-05-09 16:39:38,790 | INFO    | runner | [train] embedded 1100/1131
+2026-05-09 16:39:39,798 | INFO    | runner | [train] embedded 1131/1131
+2026-05-09 16:39:40,798 | INFO    | faiss.loader | Loading faiss with AVX512 support.
+2026-05-09 16:39:40,820 | INFO    | faiss.loader | Successfully loaded faiss with AVX512 support.
+2026-05-09 16:39:41,119 | INFO    | runner | Index built: 15102 docs, dim=1280, 1.3s
+2026-05-09 16:39:42,353 | INFO    | runner | [test:clean] embedded 50/306
+2026-05-09 16:39:44,919 | INFO    | runner | [test:clean] embedded 100/306
+2026-05-09 16:39:47,028 | INFO    | runner | [test:clean] embedded 150/306
+2026-05-09 16:39:48,272 | INFO    | runner | [test:clean] embedded 200/306
+2026-05-09 16:39:49,536 | INFO    | runner | [test:clean] embedded 250/306
+2026-05-09 16:39:52,944 | INFO    | runner | [test:clean] embedded 300/306
+2026-05-09 16:39:53,130 | INFO    | runner | [test:clean] embedded 306/306
+2026-05-09 16:39:54,417 | INFO    | runner | [clean] MAP=0.6183 MRR=0.6183 P@1=0.5359 nDCG=0.6604 n=306
+/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+2026-05-09 16:40:15,969 | INFO    | runner | Experiment strategy1_segments_torch done in 554.2s — MAP=0.6183 MRR=0.6183
+2026-05-09 16:40:15,982 | INFO    | runner | Experiment strategy2_super_embedding_torch starting
+2026-05-09 16:40:17,121 | INFO    | runner | Loaded 1437 records
+2026-05-09 16:40:17,122 | INFO    | runner | Split: train=1131 test=306
+2026-05-09 16:40:17,123 | INFO    | runner | [train] embedded 50/1131
+2026-05-09 16:40:17,124 | INFO    | runner | [train] embedded 100/1131
+2026-05-09 16:40:17,125 | INFO    | runner | [train] embedded 150/1131
+2026-05-09 16:40:17,126 | INFO    | runner | [train] embedded 200/1131
+2026-05-09 16:40:17,127 | INFO    | runner | [train] embedded 250/1131
+2026-05-09 16:40:17,127 | INFO    | runner | [train] embedded 300/1131
+2026-05-09 16:40:17,128 | INFO    | runner | [train] embedded 350/1131
+2026-05-09 16:40:17,129 | INFO    | runner | [train] embedded 400/1131
+2026-05-09 16:40:17,130 | INFO    | runner | [train] embedded 450/1131
+2026-05-09 16:40:17,131 | INFO    | runner | [train] embedded 500/1131
+2026-05-09 16:40:17,131 | INFO    | runner | [train] embedded 550/1131
+2026-05-09 16:40:17,132 | INFO    | runner | [train] embedded 600/1131
+2026-05-09 16:40:17,133 | INFO    | runner | [train] embedded 650/1131
+2026-05-09 16:40:17,134 | INFO    | runner | [train] embedded 700/1131
+2026-05-09 16:40:17,135 | INFO    | runner | [train] embedded 750/1131
+2026-05-09 16:40:17,135 | INFO    | runner | [train] embedded 800/1131
+2026-05-09 16:40:17,136 | INFO    | runner | [train] embedded 850/1131
+2026-05-09 16:40:17,137 | INFO    | runner | [train] embedded 900/1131
+2026-05-09 16:40:17,138 | INFO    | runner | [train] embedded 950/1131
+2026-05-09 16:40:17,138 | INFO    | runner | [train] embedded 1000/1131
+2026-05-09 16:40:17,140 | INFO    | runner | [train] embedded 1050/1131
+2026-05-09 16:40:17,141 | INFO    | runner | [train] embedded 1100/1131
+2026-05-09 16:40:17,141 | INFO    | runner | [train] embedded 1131/1131
+2026-05-09 16:40:18,097 | INFO    | runner | Index built: 1131 docs, dim=1280, 1.0s
+2026-05-09 16:40:18,098 | INFO    | runner | [test:clean] embedded 50/306
+2026-05-09 16:40:18,099 | INFO    | runner | [test:clean] embedded 100/306
+2026-05-09 16:40:18,100 | INFO    | runner | [test:clean] embedded 150/306
+2026-05-09 16:40:18,101 | INFO    | runner | [test:clean] embedded 200/306
+2026-05-09 16:40:18,102 | INFO    | runner | [test:clean] embedded 250/306
+2026-05-09 16:40:18,103 | INFO    | runner | [test:clean] embedded 300/306
+2026-05-09 16:40:18,103 | INFO    | runner | [test:clean] embedded 306/306
+2026-05-09 16:40:18,335 | INFO    | runner | [clean] MAP=0.6335 MRR=0.6335 P@1=0.5654 nDCG=0.6705 n=306
+/home/cnt-computadores/Pedro/venv/lib/python3.12/site-packages/umap/umap_.py:1952: UserWarning: n_jobs value 1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+2026-05-09 16:40:23,223 | INFO    | runner | Experiment strategy2_super_embedding_torch done in 2.4s — MAP=0.6335 MRR=0.6335
+
+=== Strategy comparison ===
+
+| Metric | strategy1_segments_torch | strategy2_super_embedding_torch |
+|---|---|---|
+| MAP | 0.6183 | 0.6335 |
+| MRR | 0.6183 | 0.6335 |
+| P@1 | 0.5359 | 0.5654 |
+| P@5 | 0.1440 | 0.1464 |
+| R@1 | 0.0086 | 0.1011 |
+| R@5 | 0.0121 | 0.1299 |
+| R@10 | 0.0137 | 0.1405 |
+| nDCG | 0.6604 | 0.6705 |
+| latency | 3.7 / p95 6.0 ms | 0.3 / p95 0.3 ms |
+| n_documents | 15102 | 1131 |
+| index_build_time_s | 1.3 | 1.0 |
+| embedding_dim | 1280 | 1280 |
+
+Saved → /home/cnt-computadores/Pedro/results/strategy_compare

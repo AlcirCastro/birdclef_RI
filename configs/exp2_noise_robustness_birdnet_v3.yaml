@@ -1,0 +1,68 @@
+name: exp2_noise_robustness_birdnet_v3
+seed: 42
+similarity: cosine
+
+notes: >
+  Noise robustness sweep using BirdNET+ V3.0. This mirrors exp2_noise_robustness
+  but swaps the embedder so the denoising/noise-ablation pipeline can be compared
+  against the original Perch v2 results.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: 1500
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: spectral_gating
+  params:
+    prop_decrease: 1.0
+    n_std_thresh: 1.5
+    stationary: true
+
+segmentation:
+  type: fixed
+  params:
+    window_sec: 5.0
+    pad_last: true
+
+embedding:
+  type: birdnet_v3
+  params:
+    model_path: https://zenodo.org/records/18247420/files/BirdNET%2B_V3.0-preview3_Global_11K_FP32.pt?download=1
+    batch_size: 16
+
+aggregation:
+  type: mean
+
+representation:
+  type: audio
+
+indexing:
+  type: flat
+
+fusion:
+  type: early
+  params:
+    aggregator: mean
+
+ranking:
+  type: max
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  noise:
+    enabled: true
+    noise_types: ["white", "pink"]
+    snr_db: [20.0, 10.0, 0.0, -5.0]
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: true
+  save_rankings: true

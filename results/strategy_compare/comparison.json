@@ -1,0 +1,230 @@
+{
+  "left": {
+    "experiment": "strategy1_segments_torch",
+    "notes": "Strategy 1 — Segment-Based Indexing using the experimental PyTorch export path for the official Perch v2 checkpoint.\n",
+    "n_train": 27309,
+    "n_test": 6835,
+    "n_documents": 363917,
+    "embedding_dim": 1280,
+    "index_build_time_s": 47.82356562500354,
+    "memory_peak_rss_bytes": 19428925440,
+    "memory_current_rss_bytes": 17390313472,
+    "config": {
+      "name": "strategy1_segments_torch",
+      "seed": 42,
+      "data": {
+        "dataset_zip": "/home/cnt-computadores/Pedro/birdclef-2026.zip",
+        "audio_dir": "/home/cnt-computadores/Pedro/birdclef_cache/train_audio",
+        "max_records": null,
+        "min_rating": 3.0,
+        "train_ratio": 0.8,
+        "sample_rate": 32000
+      },
+      "preprocessing": {
+        "type": "none",
+        "params": {}
+      },
+      "segmentation": {
+        "type": "overlapping",
+        "params": {
+          "window_sec": 5.0,
+          "hop_sec": 2.5,
+          "pad_last": true
+        }
+      },
+      "embedding": {
+        "type": "perch_v2_torch",
+        "params": {
+          "batch_size": 16,
+          "model_cache_dir": "birdclef_cache/torch_models"
+        }
+      },
+      "aggregation": {
+        "type": "mean",
+        "params": {}
+      },
+      "representation": {
+        "type": "segment",
+        "params": {}
+      },
+      "indexing": {
+        "type": "hnsw",
+        "params": {
+          "M": 32,
+          "ef_construction": 200,
+          "ef_search": 64
+        }
+      },
+      "fusion": {
+        "type": "late",
+        "params": {}
+      },
+      "ranking": {
+        "type": "rrf",
+        "params": {
+          "k_const": 60.0
+        }
+      },
+      "similarity": "cosine",
+      "evaluation": {
+        "top_k": 10,
+        "p_at": [
+          1,
+          5
+        ],
+        "recall_at": [
+          1,
+          5,
+          10
+        ],
+        "noise": {
+          "enabled": false,
+          "noise_types": [
+            "white"
+          ],
+          "snr_db": [
+            20.0,
+            10.0,
+            0.0,
+            -5.0
+          ],
+          "noise_dir": null
+        }
+      },
+      "notes": "Strategy 1 — Segment-Based Indexing using the experimental PyTorch export path for the official Perch v2 checkpoint.\n"
+    },
+    "clean": {
+      "n_queries": 6835,
+      "MAP": 0.819107708921169,
+      "MRR": 0.819107708921169,
+      "nDCG": 0.8416561738300811,
+      "avg_latency_ms": 22.55416501494586,
+      "P@1": 0.7697147037307973,
+      "P@5": 0.2518141916605706,
+      "R@1": 0.00041840964782054456,
+      "R@5": 0.0005259463655989594,
+      "R@10": 0.0005508335600076107,
+      "latency": {
+        "n": 6835,
+        "mean_ms": 22.55416501494586,
+        "p50_ms": 21.329273004084826,
+        "p95_ms": 33.267154407803886,
+        "p99_ms": 39.57474517752416
+      }
+    },
+    "noise": [],
+    "elapsed_s": 1934.9766075639927
+  },
+  "right": {
+    "experiment": "strategy2_super_embedding_torch",
+    "notes": "Strategy 2 — Super-Embedding with Pooling using the experimental PyTorch export path for the official Perch v2 checkpoint.\n",
+    "n_train": 27309,
+    "n_test": 6835,
+    "n_documents": 27309,
+    "embedding_dim": 1280,
+    "index_build_time_s": 22.69899918900046,
+    "memory_peak_rss_bytes": 19428925440,
+    "memory_current_rss_bytes": 13025558528,
+    "config": {
+      "name": "strategy2_super_embedding_torch",
+      "seed": 42,
+      "data": {
+        "dataset_zip": "/home/cnt-computadores/Pedro/birdclef-2026.zip",
+        "audio_dir": "/home/cnt-computadores/Pedro/birdclef_cache/train_audio",
+        "max_records": null,
+        "min_rating": 3.0,
+        "train_ratio": 0.8,
+        "sample_rate": 32000
+      },
+      "preprocessing": {
+        "type": "none",
+        "params": {}
+      },
+      "segmentation": {
+        "type": "overlapping",
+        "params": {
+          "window_sec": 5.0,
+          "hop_sec": 2.5,
+          "pad_last": true
+        }
+      },
+      "embedding": {
+        "type": "perch_v2_torch",
+        "params": {
+          "batch_size": 16,
+          "model_cache_dir": "birdclef_cache/torch_models"
+        }
+      },
+      "aggregation": {
+        "type": "mean",
+        "params": {}
+      },
+      "representation": {
+        "type": "audio",
+        "params": {}
+      },
+      "indexing": {
+        "type": "flat",
+        "params": {}
+      },
+      "fusion": {
+        "type": "early",
+        "params": {
+          "aggregator": "mean"
+        }
+      },
+      "ranking": {
+        "type": "max",
+        "params": {}
+      },
+      "similarity": "cosine",
+      "evaluation": {
+        "top_k": 10,
+        "p_at": [
+          1,
+          5
+        ],
+        "recall_at": [
+          1,
+          5,
+          10
+        ],
+        "noise": {
+          "enabled": false,
+          "noise_types": [
+            "white"
+          ],
+          "snr_db": [
+            20.0,
+            10.0,
+            0.0,
+            -5.0
+          ],
+          "noise_dir": null
+        }
+      },
+      "notes": "Strategy 2 — Super-Embedding with Pooling using the experimental PyTorch export path for the official Perch v2 checkpoint.\n"
+    },
+    "clean": {
+      "n_queries": 6835,
+      "MAP": 0.8227229131106234,
+      "MRR": 0.8227229131106234,
+      "nDCG": 0.8456835821670429,
+      "avg_latency_ms": 6.294942720003829,
+      "P@1": 0.7729334308705194,
+      "P@5": 0.22074372104364792,
+      "R@1": 0.005385365712465381,
+      "R@5": 0.006244032167473221,
+      "R@10": 0.006510724372376333,
+      "latency": {
+        "n": 6835,
+        "mean_ms": 6.294942720003829,
+        "p50_ms": 6.183844991028309,
+        "p95_ms": 6.410372308164369,
+        "p99_ms": 6.741583661059849
+      }
+    },
+    "noise": [],
+    "elapsed_s": 73.09040338799241
+  }
+}

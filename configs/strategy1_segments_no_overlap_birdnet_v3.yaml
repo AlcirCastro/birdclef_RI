@@ -1,0 +1,72 @@
+name: strategy1_segments_no_overlap_birdnet_v3
+seed: 42
+similarity: cosine
+
+notes: >
+  Strategy 1 without overlap using BirdNET+ V3.0. This mirrors
+  strategy1_segments_no_overlap with the new embedder only.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: null
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: none
+  params: {}
+
+segmentation:
+  type: fixed
+  params:
+    window_sec: 5.0
+    drop_last_short: false
+    pad_last: true
+
+embedding:
+  type: birdnet_v3
+  params:
+    model_path: https://zenodo.org/records/18247420/files/BirdNET%2B_V3.0-preview3_Global_11K_FP32.pt?download=1
+    batch_size: 16
+
+aggregation:
+  type: mean
+  params: {}
+
+representation:
+  type: segment
+  params: {}
+
+indexing:
+  type: hnsw
+  params:
+    M: 32
+    ef_construction: 200
+    ef_search: 64
+
+fusion:
+  type: late
+  params: {}
+
+ranking:
+  type: rrf
+  params:
+    k_const: 60.0
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  measure_latency: true
+  measure_memory: true
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: true
+  save_rankings: true

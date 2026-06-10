@@ -1,0 +1,72 @@
+name: strategy2_super_embedding_no_overlap_noise_torch
+seed: 42
+similarity: cosine
+
+notes: >
+  Strategy 2 without overlapping windows, spectral-gating denoising, and the
+  experimental PyTorch backend for Perch v2.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: null
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: spectral_gating
+  params:
+    prop_decrease: 1.0
+    n_std_thresh: 1.5
+    stationary: true
+
+segmentation:
+  type: fixed
+  params:
+    window_sec: 5.0
+    drop_last_short: false
+    pad_last: true
+
+embedding:
+  type: perch_v2_torch
+  params:
+    batch_size: 16
+    model_cache_dir: birdclef_cache/torch_models
+
+aggregation:
+  type: mean
+  params: {}
+
+representation:
+  type: audio
+  params: {}
+
+indexing:
+  type: flat
+  params: {}
+
+fusion:
+  type: early
+  params:
+    aggregator: mean
+
+ranking:
+  type: max
+  params: {}
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  measure_latency: true
+  measure_memory: true
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: true
+  save_rankings: true

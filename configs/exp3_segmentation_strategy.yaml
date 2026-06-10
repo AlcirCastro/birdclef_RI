@@ -1,0 +1,70 @@
+name: exp3_segmentation_strategy
+seed: 42
+similarity: cosine
+
+notes: >
+  Overlapping segmentation + segment-level documents + late fusion with
+  Reciprocal Rank Fusion (RRF). HNSW index for sub-linear search. Compare
+  against exp1 to isolate the impact of denser segments and rank fusion.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: 1500
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: bandpass
+  params:
+    low_hz: 250.0
+    high_hz: 12000.0
+    order: 4
+
+segmentation:
+  type: overlapping
+  params:
+    window_sec: 5.0
+    hop_sec: 2.5
+
+embedding:
+  type: perch_v2
+  params:
+    batch_size: 16
+
+aggregation:
+  type: mean       # used by query-side early fusion only; segment store ignores it
+
+representation:
+  type: segment
+
+indexing:
+  type: hnsw
+  params:
+    M: 32
+    ef_construction: 200
+    ef_search: 64
+
+fusion:
+  type: late
+  params: {}
+
+ranking:
+  type: rrf
+  params:
+    k_const: 60.0
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: true
+  save_rankings: true

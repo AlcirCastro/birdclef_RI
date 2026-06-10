@@ -1,0 +1,72 @@
+name: strategy2_super_embedding
+seed: 42
+similarity: cosine
+
+notes: >
+  Strategy 2 — Super-Embedding with Pooling. Audio is split into the same
+  overlapping 5s windows as strategy 1, then all segment embeddings are
+  pooled into a single per-file vector via the configured aggregator
+  (mean by default; swap to `max`, `attention`, `topk_mean`, `median`,
+  or `spe` for ablation). Indexing and search are 1-vector-per-file:
+  smaller index, faster search, no temporal localization.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: null
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: none
+  params: {}
+
+segmentation:
+  type: overlapping       # identical to strategy 1 — only the post-embedding stages differ
+  params:
+    window_sec: 5.0
+    hop_sec: 2.5
+    pad_last: true
+
+embedding:
+  type: perch_v2
+  params:
+    batch_size: 16
+
+aggregation:
+  type: mean              # try: max | attention | topk_mean | median | spe
+  params: {}
+
+representation:
+  type: audio             # one document per source file — the "super-embedding"
+  params: {}
+
+indexing:
+  type: flat              # exact search — index is small enough to brute-force
+  params: {}
+
+fusion:
+  type: early             # collapse query segments into a single vector before search
+  params:
+    aggregator: mean
+
+ranking:
+  type: max
+  params: {}
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  measure_latency: true
+  measure_memory: true
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: true
+  save_rankings: true

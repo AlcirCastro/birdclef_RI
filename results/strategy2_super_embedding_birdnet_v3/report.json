@@ -1,0 +1,115 @@
+{
+  "experiment": "strategy2_super_embedding_birdnet_v3",
+  "notes": "Strategy 2 (super-embedding) using BirdNET+ V3.0. Audio is pooled to a single vector per file after segmenting, then searched with flat FAISS.\n",
+  "n_train": 27309,
+  "n_test": 6835,
+  "n_documents": 27309,
+  "embedding_dim": 1280,
+  "index_build_time_s": 23.393039324029814,
+  "memory_peak_rss_bytes": 8248045568,
+  "memory_current_rss_bytes": 3431555072,
+  "config": {
+    "name": "strategy2_super_embedding_birdnet_v3",
+    "seed": 42,
+    "data": {
+      "dataset_zip": "/home/cnt-computadores/Pedro/birdclef-2026.zip",
+      "audio_dir": "/home/cnt-computadores/Pedro/birdclef_cache/train_audio",
+      "max_records": null,
+      "min_rating": 3.0,
+      "train_ratio": 0.8,
+      "sample_rate": 32000
+    },
+    "preprocessing": {
+      "type": "none",
+      "params": {}
+    },
+    "segmentation": {
+      "type": "overlapping",
+      "params": {
+        "window_sec": 5.0,
+        "hop_sec": 2.5,
+        "pad_last": true
+      }
+    },
+    "embedding": {
+      "type": "birdnet_v3",
+      "params": {
+        "model_path": "https://zenodo.org/records/18247420/files/BirdNET%2B_V3.0-preview3_Global_11K_FP32.pt?download=1",
+        "batch_size": 16
+      }
+    },
+    "aggregation": {
+      "type": "mean",
+      "params": {}
+    },
+    "representation": {
+      "type": "audio",
+      "params": {}
+    },
+    "indexing": {
+      "type": "flat",
+      "params": {}
+    },
+    "fusion": {
+      "type": "early",
+      "params": {
+        "aggregator": "mean"
+      }
+    },
+    "ranking": {
+      "type": "taxonomy_boost",
+      "params": {
+        "genus_boost": 0.2,
+        "common_name_boost": 0.1
+      }
+    },
+    "similarity": "cosine",
+    "evaluation": {
+      "top_k": 10,
+      "p_at": [
+        1,
+        5
+      ],
+      "recall_at": [
+        1,
+        5,
+        10
+      ],
+      "noise": {
+        "enabled": false,
+        "noise_types": [
+          "white"
+        ],
+        "snr_db": [
+          20.0,
+          10.0,
+          0.0,
+          -5.0
+        ],
+        "noise_dir": null
+      }
+    },
+    "notes": "Strategy 2 (super-embedding) using BirdNET+ V3.0. Audio is pooled to a single vector per file after segmenting, then searched with flat FAISS.\n"
+  },
+  "clean": {
+    "n_queries": 6835,
+    "MAP": 0.823959487233079,
+    "MRR": 0.823959487233079,
+    "nDCG": 0.8493240909489491,
+    "avg_latency_ms": 6.236793214328187,
+    "P@1": 0.7700073152889539,
+    "P@5": 0.19649109973177273,
+    "R@1": 0.004305584978944689,
+    "R@5": 0.005846451946300526,
+    "R@10": 0.0062930162406180145,
+    "latency": {
+      "n": 6835,
+      "mean_ms": 6.236793214328187,
+      "p50_ms": 6.178718991577625,
+      "p95_ms": 6.695097975898534,
+      "p99_ms": 7.608432414708659
+    }
+  },
+  "noise": [],
+  "elapsed_s": 71.92147543496685
+}

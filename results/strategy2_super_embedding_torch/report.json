@@ -1,0 +1,115 @@
+{
+  "experiment": "strategy2_super_embedding_torch",
+  "notes": "Strategy 2 — Super-Embedding with Pooling using the experimental PyTorch export path for the official Perch v2 checkpoint.\n",
+  "n_train": 27309,
+  "n_test": 6835,
+  "n_documents": 27309,
+  "embedding_dim": 1280,
+  "index_build_time_s": 22.440617038984783,
+  "memory_peak_rss_bytes": 5980372992,
+  "memory_current_rss_bytes": 2410188800,
+  "config": {
+    "name": "strategy2_super_embedding_torch",
+    "seed": 42,
+    "data": {
+      "dataset_zip": "/home/cnt-computadores/Pedro/birdclef-2026.zip",
+      "audio_dir": "/home/cnt-computadores/Pedro/birdclef_cache/train_audio",
+      "max_records": null,
+      "min_rating": 3.0,
+      "train_ratio": 0.8,
+      "sample_rate": 32000
+    },
+    "preprocessing": {
+      "type": "none",
+      "params": {}
+    },
+    "segmentation": {
+      "type": "overlapping",
+      "params": {
+        "window_sec": 5.0,
+        "hop_sec": 2.5,
+        "pad_last": true
+      }
+    },
+    "embedding": {
+      "type": "perch_v2_torch",
+      "params": {
+        "batch_size": 16,
+        "model_cache_dir": "birdclef_cache/torch_models"
+      }
+    },
+    "aggregation": {
+      "type": "mean",
+      "params": {}
+    },
+    "representation": {
+      "type": "audio",
+      "params": {}
+    },
+    "indexing": {
+      "type": "flat",
+      "params": {}
+    },
+    "fusion": {
+      "type": "early",
+      "params": {
+        "aggregator": "mean"
+      }
+    },
+    "ranking": {
+      "type": "taxonomy_boost",
+      "params": {
+        "genus_boost": 0.2,
+        "common_name_boost": 0.1
+      }
+    },
+    "similarity": "cosine",
+    "evaluation": {
+      "top_k": 10,
+      "p_at": [
+        1,
+        5
+      ],
+      "recall_at": [
+        1,
+        5,
+        10
+      ],
+      "noise": {
+        "enabled": false,
+        "noise_types": [
+          "white"
+        ],
+        "snr_db": [
+          20.0,
+          10.0,
+          0.0,
+          -5.0
+        ],
+        "noise_dir": null
+      }
+    },
+    "notes": "Strategy 2 — Super-Embedding with Pooling using the experimental PyTorch export path for the official Perch v2 checkpoint.\n"
+  },
+  "clean": {
+    "n_queries": 6835,
+    "MAP": 0.8199604626049395,
+    "MRR": 0.8199604626049395,
+    "nDCG": 0.8467212464358257,
+    "avg_latency_ms": 5.967848748632931,
+    "P@1": 0.756108266276518,
+    "P@5": 0.1906315532796879,
+    "R@1": 0.004353706588653078,
+    "R@5": 0.006039191432082086,
+    "R@10": 0.006375501346861353,
+    "latency": {
+      "n": 6835,
+      "mean_ms": 5.967848748632931,
+      "p50_ms": 5.963751988019794,
+      "p95_ms": 6.118908413918688,
+      "p99_ms": 6.402509537292644
+    }
+  },
+  "noise": [],
+  "elapsed_s": 68.9098352729925
+}

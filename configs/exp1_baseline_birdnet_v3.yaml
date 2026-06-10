@@ -1,0 +1,71 @@
+name: exp1_baseline_birdnet_v3
+seed: 42
+similarity: cosine
+
+notes: >
+  Baseline configuration using BirdNET+ V3.0 instead of Perch v2. The rest
+  of the retrieval stack stays identical to exp1_baseline so the comparison
+  is apples-to-apples; BirdNET's native 3 s window is handled inside the
+  embedder.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: 1500
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: none
+  params: {}
+
+segmentation:
+  type: fixed
+  params:
+    window_sec: 5.0
+    drop_last_short: false
+    pad_last: true
+
+embedding:
+  type: birdnet_v3
+  params:
+    model_path: https://zenodo.org/records/18247420/files/BirdNET%2B_V3.0-preview3_Global_11K_FP32.pt?download=1
+    batch_size: 16
+
+aggregation:
+  type: mean
+  params: {}
+
+representation:
+  type: audio
+  params: {}
+
+indexing:
+  type: flat
+  params: {}
+
+fusion:
+  type: early
+  params:
+    aggregator: mean
+
+ranking:
+  type: max
+  params: {}
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  measure_latency: true
+  measure_memory: true
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: true
+  save_rankings: true

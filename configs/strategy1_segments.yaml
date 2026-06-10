@@ -1,0 +1,76 @@
+name: strategy1_segments
+seed: 42
+similarity: cosine
+
+notes: >
+  Strategy 1 — Segment-Based Indexing. Audio is split into overlapping 5s
+  windows (hop 2.5s); every window becomes its own document in the index.
+  At query time, each query window is searched independently and the per-segment
+  result lists are folded by Reciprocal Rank Fusion — preserving fine-grained
+  temporal alignment at the cost of a larger index. Counterpart of
+  configs/strategy2_super_embedding.yaml; the only differences are the
+  representation, fusion, ranking, and index choices.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: null
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: none
+  params: {}
+
+segmentation:
+  type: overlapping
+  params:
+    window_sec: 5.0
+    hop_sec: 2.5
+    pad_last: true
+
+embedding:
+  type: perch_v2
+  params:
+    batch_size: 16
+
+aggregation:
+  type: mean        # ignored by `segment` representation, but consumed by ranker.mean / late fusion
+  params: {}
+
+representation:
+  type: segment      # one document per 5s window — preserves temporal precision
+  params: {}
+
+indexing:
+  type: hnsw         # sub-linear search keeps a segment-grained index practical
+  params:
+    M: 32
+    ef_construction: 200
+    ef_search: 64
+
+fusion:
+  type: late         # one query per segment → N kNN result lists folded by ranker
+  params: {}
+
+ranking:
+  type: rrf          # Option A: top-K per query window, fused by reciprocal rank
+  params:
+    k_const: 60.0
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  measure_latency: true
+  measure_memory: true
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: true
+  save_rankings: true
