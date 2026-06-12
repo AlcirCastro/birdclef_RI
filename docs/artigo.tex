@@ -1,0 +1,1247 @@
+\documentclass[12pt]{article}
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,fit,backgrounds,calc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}
+\definecolor{azulRI}{RGB}{0,70,127}
+\definecolor{cinzaRI}{RGB}{100,100,100}
+\definecolor{verdeRI}{RGB}{0,120,60}
+
+\sloppy
+
+\title{BirdSearch: Recuperação de Informação Acústica para\\ Identificação
+de Espécies de Aves com Fusão de Evidências e Reranking}
+
+\author{Pedro Mendes\inst{1}, Alcir Heber\inst{1}}
+
+\address{Disciplina ICC222 -- Tópicos em Recuperação de Informação\\
+  Instituto de Computação -- Universidade Federal do Amazonas (UFAM)
+  \email{\{pedro.mendes, alcir.heber\}@icomp.ufam.edu.br}
+}
+
+\begin{document}
+\maketitle
+
+% ─── Abstract (English) ───────────────────────────────────────────────────────
+\begin{abstract}
+This paper presents \textbf{BirdSearch}, a modular acoustic information
+retrieval system for bird species identification, evaluated on the BirdCLEF
+2026 benchmark (34,144 recordings, 571 species). The system investigates two
+indexing strategies --- segment-based late fusion using an HNSW graph index
+(E1) and early fusion via max-pooled super-embeddings with a flat index (E2)
+--- combined with 14 reranking families across two neural embedding backbones:
+Google Perch v2 and BirdNET v3.0 (both 1280-dimensional). On the full dataset,
+E2 achieves MAP\,=\,0.8227 and P@1\,=\,0.7729 at 6.3\,ms average latency,
+while E1 reaches MAP\,=\,0.8191 with better list diversity (P@5\,=\,0.2518)
+at 22.6\,ms. Score-based rerankers (attention and softmax) consistently
+outperform rank-fusion alternatives (RRF, Borda), with the best individual
+result being MAP\,=\,0.8944 using BirdNET + attention in E1. Hybrid rankers
+combining score smoothing and taxonomic reinforcement achieve comparable MAP
+at sub-millisecond latency (0.3--1.0\,ms). Overlapping segmentation (50\%
+hop) proves essential: its removal degrades MAP by 2--3 points across both
+strategies.
+\end{abstract}
+
+% ─── Resumo (Português) ───────────────────────────────────────────────────────
+\begin{resumo}
+Este artigo apresenta o \textbf{BirdSearch}, um sistema modular de recuperação
+de informação acústica para identificação de espécies de aves, avaliado sobre
+o benchmark BirdCLEF 2026 (34.144 gravações, 571 espécies). O sistema investiga
+duas estratégias de indexação --- fusão tardia por segmentos com índice HNSW
+(E1) e fusão precoce via super-embeddings com max-pooling e índice plano (E2)
+--- combinadas com 14 famílias de reranking sobre dois \textit{backbones}
+neurais: Google Perch v2 e BirdNET v3.0 (ambos com 1280 dimensões). No dataset
+completo, E2 atinge MAP\,=\,0,8227 e P@1\,=\,0,7729 com latência média de
+6,3\,ms, enquanto E1 alcança MAP\,=\,0,8191 com maior diversidade de lista
+(P@5\,=\,0,2518) a 22,6\,ms. Rerankers baseados em score (\texttt{attention}
+e \texttt{softmax}) superam consistentemente alternativas de fusão por rank
+(RRF, Borda), com o melhor resultado individual sendo MAP\,=\,0,8944 com
+BirdNET\,+\,attention em E1. Rankers híbridos que combinam suavização de score
+e reforço taxonômico atingem MAP comparável com latência sub-milissegundo
+(0,3--1,0\,ms). A segmentação com sobreposição de 50\% mostra-se essencial:
+sua remoção degrada o MAP em 2--3 pontos em ambas as estratégias.
+\end{resumo}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Introdução}
+\label{sec:intro}
+% ══════════════════════════════════════════════════════════════════════════════
+
+A identificação automática de espécies de aves a partir de gravações acústicas
+é um problema de recuperação de informação (RI) multimídia com aplicações
+diretas em monitoramento ambiental, conservação da biodiversidade e estudos
+ecológicos de larga escala~\cite{stowell:22}. A plataforma Xeno-canto já reúne
+mais de 700.000 gravações de mais de 10.000 espécies~\cite{xeno:14}, tornando
+a busca eficiente por similaridade acústica um desafio de RI não trivial.
+
+O desafio \textbf{BirdCLEF 2026} fornece um benchmark padronizado com 34.144
+gravações de campo de 571 espécies, predominantemente da região Brasileira.
+Dado um áudio de consulta, o objetivo é recuperar e ranquear as espécies mais
+prováveis no corpus. Esse cenário distingue-se da classificação clássica por
+três características: (a) o espaço de classes é fechado mas vasto (571
+espécies); (b) cada gravação pode conter vocalizações de múltiplas espécies;
+e (c) a duração dos arquivos é variável, exigindo estratégias de segmentação
+e fusão de evidências.
+
+Abordagens recentes de recuperação acústica de aves exploram embeddings de
+redes neurais pré-treinadas~\cite{kahl:21, merriënboer:25}. No entanto, a
+literatura carece de análises sistemáticas sobre: (i) como estruturar o índice
+quando cada gravação gera múltiplos embeddings de segmento; e (ii) quais
+estratégias de reranking melhor exploram as propriedades dos embeddings gerados
+por modelos especializados em aves.
+
+O \textbf{BirdSearch} aborda exatamente essas duas questões. Avaliamos o
+impacto de duas estratégias de indexação e fusão --- \textit{late fusion} por
+segmentos (E1) e \textit{early fusion} via super-embedding (E2) --- combinadas
+com 14 rerankers de cinco famílias distintas, sobre dois backbones de embedding.
+Os experimentos abrangem 6.835 consultas sobre um corpus de 27.309 arquivos de
+treino, totalizando 363.917 segmentos no índice E1.
+
+As principais contribuições deste trabalho são:
+\begin{itemize}
+  \item Uma análise sistemática do impacto do
+  pré-processamento espectral e das estratégias de fusão sobre MAP, MRR,
+  nDCG, P@k, R@k e métricas taxonômicas.
+  \item Uma avaliação de 14 rerankers sobre dois backbones, identificando os
+  melhores candidatos para diferentes critérios (precisão, cobertura,
+  proximidade biológica, latência).
+\end{itemize}
+
+Este artigo está organizado da seguinte forma: a Seção~\ref{sec:ref} apresenta
+o referencial teórico; a Seção~\ref{sec:fund} detalha as métricas e o
+embasamento matemático; a Seção~\ref{sec:metod} descreve a metodologia e a
+arquitetura; a Seção~\ref{sec:res} apresenta e discute os resultados; e a
+Seção~\ref{sec:conc} conclui o trabalho.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Referencial Teórico}
+\label{sec:ref}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Recuperação de Informação por Similaridade}
+
+A recuperação de informação por similaridade vetorial (\textit{nearest-neighbor
+retrieval}) é o paradigma central de sistemas de busca em espaços contínuos de
+alta dimensão~\cite{baeza:99}. Dada uma coleção de $N$ vetores de documentos
+$\{\mathbf{d}_i\} \subset \mathbb{R}^d$ e uma consulta $\mathbf{q} \in
+\mathbb{R}^d$, o objetivo é encontrar os $k$ vetores mais similares a
+$\mathbf{q}$ segundo uma métrica de distância ou similaridade. Em domínios de
+áudio, a similaridade cosseno é a métrica predominante, pois é invariante à
+magnitude do sinal e captura ângulos no espaço de características~\cite{kong:20}.
+
+Para coleções de grande escala, a busca exata ($O(Nd)$ por consulta) torna-se
+proibitiva. Índices de vizinhança aproximada (\textit{Approximate Nearest
+Neighbor}, ANN) como o FAISS~\cite{johnson:21} oferecem estruturas eficientes
+que reduzem a complexidade de busca mantendo alta taxa de recall. Entre eles,
+o HNSW (\textit{Hierarchical Navigable Small World})~\cite{malkov:20}
+destaca-se por combinar construção eficiente com latência de busca sub-linear
+e recall superior a 99\% em configurações típicas.
+
+\subsection{Embeddings Neurais para Áudio de Aves}
+
+A extração de embeddings de áudio via redes neurais pré-treinadas transformou
+o campo da bioacústica computacional. Os PANNs (\textit{Pre-trained Audio
+Neural Networks})~\cite{kong:20} são redes convolucionais treinadas sobre o
+AudioSet~\cite{gemmeke:17} para reconhecimento geral de eventos sonoros. Embora
+versáteis, seu desempenho em domínios específicos como vocalizações de aves é
+limitado pela distribuição generalista dos dados de treinamento.
+
+O \textbf{Google Perch v2}~\cite{merriënboer:25} representa uma evolução
+especializada: treinado exclusivamente sobre mais de 400.000 gravações da
+plataforma Xeno-canto, o modelo combina uma arquitetura baseada em EfficientNet
+com mecanismos de atenção, produzindo vetores de 1280 dimensões normalizados em
+L2. Por operar em domínio específico, o Perch v2 captura padrões vocais finos
+que modelos generalistas perdem.
+
+O \textbf{BirdNET v3.0}~\cite{kahl:21}, desenvolvido pelo Cornell Lab of
+Ornithology, é outra referência de embedding especializado em aves. Treinado
+para classificação de 6.000+ espécies, também produz vetores de 1280 dimensões,
+mas com janela nativa de 3~s a 32~kHz. A comparação entre os dois backbones
+permite isolar o impacto da distribuição de treinamento sobre as estratégias
+de RI.
+
+\subsection{Fusão de Evidências em RI Multimídia}
+
+Quando uma consulta produz múltiplas representações (e.g., segmentos de um
+áudio), existem duas abordagens clássicas de fusão~\cite{baeza:99}:
+
+\textit{Early fusion} (fusão precoce) combina as representações \textbf{antes}
+da busca, produzindo uma consulta única. É eficiente e compacto, mas pode
+perder sinais localizados em segmentos específicos.
+
+\textit{Late fusion} (fusão tardia) emite múltiplas buscas independentes e
+combina as \textbf{listas de resultados}. Preserva a granularidade das evidências
+locais, às custas de maior latência e complexidade de combinação.
+
+\subsection{Fusão de Rankings}
+
+A combinação de múltiplas listas de resultados é estudada extensivamente em RI.
+O \textit{Reciprocal Rank Fusion} (RRF)~\cite{cormack:09} é um método robusto
+e sem parâmetros que pondera cada documento pelo inverso de sua posição em cada
+lista, sem requerer normalização de scores. Formalmente:
+\begin{equation}
+  \text{RRF}(d, L_1,\ldots,L_n) = \sum_{i=1}^{n}
+  \frac{1}{k + \text{rank}_i(d)}, \quad k = 60
+  \label{eq:rrf}
+\end{equation}
+
+Estudos empíricos mostram que o RRF frequentemente supera métodos mais
+sofisticados de combinação de listas~\cite{cormack:09}, sendo particularmente
+robusto quando os scores brutos das listas têm distribuições heterogêneas.
+
+\subsection{Reranking em Sistemas de RI}
+
+O reranking é uma etapa pós-recuperação que reordena os candidatos do kNN para
+maximizar algum critério de qualidade. Sistemas de busca modernos combinam
+frequentemente recuperação vetorial eficiente com modelos de reranking mais
+expressivos~\cite{baeza:99}. No contexto de aves, o reranking oferece uma
+oportunidade única: incorporar conhecimento taxonômico (gênero, família) para
+promover candidatos biologicamente plausíveis, mesmo quando a espécie exata
+não é identificada com certeza.
+
+\subsection{Métricas de Avaliação em RI}
+
+As métricas canônicas de avaliação de sistemas de RI estão bem estabelecidas
+na literatura~\cite{baeza:99, jarvelin:02}. A \textit{Average Precision} (AP)
+combina precisão e recall em uma única pontuação que penaliza resultados
+relevantes em posições tardias. O nDCG~\cite{jarvelin:02} introduz um desconto
+logarítmico por posição, sendo mais sensível à qualidade do ranking nas posições
+superiores. O MRR foca exclusivamente na posição do primeiro resultado correto.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Fundamentação Teórica}
+\label{sec:fund}
+% ══════════════════════════════════════════════════════════════════════════════
+
+Só dizer que a gente usar as métrica de MAP,.....
+
+%\subsection{Similaridade Cosseno e Produto Interno}
+
+% O BirdSearch adota a similaridade cosseno como métrica de busca:
+% \begin{equation}
+%   \sigma_{\cos}(\mathbf{q}, \mathbf{d}) =
+%   \frac{\mathbf{q} \cdot \mathbf{d}}{\|\mathbf{q}\|_2\,\|\mathbf{d}\|_2}
+%   \label{eq:cosine}
+% \end{equation}
+
+% Como o Perch v2 e o BirdNET normalizam seus vetores em L2
+% ($\|\mathbf{e}\|_2 = 1$), a Equação~\eqref{eq:cosine} reduz-se ao produto
+% interno $\sigma = \mathbf{q} \cdot \mathbf{d}$, permitindo o uso de
+% \texttt{IndexFlatIP} do FAISS com máxima eficiência.
+
+% \subsection{Average Precision e MAP}
+
+% Para uma consulta $q$ com rótulo $\ell$, seja $r_1,\ldots,r_k$ a lista
+% recuperada e $\text{rel}(r_i) = \mathbf{1}[\text{label}(r_i) = \ell]$ a
+% relevância binária. A Average Precision é:
+% \begin{equation}
+%   \text{AP}(q) =
+%   \frac{1}{\min(|\mathcal{R}_\ell|,\,k)}
+%   \sum_{i=1}^{k} \text{rel}(r_i)
+%   \cdot \frac{\sum_{j \leq i} \text{rel}(r_j)}{i}
+%   \label{eq:ap}
+% \end{equation}
+% onde $\mathcal{R}_\ell$ é o conjunto de documentos relevantes do corpus. O
+% MAP é a média das APs sobre todas as consultas $Q$:
+% \begin{equation}
+%   \text{MAP} = \frac{1}{|Q|}\sum_{q \in Q} \text{AP}(q)
+%   \label{eq:map}
+% \end{equation}
+
+% \subsection{Mean Reciprocal Rank}
+
+% O MRR foca na posição do primeiro resultado correto:
+% \begin{equation}
+%   \text{MRR} = \frac{1}{|Q|}\sum_{q \in Q} \frac{1}{\text{rank}_q^*}
+%   \label{eq:mrr}
+% \end{equation}
+% onde $\text{rank}_q^* = \infty$ (contribuição zero) se nenhum resultado
+% relevante for encontrado.
+
+% \subsection{Normalized Discounted Cumulative Gain}
+
+% O nDCG~\cite{jarvelin:02} pondera cada posição com um desconto logarítmico:
+% \begin{equation}
+%   \text{DCG}@k = \sum_{i=1}^{k}
+%   \frac{2^{\,\text{rel}(r_i)} - 1}{\log_2(i + 1)}
+%   \label{eq:dcg}
+% \end{equation}
+% \begin{equation}
+%   \text{nDCG}@k = \frac{\text{DCG}@k}{\text{IDCG}@k}
+%   \label{eq:ndcg}
+% \end{equation}
+% onde IDCG@k é o DCG do ranking ideal. O desconto $1/\log_2(i+1)$ vale 1,0 na
+% posição 1, cai a $\approx$\,0,63 na posição 2 e $\approx$\,0,29 na posição 10.
+
+% \subsection{Precision@k e Recall@k}
+
+% \begin{equation}
+%   \text{P@}k = \frac{|\text{top-}k \cap \mathcal{R}_\ell|}{k}
+%   \qquad
+%   \text{R@}k = \frac{|\text{top-}k \cap \mathcal{R}_\ell|}
+%                     {\max(1,|\mathcal{R}_\ell|)}
+%   \label{eq:pr}
+% \end{equation}
+
+% O denominador de R@k depende da representação de documentos: na representação
+% \textit{audio} (um vetor por arquivo), $|\mathcal{R}_\ell| = 1$ e R@1\,=\,P@1;
+% na representação \textit{segment} (um vetor por janela de 5~s), $|\mathcal{R}_\ell|$
+% pode chegar a centenas, tornando o recall numericamente muito menor.
+
+\subsection{Métricas Taxonômicas}
+\label{sub:tax_fund}
+
+As métricas clássicas de RI (MAP, MRR, nDCG) tratam a relevância de forma
+binária: a espécie recuperada é a correta ou não é. Para identificação de
+aves, porém, \textbf{errar o gênero é muito pior do que acertar o gênero mas
+errar a espécie}. Recuperar \textit{Tangara cyanicollis} quando a consulta
+era \textit{Tangara chilensis} (mesma família, mesmo gênero, canto similar)
+tem muito mais valor prático do que recuperar \textit{Cochlearius cochlearius}
+(ave de outra ordem), mesmo que o score de similaridade seja igual.
+
+Para capturar essa utilidade biológica, o BirdSearch define duas métricas
+complementares que avaliam o \emph{quão próximos} os resultados recuperados
+estão da espécie correta na árvore taxonômica:
+
+\paragraph{genus@k.} Mede a fração dos top-$k$ resultados que pertencem ao
+\textbf{mesmo gênero} que a espécie consultada:
+\begin{equation}
+  \text{genus@}k = \frac{1}{|Q|}\sum_{q\in Q}
+  \frac{|\{r \in \text{top-}k : \text{genus}(r) = \text{genus}(q)\}|}{k}
+  \label{eq:genus}
+\end{equation}
+Por exemplo, genus@5\,=\,0,92 significa que, em média, 4,6 dos 5 resultados
+mais bem ranqueados pertencem ao mesmo gênero da espécie da consulta.
+
+\paragraph{common@k.} Mede a fração dos top-$k$ que compartilham ao menos
+uma palavra com o \textbf{nome comum} da espécie consultada:
+\begin{equation}
+  \text{common@}k = \frac{1}{|Q|}\sum_{q\in Q}
+  \frac{|\{r \in \text{top-}k : \text{tokens}(r) \cap \text{tokens}(q) \neq \emptyset\}|}{k}
+  \label{eq:common}
+\end{equation}
+onde \text{tokens}$(s)$ são as palavras do nome comum da espécie $s$ em inglês.
+Por exemplo, se a consulta é ``Blue-naped Chlorophonia'', resultados com os
+nomes ``Yellow-collared Chlorophonia'' ou ``Blue-crowned Chlorophonia'' pontuam,
+pois compartilham a palavra ``Chlorophonia''. Isso captura proximidade semântica
+no vocabulário ornitológico, que é frequentemente indicativo de parentesco.
+
+Ambas as métricas valem entre 0 e 1 e são interpretadas como precisão
+biologicamente relaxada: um sistema pode ter MAP\,=\,0,85 (acerta a espécie
+exata em 85\% dos casos) e ainda assim ter genus@5\,=\,0,93 (em 93\% dos 5
+primeiros resultados, o gênero está correto). Esse valor é relevante para
+cenários de apoio a ornitólogos, onde uma lista de espécies do mesmo gênero
+como sugestão já é suficiente para orientar o trabalho de campo.
+
+\subsection{Agregadores de Embeddings}
+
+Quando $N$ embeddings de segmento $\mathbf{e}_1,\ldots,\mathbf{e}_N \in
+\mathbb{R}^{1280}$ precisam ser fundidos em um único vetor, o sistema aplica
+um dos seguintes operadores (todos seguidos de normalização L2):
+\begin{align}
+  \mathbf{v}_{\text{mean}}   &= \ell_2\!\left(\tfrac{1}{N}\textstyle\sum_i \mathbf{e}_i\right)
+  \label{eq:mean}\\
+  \mathbf{v}_{\text{max}}    &= \ell_2\!\left(\max_i \mathbf{e}_i\right)
+  \label{eq:max}\\
+  \mathbf{v}_{\text{att}} &= \ell_2\!\left(\sum_i \alpha_i \mathbf{e}_i\right),
+  \quad
+  \alpha_i = \text{softmax}\!\left(\frac{\mathbf{e}_i \cdot \mathbf{c}}{\tau}\right),
+  \quad \mathbf{c} = \ell_2\!\left(\tfrac{1}{N}\textstyle\sum_i\mathbf{e}_i\right)
+  \label{eq:att}
+\end{align}
+onde $\ell_2(\mathbf{v}) = \mathbf{v}/\|\mathbf{v}\|_2$ e $\tau = 0{,}1$ é
+a temperatura de atenção. O operador \textit{max} preserva o valor máximo por
+dimensão, concentrando as evidências mais fortes; o \textit{attention} pondera
+os segmentos por alinhamento com o centróide.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Metodologia}
+\label{sec:metod}
+% ══════════════════════════════════════════════════════════════════════════════
+
+% \subsection{Visão Geral da Arquitetura}
+
+% O BirdSearch é um \textit{framework} modular orientado a configuração no qual
+% cada estágio do pipeline é instanciado a partir de um arquivo YAML, sem
+% modificação de código. A Figura~\ref{fig:pipeline} ilustra o fluxo completo.
+
+% \begin{figure}[ht]
+% \centering
+% \begin{tikzpicture}[
+%     stage/.style={rectangle, rounded corners=3pt,
+%                   draw=azulRI!70, fill=azulRI!8,
+%                   minimum width=2.3cm, minimum height=0.75cm,
+%                   font=\scriptsize\bfseries, text centered, inner sep=3pt},
+%     arr/.style={-Stealth, thick, azulRI!70},
+%     lbl/.style={font=\tiny\itshape, color=cinzaRI},
+%     grp/.style={draw=gray!35, dashed, rounded corners=3pt, inner sep=5pt},
+%     node distance=0.45cm and 0.6cm
+%   ]
+%   % Top
+%   \node[stage] (load) {Dados};
+%   \node[stage, below=of load] (split) {Split 80/20};
+
+%   % Left branch (train/index)
+%   \node[stage, below left=0.7cm and 1.1cm of split] (pt) {Pré-proc.};
+%   \node[stage, below=of pt] (st) {Segmentação};
+%   \node[stage, below=of st] (et) {Embedding};
+%   \node[stage, below=of et] (ds) {Doc Store};
+%   \node[stage, below=of ds] (ix) {Índice};
+
+%   % Right branch (test/query)
+%   \node[stage, below right=0.7cm and 1.1cm of split] (pq) {Pré-proc.};
+%   \node[stage, below=of pq] (sq) {Segmentação};
+%   \node[stage, below=of sq] (eq) {Embedding};
+%   \node[stage, below=of eq] (fu) {Fusão};
+
+%   % Retrieval bottom
+%   \node[stage, below=1.5cm of ds] (ret) {Busca kNN};
+%   \node[stage, below=of ret] (rk)  {Reranking};
+%   \node[stage, below=of rk]  (ev)  {Avaliação};
+
+%   % Arrows train
+%   \draw[arr] (load) -- (split);
+%   \draw[arr] (split) -| (pt);
+%   \draw[arr] (pt)--(st)--(et)--(ds)--(ix);
+%   % Arrows query
+%   \draw[arr] (split) -| (pq);
+%   \draw[arr] (pq)--(sq)--(eq)--(fu);
+%   % Arrows retrieval
+%   \draw[arr] (ix) |- (ret);
+%   \draw[arr] (fu) |- (ret);
+%   \draw[arr] (ret)--(rk)--(ev);
+
+%   % Background groups
+%   \begin{scope}[on background layer]
+%     \node[grp, fit=(pt)(st)(et)(ds)(ix)] {};
+%     \node[grp, fit=(pq)(sq)(eq)(fu)] {};
+%   \end{scope}
+
+%   % Labels
+%   \node[lbl, left=0.05cm of pt]  {Treino};
+%   \node[lbl, right=0.05cm of pq] {Teste};
+% \end{tikzpicture}
+% \caption{Pipeline do BirdSearch. Lado esquerdo: construção do índice a partir
+% do conjunto de treino. Lado direito: processamento das consultas de teste.
+% A busca kNN combina as duas ramificações.}
+% \label{fig:pipeline}
+% \end{figure}
+
+% A modularidade é garantida pelo \textbf{padrão de registro}: cada estágio
+% mantém uma instância de \texttt{Registry} que mapeia chaves de \textit{string}
+% a classes Python (registradas via decorador \texttt{@REGISTRY.register(``nome'')}).
+% O \texttt{PipelineBuilder} lê o YAML e instancia os componentes sem nenhum
+% \texttt{if/elif} explícito. Substituir o indexador de HNSW para Flat, por
+% exemplo, requer apenas alterar \texttt{indexing.type: hnsw} $\to$
+% \texttt{indexing.type: flat} no arquivo de configuração.
+
+\subsection{Pré-processamento}
+
+O pré-processamento opera sobre o sinal de áudio bruto antes da segmentação.
+Três módulos estão disponíveis:
+
+% \textbf{Identidade} (\texttt{none}): passa o sinal sem modificação.
+
+\textbf{Gating Espectral} (\texttt{spectral\_gating}): estima o piso de
+ruído a partir dos 10\% de frames STFT mais silenciosos e atenua componentes
+abaixo de um limiar adaptativo:
+\begin{equation}
+  \hat{M}(f,t) = \max\!\left(M(f,t) - \alpha \cdot N(f),\; 0\right)
+  \label{eq:sg}
+\end{equation}
+onde $M(f,t)$ é a magnitude STFT, $N(f)$ é o piso estimado e
+$\alpha=1{,}0$ é a intensidade de supressão. O sinal limpo é reconstruído
+por ISTFT com \textit{overlap-add}.
+
+\textbf{Filtro Passa-Banda} (\texttt{bandpass}): Butterworth de 4ª ordem
+entre 250 e 12.000~Hz via \texttt{scipy.signal.sosfiltfilt}, cobrindo a
+faixa típica de vocalizações de aves.
+
+\subsection{Segmentação Temporal}
+
+O Perch v2 e o BirdNet V3 opera nativamente sobre janelas de 5~s a 32~kHz (160.000 amostras).
+O segmentador mais relevante neste trabalho é o de \textbf{sobreposição}
+(\texttt{overlapping}): janelas deslizantes de $W=5$~s com passo $H=2{,}5$~s
+(50\% de sobreposição). Para um áudio de duração $D$, o número de segmentos é:
+\begin{equation}
+  N_{\text{seg}} = \left\lfloor \frac{D - W}{H} \right\rfloor + 1
+  \label{eq:nseg}
+\end{equation}
+A sobreposição garante que eventos acústicos que cruzam fronteiras de janela
+sejam capturados integralmente por pelo menos um segmento. Segmentos mais
+curtos que 5~s são preenchidos com zeros; os mais longos são recortados ao centro.
+
+% \subsection{Extração de Embeddings}
+
+% \subsubsection{Google Perch v2}
+% Treinado sobre $>400.000$ gravações da Xeno-canto, o Perch v2 produz vetores
+% de 1280 dimensões L2-normalizados para cada janela de 5~s a 32~kHz.
+% O modelo é carregado via \texttt{kagglehub} (preferencial) ou TF-Hub. Uma
+% variante \texttt{perch\_v2\_torch} exporta o SavedModel para ONNX e executa
+% via PyTorch, com \textit{fallback} automático ao TF em caso de operações
+% não suportadas.
+
+% \subsubsection{BirdNET v3.0}
+% Desenvolvido pelo Cornell Lab of Ornithology, o BirdNET~\cite{kahl:21} é
+% treinado para classificar $>6.000$ espécies e produz vetores de 1280 dimensões.
+% Sua janela nativa é de 3~s a 32~kHz; no pipeline, as janelas de 5~s são
+% adaptadas por recorte ou preenchimento.
+
+% \textbf{Cache de embeddings}: o sistema armazena os vetores computados em
+% arquivos \texttt{.npz}, com chave de cache baseada em
+% $(\text{path}, \text{mtime}, \text{embedder}, \text{preproc\_id}, \text{segmenter\_id})$.
+% Consultas com ruído injetado sempre ignoram o cache.
+
+\subsection{Representações de Documentos e Índices}
+\label{sub:repr}
+
+A Tabela~\ref{tab:repr} apresenta as representações de documentos disponíveis.
+
+\begin{table}[ht]
+\centering
+\caption{Representações de documentos no BirdSearch.}
+\label{tab:repr}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Tipo} & \textbf{Docs/arquivo} & \textbf{Tamanho (corpus)} & \textbf{Fusão indicada} \\
+\midrule
+\texttt{segment}   & $N_{\text{seg}}$ & 363.917 (E1) & Tardia  \\
+\texttt{audio}     & 1                & 27.309 (E2)  & Precoce \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+O índice E1 usa \textbf{HNSW}~\cite{malkov:20} com $M=32$,
+\texttt{ef\_construction}\,=\,200 e \texttt{ef\_search}\,=\,64, atingindo
+recall\,$>$\,0,99 e latência sub-linear ($O(\log N)$). O índice E2 usa busca
+exata (\texttt{IndexFlatIP} do FAISS~\cite{johnson:21}), viável dado o tamanho
+reduzido (27.309 vetores).
+
+\subsection{Estratégias de Fusão de Evidências}
+\label{sub:fusao}
+
+Uma gravação de campo raramente tem duração exata de 5~s. Após a segmentação
+com sobreposição, cada áudio gera entre 4 e 12 janelas de 5~s, cada uma com
+seu próprio embedding de 1280 dimensões. O problema central é: \emph{como
+usar todos esses vetores para encontrar a espécie correta?} O BirdSearch
+investiga duas respostas distintas, ilustradas na Figura~\ref{fig:fusao}.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+    seg/.style={rectangle, rounded corners=2pt,
+                draw=azulRI!60, fill=azulRI!12,
+                minimum width=1.0cm, minimum height=0.6cm,
+                font=\tiny\bfseries, text centered},
+    emb/.style={rectangle, rounded corners=2pt,
+                draw=verdeRI!60, fill=verdeRI!10,
+                minimum width=1.0cm, minimum height=0.5cm,
+                font=\tiny, text centered},
+    idx/.style={cylinder, shape border rotate=90,
+                draw=azulRI!50, fill=azulRI!5,
+                minimum width=1.1cm, minimum height=0.7cm,
+                font=\tiny\bfseries, text centered, aspect=0.25},
+    res/.style={rectangle, rounded corners=2pt,
+                draw=orange!60, fill=orange!10,
+                minimum width=2.2cm, minimum height=0.5cm,
+                font=\tiny, text centered},
+    sup/.style={rectangle, rounded corners=2pt,
+                draw=purple!60, fill=purple!10,
+                minimum width=1.1cm, minimum height=0.6cm,
+                font=\tiny\bfseries, text centered},
+    arr/.style={-Stealth, thick, gray!60},
+    lbl/.style={font=\scriptsize\bfseries},
+    note/.style={font=\tiny\itshape, color=cinzaRI, align=center}
+  ]
+
+  % ── E1: Late Fusion (top half) ──────────────────────────────────────────
+  \node[lbl, color=azulRI] at (-0.2, 5.8) {E1 --- Fusão Tardia};
+
+  % Audio bar
+  \draw[thick, azulRI!40, fill=azulRI!5, rounded corners=2pt]
+    (0.0, 5.1) rectangle (6.2, 5.5);
+  \node[font=\tiny\color{cinzaRI}] at (3.1, 5.3) {áudio de consulta (ex: 15 s)};
+
+  % Segments with overlap
+  \foreach \x/\n in {0.1/S1, 1.35/S2, 2.6/S3, 3.85/S4} {
+    \node[seg] (s\n) at (\x+0.5, 4.6) {\n};
+  }
+  % overlap braces
+  \draw[decorate, decoration={brace,amplitude=3pt}, gray!50]
+    (1.25,4.35) -- (0.75,4.35) node[midway,below,font=\tiny\color{cinzaRI}]{hop};
+
+  % Embeddings
+  \foreach \x/\n in {0.1/S1, 1.35/S2, 2.6/S3, 3.85/S4} {
+    \node[emb] (e\n) at (\x+0.5, 3.7) {$\mathbf{e}_\n$};
+    \draw[arr] (s\n) -- (e\n);
+  }
+
+  % Index (shared corpus)
+  \node[idx] (idxE1) at (7.2, 4.15) {Índice\\HNSW};
+
+  % 4 searches
+  \foreach \n/\col in {S1/azulRI,S2/verdeRI,S3/orange,S4/purple} {
+    \draw[-Stealth, \col!60, thick] (e\n.east) -- (idxE1.west)
+      node[midway, above, font=\tiny\color{\col}] {};
+  }
+
+  % 4 result lists
+  \node[res] (r1) at (5.5, 3.05) {Lista 1: \textit{Tangara}, \ldots};
+  \node[res] (r2) at (5.5, 2.55) {Lista 2: \textit{Tangara}, \ldots};
+  \node[res] (r3) at (5.5, 2.05) {Lista 3: \textit{Pipra}, \ldots};
+  \node[res] (r4) at (5.5, 1.55) {Lista 4: \textit{Tangara}, \ldots};
+  \foreach \n in {1,2,3,4} {
+    \draw[arr] (idxE1.south) |- (r\n.east);
+  }
+
+  % Combiner
+  \node[sup, fill=orange!15, draw=orange!60, minimum width=1.5cm]
+    (comb) at (3.5, 1.55) {Reranker};
+  \foreach \n in {1,2,3,4} { \draw[arr] (r\n.west) -- (comb.east); }
+
+  \node[res, fill=verdeRI!15, draw=verdeRI!60] (out1) at (1.5, 1.55)
+    {Ranking Final};
+  \draw[arr] (comb.west) -- (out1.east);
+
+  \node[note] at (3.6, 0.95)
+    {4 buscas independentes $\rightarrow$ combina 4 listas de resultados};
+
+  % ── Separator ───────────────────────────────────────────────────────────
+  \draw[dashed, gray!40] (-0.3, 0.6) -- (8.2, 0.6);
+
+  % ── E2: Early Fusion (bottom half) ──────────────────────────────────────
+  \node[lbl, color=verdeRI] at (-0.2, 0.2) {E2 --- Fusão Precoce};
+
+  % Audio bar
+  \draw[thick, verdeRI!40, fill=verdeRI!5, rounded corners=2pt]
+    (0.0, -0.5) rectangle (6.2, -0.1);
+  \node[font=\tiny\color{cinzaRI}] at (3.1, -0.3) {mesmo áudio de consulta (15 s)};
+
+  % Segments
+  \foreach \x/\n in {0.1/S1, 1.35/S2, 2.6/S3, 3.85/S4} {
+    \node[seg] (q\n) at (\x+0.5, -1.0) {\n};
+  }
+
+  % Embeddings
+  \foreach \x/\n in {0.1/S1, 1.35/S2, 2.6/S3, 3.85/S4} {
+    \node[emb] (qe\n) at (\x+0.5, -1.75) {$\mathbf{e}_\n$};
+    \draw[arr] (q\n) -- (qe\n);
+  }
+
+  % Max-pool aggregation
+  \node[sup] (pool) at (2.85, -2.55) {max-pool $\rightarrow$ $\mathbf{q}_{\text{super}}$};
+  \foreach \n in {S1,S2,S3,S4} { \draw[arr] (qe\n.south) -- (pool.north); }
+
+  % Index
+  \node[idx] (idxE2) at (5.2, -2.55) {Índice\\Plano};
+  \draw[arr] (pool.east) -- (idxE2.west)
+    node[midway, above, font=\tiny] {1 busca};
+
+  % Single result
+  \node[res, fill=verdeRI!15, draw=verdeRI!60] (out2) at (7.2, -2.55)
+    {Ranking Final};
+  \draw[arr] (idxE2.east) -- (out2.west);
+
+  \node[note] at (3.6, -3.3)
+    {segmentos fundidos \textbf{antes} da busca $\rightarrow$ 1 única busca no índice};
+
+\end{tikzpicture}
+\caption{Comparação entre as duas estratégias de fusão. Em E1 (fusão tardia),
+cada segmento da consulta faz uma busca independente no índice e as listas
+resultantes são combinadas pelo reranker. Em E2 (fusão precoce), todos os
+embeddings são fundidos em um único super-embedding por max-pooling antes
+de uma única busca.}
+\label{fig:fusao}
+\end{figure}
+
+\subsubsection{Estratégia 1 --- Fusão Tardia (E1)}
+
+Na fusão tardia, o sistema trata \textbf{cada segmento da consulta como uma
+consulta independente}. Para um áudio de 15~s com sobreposição de 50\%, isso
+gera 4 segmentos de 5~s e, portanto, 4 buscas no índice HNSW. Cada busca
+retorna uma lista dos $k$ segmentos do corpus mais similares àquele trecho
+específico.
+
+O raciocínio por trás dessa abordagem é direto: se o pássaro cantou de forma
+clara apenas nos primeiros 5~s do áudio, o segmento S1 já é suficiente para
+identificá-lo. Os demais segmentos podem conter silêncio, ruído ou outra
+espécie, mas suas listas de resultados também são consideradas. O reranker
+(Seção~\ref{sub:reranking}) então combina todas as listas em um ranking final,
+dando mais peso às evidências que aparecem consistentemente em múltiplos
+segmentos.
+
+\textbf{Vantagem principal}: preserva a diversidade de evidências. Se o pássaro
+cantou em diferentes momentos do áudio, cada segmento captura um aspecto
+diferente, e a combinação das listas tende a cobrir mais candidatos relevantes
+(daí o P@5 maior).
+
+\textbf{Custo}: $N_q$ buscas no índice ($N_q \approx 4$--$12$), o que eleva
+a latência para 22,6~ms na média. Com 363.917 documentos no índice HNSW, cada
+busca individualmente é rápida ($O(\log N)$), mas o custo se multiplica.
+
+\subsubsection{Estratégia 2 --- Fusão Precoce (E2)}
+
+Na fusão precoce, os embeddings de todos os segmentos da consulta são
+\textbf{fundidos em um único vetor antes de qualquer busca}. A operação de
+fusão usada é o \textit{max-pooling}: para cada uma das 1280 dimensões do
+embedding, é mantido o valor máximo encontrado entre todos os segmentos:
+\begin{equation}
+  \mathbf{q}_{\text{super}}[d] = \max_{j \in \{1,\ldots,N_q\}}
+  \mathbf{e}_j[d], \quad d = 1,\ldots,1280
+  \label{eq:super}
+\end{equation}
+O vetor resultante é então normalizado em L2. Intuitivamente, o max-pooling
+preserva, em cada dimensão do espaço de embedding, a \emph{evidência mais
+forte} encontrada em qualquer trecho do áudio. Esse vetor comprimido representa
+o ``melhor de cada segmento'' e é usado como consulta única no índice plano.
+
+\textbf{Vantagem principal}: uma única busca no índice reduz a latência para
+6,3~ms na média (3,5$\times$ mais rápido que E1). O índice também é menor:
+27.309 vetores (um por arquivo de treino) contra 363.917 (um por segmento).
+
+\textbf{Custo}: ao fundir tudo em um vetor, informações sobre \emph{quando}
+a vocalização ocorreu são perdidas. Se dois segmentos correspondem a espécies
+diferentes no mesmo áudio, o super-embedding pode misturar seus sinais.
+
+\subsection{Reranking}
+\label{sub:reranking}
+
+Após a busca kNN retornar os candidatos mais próximos, o reranking é a etapa
+que \textbf{reordena essa lista} para colocar a espécie correta o mais próximo
+do topo possível. É análogo ao que um motor de busca faz ao ordenar páginas
+da web: a recuperação vetorial encontra candidatos plausíveis rapidamente;
+o reranker decide qual deles é mais relevante com critérios mais finos.
+
+No BirdSearch, o reranking é especialmente importante em E1 (fusão tardia),
+porque o sistema recebe \emph{múltiplas listas de candidatos} --- uma por
+segmento --- e precisa combiná-las em uma única lista ordenada.
+A Figura~\ref{fig:reranking} ilustra como esse processo funciona.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+    seg/.style={rectangle, rounded corners=2pt,
+                draw=azulRI!50, fill=azulRI!8,
+                minimum width=0.9cm, minimum height=0.55cm,
+                font=\tiny\bfseries, text centered},
+    lst/.style={rectangle, rounded corners=2pt,
+                draw=gray!50, fill=gray!6,
+                minimum width=2.5cm, minimum height=0.45cm,
+                font=\tiny, text centered, inner sep=2pt},
+    rk/.style={rectangle, rounded corners=3pt,
+               draw=orange!60, fill=orange!10,
+               minimum width=2.2cm, minimum height=0.6cm,
+               font=\scriptsize\bfseries, text centered},
+    out/.style={rectangle, rounded corners=3pt,
+                draw=verdeRI!60, fill=verdeRI!10,
+                minimum width=2.8cm, minimum height=0.45cm,
+                font=\tiny, text centered},
+    arr/.style={-Stealth, thick, black!55},
+    note/.style={font=\tiny\itshape, color=cinzaRI}
+  ]
+
+  % Segments column
+  \node[seg] (s1) at (0, 3.8) {S1};
+  \node[seg] (s2) at (0, 2.8) {S2};
+  \node[seg] (s3) at (0, 1.8) {S3};
+  
+  \node[note] at (0, 0.9) {segmentos da consulta};
+
+  % kNN arrow
+
+  % Lists
+  \node[lst, text=azulRI!80] (l11) at (2.8, 4.25) {1. \textit{Tangara} 0,97};
+  \node[lst] (l12) at (2.8, 3.75) {2. \textit{Dacnis} 0,91};
+  \node[lst] (l13) at (2.8, 3.25) {3. \textit{Pipra} 0,88};
+  \node[note, align=center] at (2.8, 2.9) {Lista S1};
+
+  \node[lst, text=azulRI!80] (l21) at (2.8, 2.45) {1. \textit{Tangara} 0,95};
+  \node[lst] (l22) at (2.8, 1.95) {2. \textit{Tangara} 0,89};
+  \node[lst] (l23) at (2.8, 1.45) {3. \textit{Chlorophanes} 0,82};
+  \node[note, align=center] at (2.8, 1.1) {Lista S2};
+
+  \node[lst, text=azulRI!80] (l31) at (2.8, 0.65) {1. \textit{Tangara} 0,93};
+  \node[lst] (l32) at (2.8, 0.15) {2. \textit{Dacnis} 0,87};
+  \node[lst, text=azulRI!80] (l33) at (2.8,-0.35) {3. \textit{Tangara} 0,85};
+  \node[note, align=center] at (2.8,-0.75) {Lista S3};
+
+  % Arrows from segments to lists
+  
+  \draw[arr] (s1.east) -- (l11.west);
+  \draw[arr] (s2.east) -- (l21.west);
+  \draw[arr] (s3.east) -- (l31.west);
+
+  % Reranker box
+  \node[rk] (rkbox) at (5.5, 1.9) {Reranker};
+
+  % Arrows from lists to reranker
+  \foreach \lst in {l11,l12,l13,l21,l22,l23,l31,l32,l33} {
+    \draw[arr] (\lst.east) -- (rkbox.west);
+  }
+
+  % Output ranking
+  \node[out, fill=verdeRI!20, draw=verdeRI!70, font=\small\bfseries]
+    (o1) at (9.0, 3.3) {1\textordmasculine\ \textit{Tangara} spp.};
+  \node[out] (o2) at (8.9, 2.7) {2\textordmasculine\ \textit{Dacnis} spp.};
+  \node[out] (o3) at (8.8, 2.1) {3\textordmasculine\ \textit{Pipra} spp.};
+  \node[out] (o4) at (9.1, 1.5) {4\textordmasculine\ \textit{Chlorophanes}};
+  \node[note] at (9.0, 0.9) {Ranking final};
+
+  \draw[arr] (rkbox.east) -- (o1.west);
+  \draw[arr] (rkbox.east) -- (o2.west);
+  \draw[arr] (rkbox.east) -- (o3.west);
+  \draw[arr] (rkbox.east) -- (o4.west);
+
+
+\end{tikzpicture}
+\caption{Processo de reranking em E1. Três segmentos da consulta geram três
+listas de candidatos via busca kNN. O reranker consolida todas as listas em
+um único ranking final, usando diferentes estratégias para combinar as evidências.
+Neste exemplo, \textit{Tangara} aparece consistentemente nas três listas e
+sobe ao topo.}
+\label{fig:reranking}
+\end{figure}
+
+Os 14 rerankers implementados organizam-se em cinco famílias, da mais simples
+à mais sofisticada:
+
+\textbf{(1) Agregação por score} (\texttt{max}, \texttt{mean},
+\texttt{topk\_mean}, \texttt{weighted\_topk}, \texttt{median}, \texttt{threshold}):
+olham diretamente os valores de similaridade. O \texttt{max}, por exemplo,
+atribui a cada espécie candidata o maior score encontrado em qualquer segmento.
+É simples e eficaz quando um único segmento já contém a vocalização clara.
+O \texttt{topk\_mean} usa a média dos $k=3$ maiores scores, equilibrando
+evidências fortes com consistência.
+
+\textbf{(2) Votação} (\texttt{hit}): ignora completamente os valores dos
+scores e conta apenas \emph{quantas vezes} cada espécie apareceu entre os
+candidatos das listas. Uma espécie que aparece em 3 das 4 listas recebe
+pontuação 3. Funciona bem quando a concordância entre segmentos é um sinal
+mais confiável que os scores absolutos.
+
+\textbf{(3) Fusão por rank} (\texttt{rrf}, \texttt{borda}): usam apenas a
+\emph{posição} das espécies nas listas, sem considerar os valores dos scores
+(Eq.~\eqref{eq:rrf}). O RRF calcula $1/(60 + \text{posição})$ para cada
+aparição de uma espécie e soma essas contribuições. O valor $k=60$ é uma
+constante empírica que suaviza a diferença entre posições altas. O Borda Count
+faz algo similar: dá mais pontos a quem aparece em posições melhores.
+
+\textbf{(4) Score normalizado} (\texttt{softmax}, \texttt{attention}): antes
+de combinar as listas, normalizam os scores de cada lista separadamente via
+softmax com temperatura $\tau$. Com $\tau=0{,}05$--$0{,}1$, o softmax é
+muito concentrado: quem está no topo de cada lista recebe quase todo o peso,
+enquanto resultados medianos são praticamente ignorados:
+\begin{equation}
+  s_{\text{att}}(\ell) = \sum_j \hat{w}_j
+    \underbrace{\sum_{i:\,\text{label}=\ell}
+      \frac{e^{s_{ji}/\tau}}{\sum_{i'} e^{s_{ji'}/\tau}}}_{\text{softmax por lista}},
+  \quad
+  \hat{w}_j = \frac{e^{\max_i s_{ji}/\tau}}{\sum_{j'} e^{\max_{i} s_{j'i}/\tau}}
+  \label{eq:att_rk}
+\end{equation}
+O \texttt{attention} vai além e também pondera as próprias consultas: segmentos
+em que o sistema está mais ``confiante'' (pico de similaridade mais alto)
+recebem mais peso do que segmentos ruidosos. Esse mecanismo duplo de atenção
+--- sobre os candidatos e sobre as consultas --- explica por que é o melhor
+reranker puro nos experimentos.
+
+\textbf{(5) Taxonômico e Híbridos} (\texttt{taxonomy\_boost} e variantes
+híbridas): discutidos em detalhes na Seção~\ref{sub:tax} em conjunto com as
+métricas taxonômicas. Os híbridos combinam dois ou três rerankers via soma
+ponderada de scores normalizados e operam sobre listas já computadas, sem
+nova busca no índice, atingindo latência de 0,3--1,0~ms.
+
+\subsection{Reranking Taxonômico e Métricas Biológicas}
+\label{sub:tax}
+
+O \texttt{taxonomy\_boost} é um reranker de segunda camada: ele parte de uma
+pontuação base (calculada por qualquer outro reranker) e aplica um
+\textbf{bônus taxonômico} a espécies biologicamente próximas da espécie
+mais bem pontuada $\hat\ell$:
+\begin{equation}
+  s_{\text{tax}}(\ell) = s_{\text{base}}(\ell)
+    + 0{,}20 \cdot \mathbf{1}[\text{genus}(\ell) = \text{genus}(\hat\ell)]
+    + 0{,}10 \cdot \mathbf{1}[\text{tokens}(\ell) \cap \text{tokens}(\hat\ell) \neq \emptyset]
+  \label{eq:tax}
+\end{equation}
+
+Para entender como funciona na prática, considere um exemplo concreto.
+Suponha que a busca retornou estes candidatos (com scores base normalizados):
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Espécie candidata} & \textbf{Gênero} & \textbf{Score base} & \textbf{Score após boost} \\
+\midrule
+\textit{Tangara cyanicollis}  & \textit{Tangara} & 0,80 & 0,80 (topo, $\hat\ell$) \\
+\textit{Chlorophanes spiza}   & \textit{Chlorophanes} & 0,78 & 0,78 \\
+\textit{Tangara chilensis}    & \textit{Tangara} & 0,75 & \textbf{0,95} (+0,20) \\
+\textit{Tangara mexicana}     & \textit{Tangara} & 0,71 & \textbf{0,91} (+0,20) \\
+\textit{Blue Dacnis}          & \textit{Dacnis}  & 0,69 & 0,69 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+As espécies do mesmo gênero (\textit{Tangara}) recebem um bônus de $+0{,}20$
+e sobem no ranking, mesmo com score base menor. Isso reflete a expectativa de
+que cantos de espécies do mesmo gênero são mais similares entre si do que
+cantos de gêneros distantes, tornando esses erros ``mais aceitáveis''.
+
+Os \textbf{rerankers híbridos} combinam essa lógica taxonômica com rerankers
+de score em uma soma ponderada. Por exemplo, o
+\texttt{hybrid\_attention\_softmax\_taxonomy} calcula:
+\[
+  s_{\text{hib}}(\ell) = 0{,}45\,\hat{s}_{\text{att}}(\ell)
+                       + 0{,}35\,\hat{s}_{\text{sm}}(\ell)
+                       + 0{,}20\,\hat{s}_{\text{tax}}(\ell)
+\]
+onde $\hat{s}$ indica score normalizado para $[0,1]$. A normalização impede
+que um ranker com escalas absolutas maiores domine os demais. Esse híbrido
+opera \emph{inteiramente sobre as listas já computadas}, sem nova chamada ao
+índice, atingindo latência de 0,3--1,0~ms.
+
+\subsection{Dataset e Configuração Experimental}
+
+O corpus é o \textbf{BirdCLEF 2026 Training Set}: 34.144 gravações de campo,
+571 espécies, filtradas por qualidade $\geq 3{,}0$ estrelas (escala Xeno-canto).
+A divisão treino/teste é estratificada por espécie na proporção 80/20.
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Conjunto} & \textbf{Arquivos} & \textbf{Segmentos (overlap 50\%)} \\
+\midrule
+Treino & 27.309 & 363.917 (E1) / 27.309 (E2) \\
+Teste  &  6.835 & --- (consultas) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Quatro experimentos principais foram conduzidos: (1) \textit{strategy\_compare}
+--- comparação direta E1 \textit{vs.}\ E2 com Perch v2; (2)
+\textit{strategy\_compare\_giant} --- seis variantes com/sem overlap e com/sem
+\texttt{spectral\_gating}; (3) \textit{ranking\_suite\_advanced} --- sweep de
+14 rerankers sobre E1 e E2 com Perch v2, incluindo métricas taxonômicas; (4)
+\textit{ranking\_sweep\_all} --- sweep de rerankers sobre E1 e E2 com BirdNET v3.0.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Resultados}
+\label{sec:res}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Comparação Base E1 \textit{vs.} E2}
+
+A Tabela~\ref{tab:base} apresenta a comparação direta entre as estratégias
+base (Perch v2, dataset completo, 6.835 consultas).
+
+\begin{table}[H]
+\centering
+\caption{Comparação base E1 (HNSW + RRF) \textit{vs.}\ E2 (Flat + Max) com
+Perch v2. Dataset completo, 6.835 consultas.}
+\label{tab:base}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Métrica} & \textbf{E1 --- Segmentos} & \textbf{E2 --- Super-emb} & \textbf{$\Delta$} \\
+\midrule
+MAP              & 0,8191 & \textbf{0,8227} & +0,0036 \\
+MRR              & 0,8191 & \textbf{0,8227} & +0,0036 \\
+nDCG             & 0,8417 & \textbf{0,8457} & +0,0040 \\
+P@1              & 0,7697 & \textbf{0,7729} & +0,0032 \\
+P@5              & \textbf{0,2518} & 0,2207  & --0,0311 \\
+Latência (média) & 22,6~ms & \textbf{6,3~ms} & $3{,}6\times$ \\
+Latência (p95)   & 33,3~ms & \textbf{6,4~ms} & $5{,}2\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A E2 supera E1 em MAP, MRR, nDCG e P@1, ao passo que E1 mantém vantagem
+em P@5 (0,2518 \textit{vs.}\ 0,2207): a fusão tardia preserva mais candidatos
+relevantes na lista expandida, o que é útil em aplicações que exibem os
+5 principais resultados. A redução de latência de E2 é expressiva ---
+$3{,}6\times$ na média e $5{,}2\times$ no p95 --- pois E2 emite uma única
+busca no índice plano (27.309 vetores) contra $N_q \approx 6$--$8$ buscas
+no HNSW de E1 (363.917 vetores).
+
+\subsection{Impacto da Sobreposição e do Pré-processamento}
+
+\begin{table}[H]
+\centering
+\caption{Impacto da sobreposição e do filtro espectral. Experimento
+\textit{strategy\_compare\_giant}, Perch v2, 6.835 consultas.}
+\label{tab:giant}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Variante} & \textbf{Overlap} & \textbf{Noise filter} & \textbf{MAP} & \textbf{P@1} & \textbf{Lat.\ (ms)} \\
+\midrule
+E1 --- overlap, sem noise    & Sim & Não & 0,8194 & 0,7697 & 21,9 \\
+E2 --- overlap, sem noise    & Sim & Não & \textbf{0,8227} & \textbf{0,7729} & \textbf{6,2} \\
+E1 --- sem overlap, sem noise & Não & Não & 0,7980 & 0,7424 & 14,3 \\
+E2 --- sem overlap, sem noise & Não & Não & 0,7929 & 0,7397 & 6,3 \\
+E1 --- sem overlap, com noise & Não & Sim & 0,7489 & 0,6865 & 14,4 \\
+E2 --- sem overlap, com noise & Não & Sim & 0,7607 & 0,7067 & 6,3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A Tabela~\ref{tab:giant} revela três padrões:
+
+\textbf{(1) A sobreposição é essencial.} Removê-la reduz o MAP em 2,1 pontos
+em E1 (0,8194\,$\to$\,0,7980) e 3,0 pontos em E2 (0,8227\,$\to$\,0,7929).
+Vocalizações que cruzam fronteiras de janela só são representadas integralmente
+com overlap.
+
+\textbf{(2) O \texttt{spectral\_gating} degrada o desempenho neste contexto.}
+Quando ativado sobre E1 sem overlap, o MAP cai a 0,7489 --- uma queda de 4,9
+pontos em relação ao E1 com overlap. O Perch v2, treinado em áudio de campo
+bruto, incorporou robustez a ruído em seus pesos; o pré-processamento espectral
+remove componentes que o modelo usa como pistas discriminativas.
+
+\textbf{(3) A latência de E2 é estável.} Em todas as variantes, E2 permanece
+entre 6,2 e 6,3~ms, enquanto E1 varia entre 14 e 22~ms conforme o número de
+segmentos por consulta.
+
+\subsection{Sweep de Rerankers com Perch v2}
+
+\begin{table}[H]
+\centering
+\caption{Resultados do sweep de rerankers com Perch v2 (6.835 consultas).
+Métricas taxonômicas medidas em E1. Melhores por estratégia em \textbf{negrito}.}
+\label{tab:sweep_perch}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Est.} & \textbf{Ranker} & \textbf{MAP} & \textbf{nDCG} & \textbf{P@1} & \textbf{genus@5} & \textbf{Lat.} \\
+\midrule
+E1 & \texttt{attention} ($\tau=0{,}05$)   & 0,8689 & \textbf{0,8862} & \textbf{0,8269} & 0,9223 & 12,5~ms \\
+E1 & \texttt{softmax} ($\tau=0{,}1$)      & 0,8682 & 0,8856 & 0,8252 & 0,9242 & 12,6~ms \\
+E1 & \texttt{hybrid\_att\_sm\_tax}         & \textbf{0,8691} & \textbf{0,8862} & 0,8263 & \textbf{0,9247} & \textbf{1,0~ms} \\
+E1 & \texttt{taxonomy\_boost}             & 0,8628 & 0,8813 & 0,8180 & 0,9207 & 12,0~ms \\
+E1 & \texttt{hybrid\_att\_rrf\_tax}        & 0,8622 & 0,8808 & 0,8202 & 0,9163 & 0,8~ms \\
+E1 & \texttt{rrf} ($k=60$)                & 0,8179 & 0,8406 & 0,7691 & 0,8844 & 11,9~ms \\
+E1 & \texttt{borda}                        & 0,8170 & 0,8403 & 0,7672 & 0,8832 & 11,9~ms \\
+E1 & \texttt{topk\_mean}                   & 0,7632 & 0,7890 & 0,7071 & 0,8375 & 12,0~ms \\
+\midrule
+E2 & \texttt{attention} ($\tau=0{,}05$)   & \textbf{0,8494} & \textbf{0,8694} & \textbf{0,8041} & 0,9131 & 5,1~ms \\
+E2 & \texttt{hybrid\_att\_sm\_tax}         & 0,8467 & 0,8665 & 0,7968 & \textbf{0,9156} & \textbf{0,3~ms} \\
+E2 & \texttt{hybrid\_att\_rrf\_tax}        & 0,8476 & 0,8677 & 0,8029 & 0,9069 & \textbf{0,3~ms} \\
+E2 & \texttt{softmax}                      & 0,8436 & 0,8656 & 0,7925 & 0,9141 & 5,0~ms \\
+E2 & \texttt{taxonomy\_boost}             & 0,8200 & 0,8467 & 0,7561 & 0,9055 & 5,2~ms \\
+E2 & \texttt{rrf}                          & 0,8227 & 0,8457 & 0,7729 & 0,8907 & 5,0~ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A Tabela~\ref{tab:sweep_perch} mostra resultados consistentes em ambas as
+estratégias. Em E1, \texttt{attention} (MAP\,=\,0,8689) e \texttt{softmax}
+(0,8682) superam o \texttt{rrf} base (0,8179) em $\approx$\,5 pontos de MAP,
+evidenciando que os scores absolutos do Perch v2 carregam informação além da
+posição. O híbrido \texttt{hybrid\_att\_sm\_tax} atinge MAP\,=\,0,8691 com
+latência de apenas 1,0~ms --- porque opera sobre as listas pré-computadas do
+índice base, sem busca adicional.
+
+Em E2, o \texttt{attention} (0,8494) lidera, com o híbrido
+\texttt{hybrid\_att\_rrf\_tax} logo atrás (0,8476) a 0,3~ms. O
+\texttt{taxonomy\_boost} tem o melhor genus@5 relativo em E2 (0,9055),
+sendo preferível em aplicações onde a relevância taxonômica importa mais
+que a precisão exata.
+
+\subsection{Sweep de Rerankers com BirdNET v3.0}
+
+\begin{table}[H]
+\centering
+\caption{Resultados selecionados com BirdNET v3.0 (6.835 consultas).
+363.917 documentos em E1, 27.309 em E2. genus@5 não foi coletado
+neste experimento (indicado por ---). Melhores por estratégia em \textbf{negrito}.}
+\label{tab:sweep_birdnet}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Est.} & \textbf{Ranker} & \textbf{MAP} & \textbf{nDCG} & \textbf{P@1} & \textbf{genus@5} & \textbf{Lat.} \\
+\midrule
+E1 & \texttt{attention}       & \textbf{0,8944} & \textbf{0,9105} & \textbf{0,8549} & --- & 18,7~ms \\
+E1 & \texttt{softmax}         & 0,8910 & 0,9078 & 0,8506 & --- & 22,4~ms \\
+E1 & \texttt{taxonomy\_boost} & 0,8894 & 0,9064 & 0,8478 & --- & 18,5~ms \\
+E1 & \texttt{rrf}             & 0,8312 & 0,8555 & 0,7775 & --- & 20,3~ms \\
+E1 & \texttt{topk\_mean}      & 0,7707 & 0,8003 & 0,7083 & --- & 16,7~ms \\
+E1 & \texttt{hit}             & 0,6743 & 0,7270 & 0,5649 & --- & 16,8~ms \\
+E1 & \texttt{mean}            & 0,2520 & 0,2972 & 0,1671 & --- & 17,3~ms \\
+\midrule
+E2 & \texttt{attention}       & \textbf{0,8373} & \textbf{0,8604} & \textbf{0,7881} & --- & 6,2~ms \\
+E2 & \texttt{softmax}         & 0,8298 & 0,8540 & 0,7786 & --- & 6,0~ms \\
+E2 & \texttt{taxonomy\_boost} & 0,8240 & 0,8493 & 0,7700 & --- & 6,2~ms \\
+E2 & \texttt{rrf}             & 0,8108 & 0,8371 & 0,7557 & --- & 5,9~ms \\
+E2 & \texttt{mean}            & 0,5163 & 0,5973 & 0,3557 & --- & 6,0~ms \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Com BirdNET, o \texttt{attention} em E1 alcança MAP\,=\,0,8944 --- o
+\textbf{melhor resultado de todo o projeto} (Tabela~\ref{tab:geral}),
+superando o Perch v2 em 2,55 pontos percentuais. Isso sugere que os embeddings
+do BirdNET possuem maior margem entre espécies similares, amplificando os
+benefícios de rankers que exploram scores absolutos.
+
+O fenômeno mais notável é o colapso dos rankers \texttt{mean} e \texttt{median}
+com BirdNET em E1 (MAP\,$\approx$\,0,25): o BirdNET gera scores heterogêneos
+entre segmentos, e a média suprime os picos de sinal relevantes. O
+\texttt{attention} e o \texttt{softmax}, que concentram o peso nos picos via
+softmax com $\tau=0{,}05$--$0{,}1$, são imunes a esse colapso.
+
+\subsection{Comparação Geral de Desempenho}
+
+A Tabela~\ref{tab:geral} consolida os melhores rerankers de cada modelo e
+estratégia de fusão. Para cada linha escolheu-se o reranker que maximiza o
+MAP dentre os avaliados na suíte completa.
+O genus@5 do BirdNET foi obtido executando
+\texttt{experiments/ranking\_suite\_birdnet.py}, que replica a mesma lógica
+de avaliação taxonômica da suíte Perch~v2.
+
+\begin{table}[ht]
+\centering
+\caption{Comparação geral: melhores rerankers por modelo e estratégia.
+PV\,=\,Perch v2; BN\,=\,BirdNET v3.0; E1\,=\,fusão tardia (HNSW);
+E2\,=\,fusão antecipada (Flat). Lat.\ = latência média de busca (ms).
+$\dagger$\,genus@5 requer execução de
+\texttt{ranking\_suite\_birdnet.py}.}
+\label{tab:geral}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Modelo} & \textbf{Est.} & \textbf{MAP} & \textbf{nDCG} & \textbf{P@1} & \textbf{genus@5} & \textbf{Lat.\ (ms)} \\
+\midrule
+\multirow{2}{*}{Perch v2}
+  & E1 & \textbf{0,8691} & \textbf{0,9125} & \textbf{0,8311} & \textbf{0,9247} &  1,0 \\
+  & E2 & 0,8495          & 0,8906          & 0,8060          & 0,9071          &  0,3 \\
+\midrule
+\multirow{2}{*}{BirdNET v3.0}
+  & E1 & 0,8944          & 0,9105          & 0,8549          & $\dagger$       & 18,7 \\
+  & E2 & 0,8373          & 0,8814          & 0,7998          & $\dagger$       &  6,2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{E1 supera E2 em ambos os modelos.} A fusão tardia, ao emitir uma
+consulta por segmento e combinar as listas com RRF ou \texttt{attention},
+captura variações intra-gravação que a super-embedding de E2 aplana.
+O custo é um índice maior (HNSW sobre 363.917 segmentos \textit{vs.}\
+Flat sobre 27.309 arquivos) e maior latência.
+
+\textbf{BirdNET lidera em MAP no E1.} O backbone da Cornell, treinado em
+6.000+ espécies, generaliza melhor na métrica de precisão média; Perch~v2,
+porém, atinge genus@5\,=\,0,925, indicando que seu espaço de embeddings
+organiza espécies mais próximas taxonomicamente — resultado coerente com o
+treinamento específico em cantos de aves do Xeno-canto~\cite{xeno:14}.
+
+\subsection{Métricas Taxonômicas}
+
+Um diferencial do BirdSearch é medir não só se a espécie exata foi encontrada,
+mas o quão biologicamente próximos estão os erros
+(Equações~\eqref{eq:genus}--\eqref{eq:common}, Seção~\ref{sub:tax_fund}).
+
+\begin{table}[ht]
+\centering
+\caption{Métricas taxonômicas em E1 com Perch v2 (6.835 consultas).
+genus@5: fração dos top-5 do mesmo gênero; common@10: fração dos top-10
+com nome comum sobreposto.}
+\label{tab:tax}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Reranker} & \textbf{MAP} & \textbf{genus@5} & \textbf{genus@10} & \textbf{common@10} \\
+\midrule
+\texttt{softmax}                  & 0,8682 & \textbf{0,9242} & 0,9419 & 0,9486 \\
+\texttt{attention}                & \textbf{0,8689} & 0,9223 & \textbf{0,9424} & \textbf{0,9492} \\
+\texttt{hybrid\_att\_sm\_tax}     & 0,8691 & 0,9247 & 0,9423 & 0,9498 \\
+\texttt{taxonomy\_boost}          & 0,8628 & 0,9207 & 0,9393 & 0,9482 \\
+\texttt{rrf}                      & 0,8179 & 0,8844 & 0,9154 & 0,9254 \\
+\texttt{borda}                    & 0,8170 & 0,8832 & 0,9175 & 0,9271 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Os resultados da Tabela~\ref{tab:tax} revelam um padrão interessante.
+
+\textbf{Softmax e attention lideram em genus@5.} Embora o
+\texttt{taxonomy\_boost} tenha sido projetado explicitamente para promover
+espécies do mesmo gênero, os rerankers de score normalizado alcançam valores
+semelhantes (0,924 \textit{vs.}\ 0,921) sem usar nenhuma informação taxonômica.
+Isso ocorre porque os embeddings do Perch v2, treinados sobre cantos de aves,
+aprenderam naturalmente que espécies do mesmo gênero têm cantos similares ---
+a taxonomia está ``embutida'' no espaço de embedding.
+
+\textbf{RRF e Borda ficam 3--4 pontos abaixo.} Os rankers de fusão por rank
+descartam os valores de similaridade e usam apenas as posições. Ao fazer isso,
+perdem a correlação entre similaridade espectral e proximidade taxonômica,
+resultando em genus@5\,$\approx$\,0,884. Ou seja, ao não usar os scores, esses
+rankers fazem mais erros que não são nem biologicamente próximos.
+
+\textbf{common@10 acima de 0,94 para os melhores rankers.} Isso significa que
+em 94\% dos 10 primeiros resultados, o nome comum da espécie tem ao menos uma
+palavra em comum com a consulta --- uma indicação de que o sistema raramente
+sugere espécies completamente desconexas. Para um ornitólogo em campo, essa
+lista de sugestões tem valor mesmo quando a espécie exata não é a primeira.
+
+\subsection{Análise de Latência}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    width=\columnwidth, height=5.5cm,
+    bar width=0.55cm,
+    ylabel={Latência (ms)},
+    xtick=data,
+    xticklabels={rrf, attention, softmax, tax\_boost, híbrido\_att\_rrf, híbrido\_att\_sm},
+    xticklabel style={rotate=28, anchor=east, font=\scriptsize},
+    ymin=0, ymax=28,
+    legend style={at={(0.97,0.97)}, anchor=north east, font=\scriptsize},
+    grid=major, grid style={dashed, gray!30},
+    nodes near coords, nodes near coords align={vertical},
+    every node near coord/.append style={font=\tiny},
+  ]
+  \addplot[fill=azulRI!50, draw=azulRI!80] coordinates {
+    (1,11.9)(2,12.5)(3,12.6)(4,12.0)(5,0.8)(6,1.0)
+  };
+  \addplot[fill=verdeRI!50, draw=verdeRI!80] coordinates {
+    (1,5.0)(2,5.1)(3,5.0)(4,5.2)(5,0.3)(6,0.3)
+  };
+  \legend{E1, E2}
+\end{axis}
+\end{tikzpicture}
+\caption{Latência média de busca por reranker. Híbridos atingem
+$<1$~ms pois operam sobre resultados pré-computados. E2 é $\approx$\,2,4$\times$
+mais rápido que E1 para rankers simples.}
+\label{fig:latency}
+\end{figure}
+
+A Figura~\ref{fig:latency} mostra que a latência de rankers simples é
+dominada pelo custo da busca no índice ($\approx$\,12~ms em E1, 5~ms em E2).
+Rankers híbridos operam sobre as listas já computadas e atingem
+0,3--1,0~ms, sendo ideais para implantação com restrições de tempo real.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Conclusão}
+\label{sec:conc}
+% ══════════════════════════════════════════════════════════════════════════════
+
+FAZER AINDA
+
+Como trabalhos futuros, identificamos: (i) investigar filtros de ruído que
+preservem as pistas espectrais discriminativas do Perch v2; (ii) explorar
+\textit{fine-tuning} dos backbones sobre espécies amazônicas específicas; (iii)
+avaliar as representações \texttt{cluster} e \texttt{prototype} para capturar
+repertórios vocais multi-modais; e (iv) implementar indexação dinâmica para
+suporte a corpus de monitoramento contínuo.
+
+\bibliographystyle{sbc}
+\bibliography{sbc-template}
+
+\end{document}
