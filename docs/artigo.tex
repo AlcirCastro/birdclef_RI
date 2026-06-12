@@ -224,7 +224,31 @@ superiores. O MRR foca exclusivamente na posição do primeiro resultado correto
 \label{sec:fund}
 % ══════════════════════════════════════════════════════════════════════════════
 
-Só dizer que a gente usar as métrica de MAP,.....
+\subsection{Métricas Clássicas de Recuperação de Informação}
+\label{sub:classicas_fund}
+
+A avaliação de sistemas de busca exige medidas que vão além de simples acertos, utilizando conjuntos de documentos relevantes identificados por especialistas e resultados respondidos pelo sistema. Para fundamentar a avaliação do modelo, adotamos as métricas escalares clássicas detalhadas a seguir.
+
+\paragraph{Mean Average Precision (MAP).} A precisão média nos relevantes encontrados (MAP) é uma medida escalar de precisão fundamental. Para o seu cálculo, extrai-se a média das precisões nos pontos de revocação onde apareceram documentos relevantes. Essa métrica permite a avaliação do sistema a partir de um único valor que resume a qualidade do ranking para múltiplas consultas.
+
+\paragraph{Mean Reciprocal Rank (MRR).} O MRR avalia o desempenho focando especificamente na posição da resposta correta mais alta no ranking \cite{voorhees1999trec}. O cálculo é definido formalmente por:
+
+\begin{equation}
+MRR(S, Q) =
+\frac{\displaystyle \sum_{q \in Q}
+\frac{1}{\mathrm{PosRel}(S(q))}}
+{|Q|}
+\label{eq:mrr}
+\end{equation}
+
+onde $Q$ é um conjunto de consultas, $S$ é um sistema de ranking e $\mathrm{PosRel}(S(q))$ representa a posição do primeiro documento relevante retornado pelo sistema $S$ para a consulta $q$. O MRR (Mean Reciprocal Rank) calcula a média dos inversos dessas posições ao longo de todas as consultas. Em avaliações com profundidade limitada, como o MRR@10, caso o primeiro documento relevante não seja recuperado entre as dez primeiras posições, a contribuição daquela consulta para o cálculo da métrica é igual a zero.
+
+\paragraph{Normalized Discounted Cumulative Gain (nDCG).} Formalizado por Järvelin e Kekäläinen \cite{jarvelin2002cumulated}, o nDCG (Ganho Cumulativo Descontado Normalizado) parte do pressuposto prático de que documentos relevantes perdem utilidade à medida que são apresentados mais longe do topo da resposta. A métrica aplica um fator de desconto logarítmico ao ganho de acordo com a posição do documento. Utilizando relevância linear, a métrica base de Ganho Cumulativo Descontado (DCG) nos $p$ primeiros resultados é dada por:
+\begin{equation}
+  \text{DCG@}p = \sum_{i=1}^{p} \frac{rel(i)}{\log_2(i+1)}
+  \label{eq:dcg}
+\end{equation}
+Um valor ideal de DCG (IDCG) é obtido caso um sistema coloque todos os documentos ordenados de forma puramente decrescente por valor de relevância. O nDCG divide o DCG de cada sistema por esse DCG ideal, resultando em valores normalizados no intervalo $[0, 1]$ para cada posição do ranking.
 
 %\subsection{Similaridade Cosseno e Produto Interno}
 
@@ -1059,33 +1083,34 @@ que a precisão exata.
 
 \begin{table}[H]
 \centering
-\caption{Resultados selecionados com BirdNET v3.0 (6.835 consultas).
-363.917 documentos em E1, 27.309 em E2. genus@5 não foi coletado
-neste experimento (indicado por ---). Melhores por estratégia em \textbf{negrito}.}
+\caption{Resultados do sweep de rerankers com BirdNET v3.0 (6.835 consultas).
+Melhores por estratégia em \textbf{negrito}.}
 \label{tab:sweep_birdnet}
 \begin{tabular}{llccccc}
 \toprule
 \textbf{Est.} & \textbf{Ranker} & \textbf{MAP} & \textbf{nDCG} & \textbf{P@1} & \textbf{genus@5} & \textbf{Lat.} \\
 \midrule
-E1 & \texttt{attention}       & \textbf{0,8944} & \textbf{0,9105} & \textbf{0,8549} & --- & 18,7~ms \\
-E1 & \texttt{softmax}         & 0,8910 & 0,9078 & 0,8506 & --- & 22,4~ms \\
-E1 & \texttt{taxonomy\_boost} & 0,8894 & 0,9064 & 0,8478 & --- & 18,5~ms \\
-E1 & \texttt{rrf}             & 0,8312 & 0,8555 & 0,7775 & --- & 20,3~ms \\
-E1 & \texttt{topk\_mean}      & 0,7707 & 0,8003 & 0,7083 & --- & 16,7~ms \\
-E1 & \texttt{hit}             & 0,6743 & 0,7270 & 0,5649 & --- & 16,8~ms \\
-E1 & \texttt{mean}            & 0,2520 & 0,2972 & 0,1671 & --- & 17,3~ms \\
+E1 & \texttt{attention} ($\tau=0{,}05$)   & \textbf{0,8942} & \textbf{0,9103} & \textbf{0,8549} & 0,9476 & 11,8~ms \\
+E1 & \texttt{softmax} ($\tau=0{,}1$)      & 0,8922 & 0,9085 & 0,8524 & 0,9473 & 12,5~ms \\
+E1 & \texttt{hybrid\_att\_sm\_tax}         & 0,8923 & 0,9089 & 0,8521 & \textbf{0,9472} & \textbf{0,9~ms} \\
+E1 & \texttt{taxonomy\_boost}             & 0,8892 & 0,9062 & 0,8477 & 0,9454 & 11,7~ms \\
+E1 & \texttt{hybrid\_att\_rrf\_tax}        & 0,8881 & 0,9052 & 0,8483 & 0,9400 & 0,8~ms \\
+E1 & \texttt{rrf} ($k=60$)                & 0,8319 & 0,8563 & 0,7782 & 0,9080 & 11,4~ms \\
+E1 & \texttt{borda}                        & 0,8284 & 0,8537 & 0,7722 & 0,9074 & 11,5~ms \\
+E1 & \texttt{topk\_mean}                   & 0,7708 & 0,8004 & 0,7080 & 0,8612 & 11,8~ms \\
 \midrule
-E2 & \texttt{attention}       & \textbf{0,8373} & \textbf{0,8604} & \textbf{0,7881} & --- & 6,2~ms \\
-E2 & \texttt{softmax}         & 0,8298 & 0,8540 & 0,7786 & --- & 6,0~ms \\
-E2 & \texttt{taxonomy\_boost} & 0,8240 & 0,8493 & 0,7700 & --- & 6,2~ms \\
-E2 & \texttt{rrf}             & 0,8108 & 0,8371 & 0,7557 & --- & 5,9~ms \\
-E2 & \texttt{mean}            & 0,5163 & 0,5973 & 0,3557 & --- & 6,0~ms \\
+E2 & \texttt{attention} ($\tau=0{,}05$)   & \textbf{0,8373} & \textbf{0,8604} & \textbf{0,7881} & \textbf{0,9086} & 5,1~ms \\
+E2 & \texttt{hybrid\_att\_rrf\_tax}        & 0,8404 & 0,8623 & 0,7921 & 0,9105 & \textbf{0,3~ms} \\
+E2 & \texttt{hybrid\_att\_sm\_tax}         & 0,8320 & 0,8562 & 0,7807 & 0,9048 & \textbf{0,3~ms} \\
+E2 & \texttt{softmax}                      & 0,8298 & 0,8540 & 0,7786 & 0,9033 & 5,1~ms \\
+E2 & \texttt{taxonomy\_boost}             & 0,8240 & 0,8493 & 0,7700 & 0,9007 & 5,1~ms \\
+E2 & \texttt{rrf}                          & 0,8108 & 0,8371 & 0,7557 & 0,8879 & 5,0~ms \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Com BirdNET, o \texttt{attention} em E1 alcança MAP\,=\,0,8944 --- o
-\textbf{melhor resultado de todo o projeto} (Tabela~\ref{tab:geral}),
+\textbf{melhor resultado de todo o projeto} (Figura~\ref{fig:map_bars}),
 superando o Perch v2 em 2,55 pontos percentuais. Isso sugere que os embeddings
 do BirdNET possuem maior margem entre espécies similares, amplificando os
 benefícios de rankers que exploram scores absolutos.
@@ -1098,47 +1123,62 @@ softmax com $\tau=0{,}05$--$0{,}1$, são imunes a esse colapso.
 
 \subsection{Comparação Geral de Desempenho}
 
-A Tabela~\ref{tab:geral} consolida os melhores rerankers de cada modelo e
-estratégia de fusão. Para cada linha escolheu-se o reranker que maximiza o
-MAP dentre os avaliados na suíte completa.
-O genus@5 do BirdNET foi obtido executando
-\texttt{experiments/ranking\_suite\_birdnet.py}, que replica a mesma lógica
-de avaliação taxonômica da suíte Perch~v2.
-
-\begin{table}[ht]
+\begin{figure}[H]
 \centering
-\caption{Comparação geral: melhores rerankers por modelo e estratégia.
-PV\,=\,Perch v2; BN\,=\,BirdNET v3.0; E1\,=\,fusão tardia (HNSW);
-E2\,=\,fusão antecipada (Flat). Lat.\ = latência média de busca (ms).
-$\dagger$\,genus@5 requer execução de
-\texttt{ranking\_suite\_birdnet.py}.}
-\label{tab:geral}
-\begin{tabular}{llccccc}
-\toprule
-\textbf{Modelo} & \textbf{Est.} & \textbf{MAP} & \textbf{nDCG} & \textbf{P@1} & \textbf{genus@5} & \textbf{Lat.\ (ms)} \\
-\midrule
-\multirow{2}{*}{Perch v2}
-  & E1 & \textbf{0,8691} & \textbf{0,9125} & \textbf{0,8311} & \textbf{0,9247} &  1,0 \\
-  & E2 & 0,8495          & 0,8906          & 0,8060          & 0,9071          &  0,3 \\
-\midrule
-\multirow{2}{*}{BirdNET v3.0}
-  & E1 & 0,8944          & 0,9105          & 0,8549          & $\dagger$       & 18,7 \\
-  & E2 & 0,8373          & 0,8814          & 0,7998          & $\dagger$       &  6,2 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\textbf{E1 supera E2 em ambos os modelos.} A fusão tardia, ao emitir uma
-consulta por segmento e combinar as listas com RRF ou \texttt{attention},
-captura variações intra-gravação que a super-embedding de E2 aplana.
-O custo é um índice maior (HNSW sobre 363.917 segmentos \textit{vs.}\
-Flat sobre 27.309 arquivos) e maior latência.
-
-\textbf{BirdNET lidera em MAP no E1.} O backbone da Cornell, treinado em
-6.000+ espécies, generaliza melhor na métrica de precisão média; Perch~v2,
-porém, atinge genus@5\,=\,0,925, indicando que seu espaço de embeddings
-organiza espécies mais próximas taxonomicamente — resultado coerente com o
-treinamento específico em cantos de aves do Xeno-canto~\cite{xeno:14}.
+\begin{tikzpicture}
+\begin{axis}[
+    xbar,
+    width=\columnwidth, height=7.5cm,
+    bar width=0.38cm,
+    xlabel={MAP},
+    xmin=0.22, xmax=0.96,
+    ytick=data,
+    yticklabels={
+      BN+E1+mean,
+      PV+E1+topk,
+      BN+E2+rrf,
+      PV+E1+rrf,
+      PV+E2+tax,
+      PV+E2+rrf,
+      BN+E2+att,
+      PV+E2+att,
+      PV+E1+tax,
+      PV+E1+softmax,
+      PV+E1+att,
+      BN+E1+tax,
+      BN+E1+softmax,
+      BN+E1+att
+    },
+    nodes near coords,
+    nodes near coords align={horizontal},
+    every node near coord/.append style={font=\tiny},
+    yticklabel style={font=\scriptsize},
+    xlabel style={font=\small},
+    grid=major, grid style={dashed, gray!30},
+  ]
+  \addplot[fill=azulRI!45, draw=azulRI!70] coordinates {
+    (0.252, 0)
+    (0.763, 1)
+    (0.811, 2)
+    (0.818, 3)
+    (0.820, 4)
+    (0.823, 5)
+    (0.837, 6)
+    (0.849, 7)
+    (0.863, 8)
+    (0.868, 9)
+    (0.869, 10)
+    (0.889, 11)
+    (0.891, 12)
+    (0.894, 13)
+  };
+\end{axis}
+\end{tikzpicture}
+\caption{MAP dos principais experimentos. PV\,=\,Perch v2,
+BN\,=\,BirdNET v3.0. O BirdNET com \texttt{attention} em E1 atinge o melhor
+MAP (0,894).}
+\label{fig:map_bars}
+\end{figure}
 
 \subsection{Métricas Taxonômicas}
 
@@ -1148,20 +1188,27 @@ mas o quão biologicamente próximos estão os erros
 
 \begin{table}[ht]
 \centering
-\caption{Métricas taxonômicas em E1 com Perch v2 (6.835 consultas).
-genus@5: fração dos top-5 do mesmo gênero; common@10: fração dos top-10
-com nome comum sobreposto.}
+\caption{Métricas taxonômicas em E1 (6.835 consultas) para Perch v2 e BirdNET v3.0.
+genus@k: fração dos top-$k$ do mesmo gênero; common@10: fração dos top-10
+com nome comum sobreposto. Melhores por modelo em \textbf{negrito}.}
 \label{tab:tax}
-\begin{tabular}{lcccc}
+\begin{tabular}{llcccc}
 \toprule
-\textbf{Reranker} & \textbf{MAP} & \textbf{genus@5} & \textbf{genus@10} & \textbf{common@10} \\
+\textbf{Modelo} & \textbf{Reranker} & \textbf{MAP} & \textbf{genus@5} & \textbf{genus@10} & \textbf{common@10} \\
 \midrule
-\texttt{softmax}                  & 0,8682 & \textbf{0,9242} & 0,9419 & 0,9486 \\
-\texttt{attention}                & \textbf{0,8689} & 0,9223 & \textbf{0,9424} & \textbf{0,9492} \\
-\texttt{hybrid\_att\_sm\_tax}     & 0,8691 & 0,9247 & 0,9423 & 0,9498 \\
-\texttt{taxonomy\_boost}          & 0,8628 & 0,9207 & 0,9393 & 0,9482 \\
-\texttt{rrf}                      & 0,8179 & 0,8844 & 0,9154 & 0,9254 \\
-\texttt{borda}                    & 0,8170 & 0,8832 & 0,9175 & 0,9271 \\
+Perch v2 & \texttt{softmax}              & 0,8682 & \textbf{0,9242} & 0,9419 & 0,9486 \\
+Perch v2 & \texttt{attention}            & \textbf{0,8689} & 0,9223 & \textbf{0,9424} & \textbf{0,9492} \\
+Perch v2 & \texttt{hybrid\_att\_sm\_tax} & 0,8691 & 0,9247 & 0,9431 & 0,9498 \\
+Perch v2 & \texttt{taxonomy\_boost}      & 0,8628 & 0,9207 & 0,9409 & 0,9482 \\
+Perch v2 & \texttt{rrf}                  & 0,8179 & 0,8844 & 0,9154 & 0,9254 \\
+Perch v2 & \texttt{borda}                & 0,8170 & 0,8832 & 0,9175 & 0,9271 \\
+\midrule
+BirdNET  & \texttt{softmax}              & 0,8922 & 0,9473 & 0,9624 & 0,9684 \\
+BirdNET  & \texttt{attention}            & \textbf{0,8942} & \textbf{0,9476} & \textbf{0,9630} & \textbf{0,9688} \\
+BirdNET  & \texttt{hybrid\_att\_sm\_tax} & 0,8923 & 0,9472 & \textbf{0,9630} & \textbf{0,9688} \\
+BirdNET  & \texttt{taxonomy\_boost}      & 0,8892 & 0,9454 & 0,9618 & 0,9680 \\
+BirdNET  & \texttt{rrf}                  & 0,8319 & 0,9080 & 0,9362 & 0,9462 \\
+BirdNET  & \texttt{borda}                & 0,8284 & 0,9074 & 0,9364 & 0,9459 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1188,51 +1235,61 @@ palavra em comum com a consulta --- uma indicação de que o sistema raramente
 sugere espécies completamente desconexas. Para um ornitólogo em campo, essa
 lista de sugestões tem valor mesmo quando a espécie exata não é a primeira.
 
-\subsection{Análise de Latência}
+% \subsection{Análise de Latência}
 
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    ybar,
-    width=\columnwidth, height=5.5cm,
-    bar width=0.55cm,
-    ylabel={Latência (ms)},
-    xtick=data,
-    xticklabels={rrf, attention, softmax, tax\_boost, híbrido\_att\_rrf, híbrido\_att\_sm},
-    xticklabel style={rotate=28, anchor=east, font=\scriptsize},
-    ymin=0, ymax=28,
-    legend style={at={(0.97,0.97)}, anchor=north east, font=\scriptsize},
-    grid=major, grid style={dashed, gray!30},
-    nodes near coords, nodes near coords align={vertical},
-    every node near coord/.append style={font=\tiny},
-  ]
-  \addplot[fill=azulRI!50, draw=azulRI!80] coordinates {
-    (1,11.9)(2,12.5)(3,12.6)(4,12.0)(5,0.8)(6,1.0)
-  };
-  \addplot[fill=verdeRI!50, draw=verdeRI!80] coordinates {
-    (1,5.0)(2,5.1)(3,5.0)(4,5.2)(5,0.3)(6,0.3)
-  };
-  \legend{E1, E2}
-\end{axis}
-\end{tikzpicture}
-\caption{Latência média de busca por reranker. Híbridos atingem
-$<1$~ms pois operam sobre resultados pré-computados. E2 é $\approx$\,2,4$\times$
-mais rápido que E1 para rankers simples.}
-\label{fig:latency}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% \begin{tikzpicture}
+% \begin{axis}[
+%     ybar,
+%     width=\columnwidth, height=5.5cm,
+%     bar width=0.55cm,
+%     ylabel={Latência (ms)},
+%     xtick=data,
+%     xticklabels={rrf, attention, softmax, tax\_boost, híbrido\_att\_rrf, híbrido\_att\_sm},
+%     xticklabel style={rotate=28, anchor=east, font=\scriptsize},
+%     ymin=0, ymax=28,
+%     legend style={at={(0.97,0.97)}, anchor=north east, font=\scriptsize},
+%     grid=major, grid style={dashed, gray!30},
+%     nodes near coords, nodes near coords align={vertical},
+%     every node near coord/.append style={font=\tiny},
+%   ]
+%   \addplot[fill=azulRI!50, draw=azulRI!80] coordinates {
+%     (1,11.9)(2,12.5)(3,12.6)(4,12.0)(5,0.8)(6,1.0)
+%   };
+%   \addplot[fill=verdeRI!50, draw=verdeRI!80] coordinates {
+%     (1,5.0)(2,5.1)(3,5.0)(4,5.2)(5,0.3)(6,0.3)
+%   };
+%   \legend{E1, E2}
+% \end{axis}
+% \end{tikzpicture}
+% \caption{Latência média de busca por reranker. Híbridos atingem
+% $<1$~ms pois operam sobre resultados pré-computados. E2 é $\approx$\,2,4$\times$
+% mais rápido que E1 para rankers simples.}
+% \label{fig:latency}
+% \end{figure}
 
-A Figura~\ref{fig:latency} mostra que a latência de rankers simples é
-dominada pelo custo da busca no índice ($\approx$\,12~ms em E1, 5~ms em E2).
-Rankers híbridos operam sobre as listas já computadas e atingem
-0,3--1,0~ms, sendo ideais para implantação com restrições de tempo real.
+% A Figura~\ref{fig:latency} mostra que a latência de rankers simples é
+% dominada pelo custo da busca no índice ($\approx$\,12~ms em E1, 5~ms em E2).
+% Rankers híbridos operam sobre as listas já computadas e atingem
+% 0,3--1,0~ms, sendo ideais para implantação com restrições de tempo real.
 
 % ══════════════════════════════════════════════════════════════════════════════
-\section{Conclusão}
+\section{Conclusão e Trabalhos Futuros}
 \label{sec:conc}
 % ══════════════════════════════════════════════════════════════════════════════
 
-FAZER AINDA
+Este trabalho apresentou o \emph{BirdSearch}, um sistema modular de recuperação de informação acústica projetado para a identificação automatizada de espécies de aves e validado sob o expressivo benchmark BirdCLEF 2026. A pesquisa promoveu uma investigação sistemática sobre o impacto de duas estratégias de estruturação de índices e fusão de evidências — a fusão tardia baseada em segmentos (E1) e a fusão precoce via super-embeddings gerados por \emph{max-pooling} (E2) —, operando em conjunto com 14 algoritmos de ranqueamento sobre os backbones neurais especializados Google Perch v2 e BirdNET v3.0.
+
+Os resultados experimentais evidenciaram que a fusão precoce (E2) consolida-se como a abordagem mais eficiente em termos computacionais, reduzindo a latência média de busca para 6,3 ms (um ganho de velocidade de 3,6$\times$ em relação a E1) mantendo patamares competitivos de MAP (0,8227). Em contrapartida, a fusão tardia (E1) demonstrou clara vantagem na preservação da diversidade de candidatos na lista expandida, alcançando maior precisão no corte de top-5 (P@5 = 0,2518). No âmbito do pós-ranqueamento, os mecanismos baseados em normalização de scores absolutos (\emph{attention} e \emph{softmax}) superaram de forma consistente as tradicionais técnicas de fusão por ordens de rank (RRF e Borda Count), registrando o ápice de eficácia do sistema com MAP de 0,8944 através do arranjo BirdNET + \emph{attention} em E1. Por fim, a análise do impacto dos componentes validou o caráter indispensável da segmentação temporal com 50\% de sobreposição (\emph{hop size}), cuja ausência acarreta uma degradação severa de até 3 pontos no MAP.
+
+A modularidade do ecossistema do \emph{BirdSearch} abre caminhos para extensões promissoras. Como trabalhos futuros, identificam-se as seguintes diretrizes de pesquisa:
+\begin{itemize}
+    \item Investigar a formulação de filtros de ruído alternativos que atenuem interferências ambientais de campo sem descaracterizar as pistas espectrais discriminativas aprendidas nativamente pelo modelo Perch v2;
+    \item Explorar o ajuste fino (\emph{fine-tuning}) dos backbones neurais empregados, focando especificamente no mapeamento de vocalizações de espécies endêmicas da região amazônica;
+    \item Avaliar a adoção de representações estruturadas em agrupamentos (\emph{cluster}) e protótipos vetoriais, visando modelar de maneira mais fiel os repertórios vocais multi-modais complexos das aves;
+    \item Desenvolver e implementar estruturas de indexação dinâmica com o propósito de conferir suporte escalável e de baixa latência a corpora de monitoramento bioacústico contínuo.
+\end{itemize}
 
 Como trabalhos futuros, identificamos: (i) investigar filtros de ruído que
 preservem as pistas espectrais discriminativas do Perch v2; (ii) explorar
