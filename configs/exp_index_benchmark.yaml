@@ -1,0 +1,72 @@
+name: exp_index_benchmark
+seed: 42
+similarity: cosine
+
+notes: >
+  Index benchmark: same pipeline as exp1_baseline (clean audio, fixed 5s segments,
+  audio-level docs with mean pooling, early fusion) but sweeps graph-based ANN
+  indexes — IMENN (exact brute-force), HNSW, NSW, NSG, Vamana, SSG — measuring
+  quality (MAP/MRR/P@k/R@k/nDCG) together with build time, search latency and
+  peak memory.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: 1500
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: none
+  params: {}
+
+segmentation:
+  type: fixed
+  params:
+    window_sec: 5.0
+    drop_last_short: false
+    pad_last: true
+
+embedding:
+  type: perch_v2
+  params:
+    batch_size: 16
+
+aggregation:
+  type: mean
+  params: {}
+
+representation:
+  type: audio
+  params: {}
+
+# indexing.type is overridden programmatically by the sweep script
+indexing:
+  type: imenn
+  params: {}
+
+fusion:
+  type: early
+  params:
+    aggregator: mean
+
+ranking:
+  type: max
+  params: {}
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  measure_latency: true
+  measure_memory: true
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: false
+  save_rankings: false

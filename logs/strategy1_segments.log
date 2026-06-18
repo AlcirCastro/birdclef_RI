@@ -1,0 +1,3 @@
+2026-05-21 14:47:04,716 | INFO    | runner | Experiment strategy1_segments starting
+2026-05-21 14:47:05,800 | INFO    | runner | Loaded 34144 records
+2026-05-21 14:47:05,807 | INFO    | runner | Split: train=27309 test=6835

@@ -1,0 +1,76 @@
+name: exp_ranker_benchmark
+seed: 42
+similarity: cosine
+
+notes: >
+  Ranker benchmark (E2): same embedding/segmentation as exp1_baseline but switches
+  to segment-level document representation + late fusion so each query produces
+  multiple per-segment result lists. This lets all ranking strategies (max, mean,
+  median, RRF, Borda, attention, etc.) differ meaningfully. The sweep script
+  overrides ranking.type for each candidate ranker.
+
+data:
+  dataset_zip: birdclef-2026.zip
+  audio_dir: birdclef_cache/train_audio
+  max_records: 1500
+  min_rating: 3.0
+  train_ratio: 0.8
+  sample_rate: 32000
+
+preprocessing:
+  type: none
+  params: {}
+
+segmentation:
+  type: fixed
+  params:
+    window_sec: 5.0
+    drop_last_short: false
+    pad_last: true
+
+embedding:
+  type: perch_v2
+  params:
+    batch_size: 16
+
+aggregation:
+  type: mean
+  params: {}
+
+# Segment-level documents: one doc per segment → late fusion gives each
+# test segment its own result list for the ranker to aggregate.
+representation:
+  type: segment
+  params: {}
+
+indexing:
+  type: hnsw
+  params:
+    M: 32
+    ef_construction: 200
+    ef_search: 64
+
+fusion:
+  type: late
+  params: {}
+
+# ranking.type is overridden programmatically by the sweep script
+ranking:
+  type: max
+  params: {}
+
+evaluation:
+  top_k: 10
+  p_at: [1, 5]
+  recall_at: [1, 5, 10]
+  measure_latency: true
+  measure_memory: true
+  noise:
+    enabled: false
+
+output:
+  results_dir: results
+  logs_dir: logs
+  cache_dir: birdclef_cache
+  plots: false
+  save_rankings: false

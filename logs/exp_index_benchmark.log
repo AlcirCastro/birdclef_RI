@@ -1,0 +1,36 @@
+2026-06-17 17:40:20,295 | INFO    | runner | Experiment exp_index_benchmark starting
+2026-06-17 17:40:20,642 | INFO    | runner | Loaded 1437 records
+2026-06-17 17:40:20,643 | INFO    | runner | Split: train=1131 test=306
+2026-06-17 17:40:20,644 | INFO    | runner | [train] embedded 50/1131
+2026-06-17 17:40:20,645 | INFO    | runner | [train] embedded 100/1131
+2026-06-17 17:40:20,646 | INFO    | runner | [train] embedded 150/1131
+2026-06-17 17:40:20,647 | INFO    | runner | [train] embedded 200/1131
+2026-06-17 17:40:20,648 | INFO    | runner | [train] embedded 250/1131
+2026-06-17 17:40:20,649 | INFO    | runner | [train] embedded 300/1131
+2026-06-17 17:40:20,650 | INFO    | runner | [train] embedded 350/1131
+2026-06-17 17:40:20,651 | INFO    | runner | [train] embedded 400/1131
+2026-06-17 17:40:20,651 | INFO    | runner | [train] embedded 450/1131
+2026-06-17 17:40:20,652 | INFO    | runner | [train] embedded 500/1131
+2026-06-17 17:40:20,653 | INFO    | runner | [train] embedded 550/1131
+2026-06-17 17:40:20,654 | INFO    | runner | [train] embedded 600/1131
+2026-06-17 17:40:20,655 | INFO    | runner | [train] embedded 650/1131
+2026-06-17 17:40:20,656 | INFO    | runner | [train] embedded 700/1131
+2026-06-17 17:40:20,657 | INFO    | runner | [train] embedded 750/1131
+2026-06-17 17:40:20,657 | INFO    | runner | [train] embedded 800/1131
+2026-06-17 17:40:20,658 | INFO    | runner | [train] embedded 850/1131
+2026-06-17 17:40:20,659 | INFO    | runner | [train] embedded 900/1131
+2026-06-17 17:40:20,660 | INFO    | runner | [train] embedded 950/1131
+2026-06-17 17:40:20,661 | INFO    | runner | [train] embedded 1000/1131
+2026-06-17 17:40:20,662 | INFO    | runner | [train] embedded 1050/1131
+2026-06-17 17:40:20,663 | INFO    | runner | [train] embedded 1100/1131
+2026-06-17 17:40:20,663 | INFO    | runner | [train] embedded 1131/1131
+2026-06-17 17:40:30,474 | INFO    | runner | Index built: 1131 docs, dim=1280, 9.8s
+2026-06-17 17:40:30,476 | INFO    | runner | [test:clean] embedded 50/306
+2026-06-17 17:40:30,477 | INFO    | runner | [test:clean] embedded 100/306
+2026-06-17 17:40:30,478 | INFO    | runner | [test:clean] embedded 150/306
+2026-06-17 17:40:30,479 | INFO    | runner | [test:clean] embedded 200/306
+2026-06-17 17:40:30,480 | INFO    | runner | [test:clean] embedded 250/306
+2026-06-17 17:40:30,481 | INFO    | runner | [test:clean] embedded 300/306
+2026-06-17 17:40:30,481 | INFO    | runner | [test:clean] embedded 306/306
+2026-06-17 17:40:31,089 | INFO    | runner | [clean] MAP=0.6093 MRR=0.6093 P@1=0.5392 nDCG=0.6464 n=306
+2026-06-17 17:40:31,094 | INFO    | runner | Experiment exp_index_benchmark done in 10.8s — MAP=0.6093 MRR=0.6093
