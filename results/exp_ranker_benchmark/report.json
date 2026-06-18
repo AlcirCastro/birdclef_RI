@@ -1,0 +1,116 @@
+{
+  "experiment": "exp_ranker_benchmark",
+  "notes": "Ranker benchmark (E2): same embedding/segmentation as exp1_baseline but switches to segment-level document representation + late fusion so each query produces multiple per-segment result lists. This lets all ranking strategies (max, mean, median, RRF, Borda, attention, etc.) differ meaningfully. The sweep script overrides ranking.type for each candidate ranker.\n",
+  "n_train": 1131,
+  "n_test": 306,
+  "n_documents": 8390,
+  "embedding_dim": 1280,
+  "index_build_time_s": 0.8631639098748565,
+  "memory_peak_rss_bytes": 1333202944,
+  "memory_current_rss_bytes": 1344446464,
+  "config": {
+    "name": "exp_ranker_benchmark",
+    "seed": 42,
+    "data": {
+      "dataset_zip": "/home/cnt-computadores/Pedro/birdclef-2026.zip",
+      "audio_dir": "/home/cnt-computadores/Pedro/birdclef_cache/train_audio",
+      "max_records": 1500,
+      "min_rating": 3.0,
+      "train_ratio": 0.8,
+      "sample_rate": 32000
+    },
+    "preprocessing": {
+      "type": "none",
+      "params": {}
+    },
+    "segmentation": {
+      "type": "fixed",
+      "params": {
+        "window_sec": 5.0,
+        "drop_last_short": false,
+        "pad_last": true
+      }
+    },
+    "embedding": {
+      "type": "perch_v2",
+      "params": {
+        "batch_size": 16
+      }
+    },
+    "aggregation": {
+      "type": "mean",
+      "params": {}
+    },
+    "representation": {
+      "type": "segment",
+      "params": {}
+    },
+    "indexing": {
+      "type": "hnsw",
+      "params": {
+        "M": 32,
+        "ef_construction": 200,
+        "ef_search": 64
+      }
+    },
+    "fusion": {
+      "type": "late",
+      "params": {}
+    },
+    "ranking": {
+      "type": "taxonomy_boost",
+      "params": {
+        "genus_boost": 0.2,
+        "common_name_boost": 0.1
+      }
+    },
+    "similarity": "cosine",
+    "evaluation": {
+      "top_k": 10,
+      "p_at": [
+        1,
+        5
+      ],
+      "recall_at": [
+        1,
+        5,
+        10
+      ],
+      "noise": {
+        "enabled": false,
+        "noise_types": [
+          "white"
+        ],
+        "snr_db": [
+          20.0,
+          10.0,
+          0.0,
+          -5.0
+        ],
+        "noise_dir": null
+      }
+    },
+    "notes": "Ranker benchmark (E2): same embedding/segmentation as exp1_baseline but switches to segment-level document representation + late fusion so each query produces multiple per-segment result lists. This lets all ranking strategies (max, mean, median, RRF, Borda, attention, etc.) differ meaningfully. The sweep script overrides ranking.type for each candidate ranker.\n"
+  },
+  "clean": {
+    "n_queries": 306,
+    "MAP": 0.5946298889926341,
+    "MRR": 0.5946298889926341,
+    "nDCG": 0.6459956074005879,
+    "avg_latency_ms": 2.1476891040923745,
+    "P@1": 0.49019607843137253,
+    "P@5": 0.14771241830065357,
+    "R@1": 0.012364290967247765,
+    "R@5": 0.021315357182121956,
+    "R@10": 0.02354301245407105,
+    "latency": {
+      "n": 306,
+      "mean_ms": 2.1476891040923745,
+      "p50_ms": 1.3042485807090998,
+      "p95_ms": 3.403006528969854,
+      "p99_ms": 8.15277787623924
+    }
+  },
+  "noise": [],
+  "elapsed_s": 2.127585866022855
+}
